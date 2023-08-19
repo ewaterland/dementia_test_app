@@ -51,6 +51,8 @@ public class Register1Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.w(TAG, "--- Register1Fragment ---");
+
         // firebase 접근 권한 갖기
         FirebaseApp.initializeApp(requireActivity());
         mAuth = FirebaseAuth.getInstance();

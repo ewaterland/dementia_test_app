@@ -89,7 +89,7 @@
             android:foregroundGravity="center"
             android:hint="이름"
             android:inputType="text"
-            android:textSize="20dp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -147,15 +147,71 @@
 
         </LinearLayout>
 
-        <DatePicker
+        <LinearLayout
             android:id="@+id/date_birth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_gender" />
+            app:layout_constraintTop_toBottomOf="@+id/view_gender">
+
+            <EditText
+                android:id="@+id/editText_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:hint="YYYY"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:text=" / "
+                android:textSize="30sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editText_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:hint="MM"
+                android:textSize="30sp">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/text_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=" / "
+                android:textSize="30sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editText_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:hint="DD"
+                android:textSize="30sp">
+
+            </EditText>
+
+
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_signup"

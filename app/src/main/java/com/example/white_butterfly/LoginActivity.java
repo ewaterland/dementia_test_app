@@ -92,26 +92,12 @@ public class LoginActivity extends AppCompatActivity {
     // 회원가입하기 버튼 누를 경우 회원가입 화면으로 이동
     public void Register(View target)
     {
-        /*
-        // 회원가입 프래그먼트 호출
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_register, new RegisterFragment());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-         */
-
-        //Intent intent = new Intent(getApplication(), RegisterActivity.class);
-        //startActivity(intent);
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.page_register_ac, new Register1Fragment())  // page_register_ac 는 로그인 액티비티의 xml에 있어야 함
                 .addToBackStack(null)
                 .commit();
 
         findViewById(R.id.page_login).setVisibility(View.GONE);
-
-        // page_register.setVisibility(View.VISIBLE);
     }
 
     // Sign in 버튼 누를 경우 로그인 시도

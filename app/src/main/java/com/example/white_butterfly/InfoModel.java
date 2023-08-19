@@ -12,7 +12,9 @@ public class InfoModel extends ViewModel {
     // register2 페이지에서 입력된 정보
     private String inputName;
     private Number inputGender;
-    private Number inputBirth;
+    private String inputYear;
+    private String inputMonth;
+    private String inputDay;
 
 
     public String getInputEmail() {
@@ -50,12 +52,14 @@ public class InfoModel extends ViewModel {
         this.inputGender = inputGender;
     }
 
-    public Number getInputBirth() {
-        return inputBirth;
-    }
-    public void setInputBirth(Number inputBirth) {
-        this.inputBirth = inputBirth;
-    }
+    public String getInputYear() { return inputYear; }
+    public void setInputYear(String inputYear) { this.inputYear = inputYear; }
+
+    public String getInputMonth() { return inputMonth; }
+    public void setInputMonth(String inputMonth) { this.inputMonth = inputMonth; }
+
+    public String getInputDay() { return inputDay; }
+    public void setInputDay(String inputDay) { this.inputDay = inputDay; }
 
 
 }
