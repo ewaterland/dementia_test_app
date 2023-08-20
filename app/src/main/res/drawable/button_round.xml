@@ -35,7 +35,7 @@
     <item android:state_enabled="false">
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/default2" />
+            <solid android:color="@color/unable" />
             <!-- 모서리 -->
             <corners
                 android:bottomLeftRadius="23dp"

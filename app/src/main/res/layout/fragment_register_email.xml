@@ -46,14 +46,14 @@
         <!-- 상단바 END -->
 
         <TextView
-            android:id="@+id/text_before"
+            android:id="@+id/textView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:gravity="start"
             android:text="이전"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_top">
 
@@ -61,17 +61,17 @@
 
         <!-- 메인 START -->
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/textView_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="30dp"
             android:text="이메일로 회원가입"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_before" />
+            app:layout_constraintTop_toBottomOf="@+id/textView01" />
 
         <EditText
             android:id="@+id/editText_EmailAddress"
@@ -83,10 +83,11 @@
             android:backgroundTint="@color/black"
             android:ems="10"
             android:hint="이메일"
+            android:textSize="25sp"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_subject" />
 
         <EditText
             android:id="@+id/editText_Password"
@@ -98,6 +99,7 @@
             android:backgroundTint="@color/black"
             android:ems="10"
             android:hint="비밀번호(6자리 이상)"
+            android:textSize="25sp"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,6 +115,7 @@
             android:backgroundTint="@color/black"
             android:ems="10"
             android:hint="비밀번호 확인"
+            android:textSize="25sp"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +130,7 @@
             android:gravity="right"
             android:text="다음"
             android:textColor="#D7D7D7"
-            android:textSize="24dp"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_Password_2" />

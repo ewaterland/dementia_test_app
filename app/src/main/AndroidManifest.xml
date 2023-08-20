@@ -20,48 +20,75 @@
         android:theme="@style/Theme.White_butterfly"
         tools:targetApi="31">
 
-    <activity
-        android:name=".SplashActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
+        <!-- 로그인 및 회원가입 -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterFinishActivity"
+            android:exported="false" />
 
-    <activity
-        android:name=".LoginActivity"
-        android:exported="false" />
+        <!-- 메인 페이지 -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
-    <activity
-        android:name=".MainActivity"
-        android:exported="false" />
-    <activity
-        android:name=".ResultActivity"
-        android:exported="false" />
-    <activity
-        android:name=".LoadingActivity"
-        android:exported="false" />
-    <activity
-        android:name=".ChatbotActivity"
-        android:label="ChatbotActivity" />
-    <activity
-        android:name=".Test1Activity"
-        android:label="Test1Activity" />
-    <activity
-        android:name=".Test2Activity"
-        android:label="Test2Activity" />
-    <activity
-        android:name=".Test3Activity"
-        android:label="Test3Activity" />
-    <activity
-        android:name=".TestMainActivity"
-        android:label="TestMainActivity" />
-    <activity
-        android:name=".MypageActivity"
-        android:label="MypageActivity" />
+        <!-- 로딩 페이지 -->
+        <activity
+            android:name=".LoadingActivity"
+            android:exported="false" />
+
+        <!-- 말동무(챗봇) -->
+        <activity
+            android:name=".ChatbotActivity"
+            android:label="ChatbotActivity" />
+
+        <!-- 치매 선별 검사 -->
+        <activity
+            android:name=".TestMainActivity"
+            android:label="TestMainActivity" />
+        <activity
+            android:name=".Test1Activity"
+            android:label="Test1Activity" />
+        <activity
+            android:name=".Test2Activity"
+            android:label="Test2Activity" />
+        <activity
+            android:name=".Test3Activity"
+            android:label="Test3Activity" />
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+
+        <!-- 기억력 검사 -->
+        <activity
+            android:name=".Memory01Activity"
+            android:label="Memory01Activity" />
+        <activity
+            android:name=".Memory02Activity"
+            android:label="Memory02Activity" />
+        <activity
+            android:name=".Memory03Activity"
+            android:label="Memory03Activity" />
+        <activity
+            android:name=".Memory04Activity"
+            android:label="Memory04Activity" />
+
+        <!-- 마이페이지 -->
+        <activity
+            android:name=".UserActivity"
+            android:label="UserActivity" />
+
 </application>
 
 </manifest>

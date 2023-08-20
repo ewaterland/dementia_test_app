@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <!-- fragment -->
+    <FrameLayout
+        android:id="@+id/view_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </FrameLayout>
+
+    <!-- register -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/page_register"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 상단바 START -->
+        <GridLayout
+            android:id="@+id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 로고 START -->
+            <ImageView
+                android:id="@+id/image_logo"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon" />
+            <!-- 로고 END -->
+
+        </GridLayout>
+        <!-- 상단바 END -->
+
+        <TextView
+            android:id="@+id/textView_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:gravity="start"
+            android:text="이전"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_top">
+
+        </TextView>
+
+        <!-- 메인 START -->
+        <TextView
+            android:id="@+id/textView_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="30dp"
+            android:text="주소를 입력해 주세요"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_before" />
+
+        <EditText
+            android:id="@+id/editText_Address"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/black"
+            android:ems="10"
+            android:foregroundGravity="center"
+            android:hint="주소"
+            android:inputType="textPostalAddress"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_subject" />
+
+        <TextView
+            android:id="@+id/text_next"
+            android:layout_width="347dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/inter_semibold"
+            android:gravity="right"
+            android:text="다음"
+            android:textColor="#D7D7D7"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- 메인 END -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

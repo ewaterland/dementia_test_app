@@ -16,7 +16,7 @@
 
     <!-- register2 -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/page_register2"
+        android:id="@+id/page_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -50,14 +50,14 @@
         <!-- 상단바 END -->
 
         <TextView
-            android:id="@+id/text_before"
+            android:id="@+id/textView_before"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:gravity="start"
             android:text="이전"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_top">
 
@@ -65,45 +65,29 @@
 
         <!-- 메인 START -->
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/textView_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="30dp"
-            android:text="정보를 입력해 주세요"
+            android:text="성별을 입력해 주세요"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_before" />
-
-        <EditText
-            android:id="@+id/editText_Name"
-            android:layout_width="320dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/black"
-            android:ems="10"
-            android:foregroundGravity="center"
-            android:hint="이름"
-            android:inputType="text"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_before" />
 
         <LinearLayout
             android:id="@+id/view_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:fadingEdge="vertical"
             android:foregroundGravity="center_vertical"
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_Name">
+            app:layout_constraintTop_toBottomOf="@+id/textView_subject">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_female"
@@ -117,7 +101,7 @@
                 android:text="여성"
                 android:textAllCaps="false"
                 android:textColor="@drawable/text_gender"
-                android:textSize="20dp"
+                android:textSize="30dp"
 
                 app:layout_constraintEnd_toStartOf="@+id/btn_male"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,99 +124,26 @@
                 android:text="남성"
                 android:textAllCaps="false"
                 android:textColor="@drawable/text_gender"
-                android:textSize="20dp"
+                android:textSize="30dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/date_birth"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_gender">
-
-            <EditText
-                android:id="@+id/editText_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:hint="YYYY"
-                android:textSize="30sp">
-
-            </EditText>
-
-            <TextView
-                android:id="@+id/text_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:text=" / "
-                android:textSize="30sp">
-
-            </TextView>
-
-            <EditText
-                android:id="@+id/editText_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:hint="MM"
-                android:textSize="30sp">
-
-            </EditText>
-
-            <TextView
-                android:id="@+id/text_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=" / "
-                android:textSize="30sp">
-
-            </TextView>
-
-            <EditText
-                android:id="@+id/editText_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:hint="DD"
-                android:textSize="30sp">
-
-            </EditText>
-
-
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_signup"
-            android:onClick="Register"
-            android:enabled="false"
-
-            android:layout_width="320dp"
+        <TextView
+            android:id="@+id/text_next"
+            android:layout_width="347dp"
             android:layout_height="56dp"
-            android:layout_marginTop="30dp"
-
-            android:text="회원가입"
-            android:textSize="24dp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:layout_marginBottom="40dp"
             android:fontFamily="@font/inter_semibold"
-            android:background="@drawable/button_round"
-
+            android:gravity="right"
+            android:text="다음"
+            android:textColor="#D7D7D7"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_birth" />
-
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- 메인 END -->
 

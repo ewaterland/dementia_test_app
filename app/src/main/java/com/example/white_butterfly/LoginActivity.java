@@ -26,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    EditText editText_email;
+    EditText editText_password;
 
     // 입력 있으면 1, 입력 없으면 0
     int email_active = 0;
@@ -40,39 +42,30 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(LoginActivity.this);
         mAuth = FirebaseAuth.getInstance();
 
-        EditText editText_email = (EditText) findViewById(R.id.editText_EmailAddress);
-        EditText editText_password = (EditText) findViewById(R.id.editText_Password);
+        editText_email = findViewById(R.id.editText_EmailAddress);
+        editText_password = findViewById(R.id.editText_Password);
 
-        editText_email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                if   (count > 0)  { email_active = 1; check(); }
-                else              { email_active = 0; check(); }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
-        });
-
-        editText_password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-                if   (count > 0)  { pw_active = 1; check(); }
-                else              { pw_active = 0; check(); }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
-        });
+        // 정보가 입력됐을 때 다음 버튼 활성화를 위함
+        editText_email.addTextChangedListener(textWatcher);
+        editText_password.addTextChangedListener(textWatcher);
     }
+
+    private final TextWatcher textWatcher = new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            email_active = editText_email.length() > 0 ? 1 : 0;
+            pw_active = editText_password.length() > 0 ? 1 : 0;
+
+            check();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {}
+    };
 
     // 이메일과 비밀번호가 둘 다 입력됐는지 확인
     public void check()
@@ -92,12 +85,26 @@ public class LoginActivity extends AppCompatActivity {
     // 회원가입하기 버튼 누를 경우 회원가입 화면으로 이동
     public void Register(View target)
     {
+        /*
+        // 회원가입 프래그먼트 호출
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_register, new RegisterFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+         */
+
+        //Intent intent = new Intent(getApplication(), RegisterActivity.class);
+        //startActivity(intent);
+
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.page_register_ac, new Register1Fragment())  // page_register_ac 는 로그인 액티비티의 xml에 있어야 함
+                .replace(R.id.page_register_ac, new RegisterEmailFragment())  // page_register_ac 는 로그인 액티비티의 xml에 있어야 함
                 .addToBackStack(null)
                 .commit();
 
         findViewById(R.id.page_login).setVisibility(View.GONE);
+
+        // page_register.setVisibility(View.VISIBLE);
     }
 
     // Sign in 버튼 누를 경우 로그인 시도

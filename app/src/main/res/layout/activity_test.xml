@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:foregroundGravity="center"
     tools:context=".Test1Activity">
+
+    <ProgressBar
+        android:id="@+id/loadBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- fragment -->
     <FrameLayout
@@ -12,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/view_top">
-
     </FrameLayout>
 
     <!-- 상단 -->
@@ -126,9 +138,9 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:onClick="loadNextQuestion"
             android:text="대답1"
             android:textSize="30dp"
-            android:onClick="loadNextQuestion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_animal" />
@@ -138,9 +150,9 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:onClick="loadNextQuestion"
             android:text="대답2"
             android:textSize="30dp"
-            android:onClick="loadNextQuestion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_reply1" />
@@ -150,9 +162,9 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:onClick="loadNextQuestion"
             android:text="대답3"
             android:textSize="30dp"
-            android:onClick="loadNextQuestion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_reply2" />

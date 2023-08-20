@@ -5,42 +5,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_test"
-        android:layout_width="wrap_content"
+    <!-- 상단 메인 메뉴 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="150dp"
-        android:text="치매선별검사"
-        android:textSize="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:foregroundGravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_chatbot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="150dp"
-        android:text="챗봇"
-        android:textSize="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_test" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dementiaTest"
+            android:layout_width="180sp"
+            android:layout_height="150sp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_round"
+            android:text="치매 선별\n검사"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_mypage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="150dp"
-        android:text="마이페이지"
-        android:textSize="40dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_chatbot"
+            android:layout_width="180sp"
+            android:layout_height="150sp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/main_round"
+            android:text="말동무"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_rememberTest"
+            android:layout_width="180sp"
+            android:layout_height="150sp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/main_round"
+            android:text="기억력\n검사"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_dementiaTest" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_mypage"
+            android:layout_width="180sp"
+            android:layout_height="150sp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/main_round"
+            android:text="마이페이지"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_chatbot" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 광고 배너 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/view_ad"
+        android:layout_width="match_parent"
+        android:layout_height="160sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_chatbot" />
+        app:layout_constraintTop_toBottomOf="@+id/view_menu">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

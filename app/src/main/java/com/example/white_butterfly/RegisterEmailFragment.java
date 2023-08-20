@@ -27,31 +27,37 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Register1Fragment extends Fragment {
-
+public class RegisterEmailFragment extends Fragment {
+    // Firebase
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth;
     private String id;
 
+    // 페이지 다음 버튼
+    TextView text_next;
+
+    // 입력 있으면 1, 입력 없으면 0
     private int email_active = 0;
     private int pw_active = 0;
     private int pwc_active = 0;
-    private TextView text_next;
 
+    // 정보 입력칸
     private EditText editText_email;
     private EditText editText_password;
     private EditText editText_password_2;
 
+    // 임시 데이터 저장 모델
     private InfoModel infoModel;
-    private static final String TAG = "Register1Fragment";
-    private View rootView;
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    // 뷰
+    private View rootView;
+    private static final String TAG = "RegisterEmailFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.w(TAG, "--- Register1Fragment ---");
+        Log.w(TAG, "--- RegisterEmailFragment ---");
 
         // firebase 접근 권한 갖기
         FirebaseApp.initializeApp(requireActivity());
@@ -64,7 +70,7 @@ public class Register1Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_register1, container, false);
+        rootView = inflater.inflate(R.layout.fragment_register_email, container, false);
 
         initializeViews();
 
@@ -77,13 +83,8 @@ public class Register1Fragment extends Fragment {
         editText_password = rootView.findViewById(R.id.editText_Password);
         editText_password_2 = rootView.findViewById(R.id.editText_Password_2);
 
-        // 정보가 입력됐을 때 다음 버튼 활성화를 위함
-        editText_email.addTextChangedListener(textWatcher);
-        editText_password.addTextChangedListener(textWatcher);
-        editText_password_2.addTextChangedListener(textWatcher);
-
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.text_before);
+        TextView text_before = rootView.findViewById(R.id.textView01);
         text_before.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
@@ -93,10 +94,15 @@ public class Register1Fragment extends Fragment {
         text_next = rootView.findViewById(R.id.text_next);
         text_next.setOnClickListener(v -> {
             int textColor = text_next.getCurrentTextColor();
-            if (textColor == ContextCompat.getColor(requireContext(), R.color.Human)) {
+            if (textColor == ContextCompat.getColor(requireContext(), R.color.main)) {
                 onNextButtonClick();
             }
         });
+
+        // 정보가 입력됐을 때 다음 버튼 활성화를 위함
+        editText_email.addTextChangedListener(textWatcher);
+        editText_password.addTextChangedListener(textWatcher);
+        editText_password_2.addTextChangedListener(textWatcher);
     }
 
     private final TextWatcher textWatcher = new TextWatcher() {
@@ -159,14 +165,19 @@ public class Register1Fragment extends Fragment {
 
     private void saveUserInfoToDatabase() {
         Map<String, Object> user = new HashMap<>();
-        user.put("Address", "");
-        user.put("Name", "");
-        user.put("Gender", "");
-        user.put("Birth", "");
-        user.put("Data", "");
-        user.put("Score", "");
-        user.put("Guardian", "");
-        user.put("My", "");
+        user.put("Name", "");      // 이름
+        user.put("Gender", "");    // 성별
+        user.put("Address", "");   // 주소
+        user.put("Birth", "");     // 생년월일
+        //user.put("Year", "");
+        //user.put("Month", "");
+        //user.put("Day", "");
+        user.put("School", 0);    // 최종 학력
+        user.put("My", "");        // 본인 연락처
+        user.put("Guardian", "");  // 보호자 연락처
+        user.put("Data", "");      // 마지막 치매선별검사 날짜
+        user.put("Score", 0);     // 마지막 치매선별검사 점수
+
 
         db.collection("Users").document(id).set(user)
                 .addOnSuccessListener(unused -> Log.d(TAG, "< 데이터베이스에 유저 정보 저장 성공 >"))
@@ -176,7 +187,7 @@ public class Register1Fragment extends Fragment {
     }
 
     private void navigateToNextFragment() {
-        Fragment fragment2 = new Register2Fragment();
+        Fragment fragment2 = new RegisterNameFragment();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.view_fragment, fragment2);
@@ -190,7 +201,7 @@ public class Register1Fragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        Log.w(TAG, "### Register - Pause");
+        Log.w(TAG, "### Register_Email - Pause");
 
         String inputEmail = editText_email.getText().toString();
         String inputPW = editText_password.getText().toString();
@@ -205,7 +216,7 @@ public class Register1Fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.w(TAG, "### Register - Resume");
+        Log.w(TAG, "### Register_Email - Resume");
 
         String inputEmail = infoModel.getInputEmail();
         String inputPW = infoModel.getInputPW();
@@ -218,7 +229,7 @@ public class Register1Fragment extends Fragment {
 
     private void check() {
         if (email_active == 1 && pw_active == 1 && pwc_active == 1) {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.Human));
+            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
         } else {
             text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
         }

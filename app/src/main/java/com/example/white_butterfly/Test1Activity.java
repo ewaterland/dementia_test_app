@@ -36,19 +36,21 @@ import java.util.Random;
 
 public class Test1Activity extends AppCompatActivity implements CurrentPageListener {
 
-    private ProgressModel progressModel;
-    private ProgressBar progressBar;
+    // 검사 페이지 진행바
+    public ProgressModel progressModel;
+    public ProgressBar progressBar;
+    private ProgressBar loadBar;
 
     // Firebase Database 인스턴스 생성
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
+    String path;  // Firebase DB 메인 주소
+    String temp;  // Firebase DB 서브 주소
 
-    public int currentPage = 0;  // 테스트 페이지 추적 (0~24)
+    private int currentPage = 0;  // 테스트 페이지 추적 (0~24)
     private int currentQuestion = 1; // (1~25)
-
-    String path;
-    int button_number = 0;  // 정답이 들어갈 버튼 랜덤 선택
-    String temp;
+    int button_number = 0;  // 정답 외의 내용이 들어갈 버튼 랜덤 선택
+    int button_number_answer = 0;  // 정답이 들어갈 버튼 랜덤 선택
 
     TextView text_q_num; // 현재 질문 개수
     TextView text_question;  // 질문 텍스트뷰
@@ -107,7 +109,6 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
         }
 
         currentQuestion = currentPage+1;
-        path = "Q" + String.format("%02d", currentQuestion);
         test();
 
         progressBar = findViewById(R.id.progress);
@@ -122,6 +123,7 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
         btn_reply1 = findViewById(R.id.btn_reply1);
         btn_reply2 = findViewById(R.id.btn_reply2);
         btn_reply3 = findViewById(R.id.btn_reply3);
+        loadBar = findViewById(R.id.loadBar);
     }
 
     public void test() {
@@ -129,40 +131,51 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
         numberList = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
         path = "Q" + String.format("%02d", currentQuestion);
 
+        // 데이터 로드할 때 로딩 중 표시, 완료 후 숨김
+        loadBar.setVisibility(View.VISIBLE);
+
         // 질문 표시
         question();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.w(TAG, "# Thread:" + currentQuestion);
+                Log.w(TAG, "# Thread: " + currentQuestion);
                 // 오래 걸리는 작업을 여기에서 처리
                 switch (currentQuestion)
                 {
                     case 2:
+                        Log.w(TAG, "case: " + currentQuestion);
                         image_question.setAlpha(0f);
                         answer_02();
                         break;
                     case 3:
+                        Log.w(TAG, "case: " + currentQuestion);
                         answer_03();
                         break;
                     case 4:
+                        Log.w(TAG, "case: " + currentQuestion);
                         answer_04();
                         break;
                     case 5:
+                        Log.w(TAG, "case: " + currentQuestion);
                         answer_05();
                         break;
                     case 6:
+                        Log.w(TAG, "case: " + currentQuestion);
                         image_question.setImageResource(R.drawable.image_dog);
                         image_question.setAlpha(1f);
                         break;
                     case 7:
+                        Log.w(TAG, "case: " + currentQuestion);
                         image_question.setImageResource(R.drawable.image_cat);
                         break;
                     case 8:
+                        Log.w(TAG, "case: " + currentQuestion);
                         image_question.setImageResource(R.drawable.image_lion);
                         break;
                     default:
+                        Log.w(TAG, "case: " + currentQuestion);
                         answer_n11();
                         break;
                 }
@@ -172,7 +185,7 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
                     @Override
                     public void run() {
                         // UI 업데이트 코드
-                        //button_set(button_number, value);
+                        loadBar.setVisibility(View.GONE);
                         Log.w(TAG, currentQuestion + "UI 업데이트 완료");
                     }
                 });
@@ -181,43 +194,49 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
     }
 
     private void question() {
-        Log.w(TAG, "# question:" + currentQuestion);
+        Log.w(TAG, "# question: " + currentQuestion);
 
         // 질문 불러오기
-        database.getReference(path).child("Q").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String value = dataSnapshot.getValue(String.class);
-                    text_question.setText(value);
-                    Log.w(TAG, currentQuestion + "질문 세팅 완료");
-                } else {
-                    Log.w(TAG, currentQuestion + "질문 경로가 존재하지 않음. path: " + path);
+        try {
+            database.getReference(path).child("Q").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String value = dataSnapshot.getValue(String.class);
+                        text_question.setText(value);
+                        Log.w(TAG, currentQuestion + "질문 세팅 완료");
+                    } else {
+                        Log.w(TAG, currentQuestion + "질문 경로가 존재하지 않음. path: " + path);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // 데이터 읽기 실패 시 처리
-                Log.w(TAG, currentQuestion + "질문 데이터 읽기 실패");
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // 데이터 읽기 실패 시 처리
+                    Log.w(TAG, currentQuestion + "질문 데이터 읽기 실패");
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, String.format("%s", e));
+        }
+
     }
 
     private void answer()  // 정답 데이터 추출
     {
-        Log.w(TAG, currentQuestion + "정답 세팅 중");
+        Log.w(TAG, currentQuestion + " 정답 세팅 중");
+
         // 정답 불러오기
         database.getReference(path).child("A").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     value = dataSnapshot.getValue(String.class);
-                    button_number = random.nextInt(3) + 1; // 1, 2, 3 중 하나를 랜덤으로 선택
-                    numberList.remove(Integer.valueOf(button_number));
+                    button_number_answer = random.nextInt(3) + 1; // 1, 2, 3 중 하나를 랜덤으로 선택
+                    numberList.remove(Integer.valueOf(button_number_answer));
                     Log.w(TAG, "정답 numberList: " + numberList);
 
-                    button_set(button_number, value);
+                    button_set(button_number_answer, value);
 
                     Log.w(TAG, currentQuestion + "정답 세팅 완료");
                 } else {
@@ -228,7 +247,7 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // 데이터 읽기 실패 시 처리
-                Log.w(TAG, "답변 데이터 읽기 실패");
+                Log.w(TAG, "정답 데이터 읽기 실패");
             }
         });
     }
@@ -284,17 +303,17 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
                     value1 = dataSnapshot.getValue(String.class);
                     button_number = numberList.get(0);
                     numberList.remove(Integer.valueOf(button_number));
-                    Log.w(TAG, "답변1 numberList: " + numberList);
+                    Log.w(TAG, "답변2 numberList: " + numberList);
                     button_set(button_number, value2);
                 } else {
-                    Log.w(TAG, "답변1 경로가 존재하지 않음. path: " + path);
+                    Log.w(TAG, "답변2 경로가 존재하지 않음. path: " + path);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // 데이터 읽기 실패 시 처리
-                Log.w(TAG, "답변1 데이터 읽기 실패");
+                Log.w(TAG, "답변2 데이터 읽기 실패");
             }
         });
     }
@@ -302,9 +321,11 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
     private void answer_n11()
     {
         // 정답 불러오기
+        Log.w(TAG, "정답 불러오기");
         answer();
 
         // 나머지 답변1 불러오기
+        Log.w(TAG, "나머지 답변1 불러오기");
         do {
             R_randomNumber1 = random.nextInt(11) + 1; // 1~11 중 하나를 랜덤으로 선택
             answer1();
@@ -313,6 +334,7 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
 
 
         // 나머지 답변2 불러오기
+        Log.w(TAG, "나머지 답변2 불러오기");
         do {
             R_randomNumber2 = random.nextInt(11) + 1; // 1~11 중 하나를 랜덤으로 선택
             answer2();
@@ -548,27 +570,29 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
     // 월에 따른 계절 판단 함수
     private String season(int num)
     {
+        String value = "";
+
         switch (num) {
             case 12:
             case 1:
             case 2:
-                value2 = "겨울";
+                value = "겨울";
 
                 break;
             case 3:
             case 4:
             case 5:
-                value2 = "봄";
+                value = "봄";
                 break;
             case 6:
             case 7:
             case 8:
-                value2 = "여름";
+                value = "여름";
                 break;
             case 9:
             case 10:
             case 11:
-                value2 = "가을";
+                value = "가을";
                 break;
             default:
                 break;
@@ -582,7 +606,8 @@ public class Test1Activity extends AppCompatActivity implements CurrentPageListe
     private void answer_05() {
         Log.w(TAG, "# answer_05");
 
-        text_remember.setText("나무 자동차 모자");
+        String rememberText = getResources().getString(R.string.remember_text); // 나무 자동차 모자
+        text_remember.setText(rememberText);
 
         Handler handler = new Handler(Looper.getMainLooper());
 
