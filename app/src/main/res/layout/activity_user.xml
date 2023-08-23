@@ -7,86 +7,148 @@
     android:background="@color/white"
     tools:context=".UserActivity">
 
-    <!-- 로그아웃 START -->
-    <TextView
-        android:id="@+id/text_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="Logout"
-        android:text="Sign Out"
-        android:textColor="#7095C6"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
-    <!-- 로그아웃 END -->
-
-    <LinearLayout
-        android:id="@+id/view_top"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal">
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/view_top2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/black"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top">
-    </LinearLayout>
-
     <!-- 메인 START -->
     <ScrollView
         android:id="@+id/view_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:background="@drawable/border"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <!-- 개인정보 -->
         <LinearLayout
             android:id="@+id/view_sub"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/view_main">
+
+            <LinearLayout
+                android:id="@+id/view_top"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@color/user"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- 치매 검사 -->
+                <LinearLayout
+                    android:id="@+id/view_date1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <!-- 치매 검사 일 -->
+                    <TextView
+                        android:id="@+id/text_DATE1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="치매 선별검사를 "
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/text_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Date"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_DATE2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="전에 시행했어요."
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="@+id/text_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+                <!-- 프로필 -->
+                <LinearLayout
+                    android:id="@+id/view_date2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <!-- 프로필 사진 -->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileImageView"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/profile_default"
+                        android:padding="0dp"
+                        android:layout_gravity="center" />
+
+                    <!-- 프로필 이름을 표시할 TextView -->
+                    <TextView
+                        android:id="@+id/text_Name"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="안녕하세요."
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_Name" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/text_email"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="80dp"
-                android:text="Email Address"
+                android:layout_marginTop="20dp"
+                android:text="이메일"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_top2" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/text_birth"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:text="생일"
                 android:textColor="#000000"
@@ -97,23 +159,20 @@
 
             <TextView
                 android:id="@+id/text_birthday"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:text="Birthday"
+                android:text="생년월일"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_top2" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/text_address"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:text="주소"
                 android:textColor="#000000"
@@ -126,18 +185,17 @@
                 android:id="@+id/editText_address"
                 android:layout_width="320dp"
                 android:layout_height="50dp"
-                android:inputType="text"
-                android:paddingStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_rounded_corner_rectangle"
+                android:inputType="text"
+                android:paddingStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
 
             <TextView
                 android:id="@+id/text_phone"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="4dp"
                 android:text="본인 연락처 / 보호자 연락처"
                 android:textColor="#000000"
@@ -150,10 +208,10 @@
                 android:id="@+id/editText_my"
                 android:layout_width="320dp"
                 android:layout_height="50dp"
-                android:inputType="numberDecimal"
-                android:paddingStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_rounded_corner_rectangle"
+                android:inputType="numberDecimal"
+                android:paddingStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
 
@@ -161,34 +219,31 @@
                 android:id="@+id/editText_guardian"
                 android:layout_width="320dp"
                 android:layout_height="50dp"
-                android:inputType="numberDecimal"
-                android:paddingStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_rounded_corner_rectangle"
+                android:inputType="numberDecimal"
+                android:paddingStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
 
             <TextView
                 android:id="@+id/text_school"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:text="학력"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_top2" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/text_dementia"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="4dp"
-                android:text="마지막 치매 검사일 / 치매 점수"
+                android:text="치매 점수"
                 android:textColor="#000000"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -196,119 +251,82 @@
                 app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
 
             <TextView
-                android:id="@+id/text_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:text="Date"
-                android:textColor="#000000"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_top2" />
-
-            <TextView
                 android:id="@+id/text_score"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:text="Score"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view_top2" />
+                app:layout_constraintStart_toStartOf="parent" />
 
-
-
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_save"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
 
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/button_round"
+                android:background="@drawable/button_round_main"
 
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/pretendard_regular"
                 android:onClick="Save"
-                android:text="Save"
+                android:text="저장"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                android:textSize="30dp"
 
-                android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_Weight" />
 
+            <TextView
+                android:id="@+id/text_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:onClick="Logout"
+                android:text="로그아웃"
+                android:textColor="#81CDCB"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btn_withdraw"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:layout_marginLeft="50dp"
                     android:layout_gravity="center"
                     android:background="@color/back"
                     android:text="회원을 탈퇴 하시겠습니까?"
-                    android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_yes"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginRight="50dp"
                     android:layout_gravity="center"
                     android:background="@color/back"
                     android:onClick="withdraw"
-                    android:text="Yes"
-                    android:textStyle="bold"
+                    android:text="네"
                     android:textAllCaps="false"
-                    android:textColor="#EF8282" />
+                    android:textColor="#81CDCB"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <!-- 메인 END -->
 
-    <!-- 프로필 사진을 표시할 ImageView -->
-    <ImageView
-        android:id="@+id/profileImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="330dp"
-        android:contentDescription="Profile Picture"
-        android:src="@drawable/user"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- 프로필 이름을 표시할 TextView -->
-    <TextView
-        android:id="@+id/text_Name"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginBottom="450dp"
-        android:contentDescription="Profile Name"
-        android:gravity="center"
-        android:text="Name"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileImageView"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

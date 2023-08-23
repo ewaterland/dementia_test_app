@@ -26,82 +26,74 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 상단바 START -->
-        <GridLayout
+        <LinearLayout
             android:id="@+id/view_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:gravity="center_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- 로고 START -->
-            <ImageView
-                android:id="@+id/image_logo"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon" />
-            <!-- 로고 END -->
+            <TextView
+                android:id="@+id/textView_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="start"
+                android:text="이전"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_top">
 
-        </GridLayout>
+            </TextView>
+
+        </LinearLayout>
         <!-- 상단바 END -->
 
-        <TextView
-            android:id="@+id/textView_before"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:gravity="start"
-            android:text="이전"
-            android:textColor="#000000"
-            android:textSize="25sp"
+        <!-- 로고 START -->
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/icon_register"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_top">
 
-        </TextView>
+        </ImageView>
+        <!-- 로고 END -->
 
         <!-- 메인 START -->
         <TextView
             android:id="@+id/textView_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="30dp"
-            android:text="학력을 선택해 주세요"
+            android:text="최종 학력"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_before" />
-
-        <TextView
-            android:id="@+id/textView_subject2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="30dp"
-            android:text="해당하는 것이 없다면 넘어가세요"
-            android:textColor="#000000"
-            android:textSize="23sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_subject" />
+            app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
         <LinearLayout
             android:id="@+id/view_school"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:fadingEdge="vertical"
             android:foregroundGravity="center_vertical"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_subject2">
+            app:layout_constraintTop_toBottomOf="@+id/textView_subject">
 
             <RadioGroup
                 android:id="@+id/radio_group"
@@ -113,7 +105,7 @@
                     android:id="@+id/radio_NoSchool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="졸업한 학교가 없어요"
+                    android:text="없음"
                     android:textSize="25sp">
 
                 </RadioButton>
@@ -122,7 +114,7 @@
                     android:id="@+id/radio_Elementary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="초등학교를 졸업했어요"
+                    android:text="초등학교"
                     android:textSize="25sp">
 
                 </RadioButton>
@@ -131,7 +123,7 @@
                     android:id="@+id/radio_Middle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="중학교를 졸업했어요"
+                    android:text="중학교"
                     android:textSize="25sp">
 
                 </RadioButton>
@@ -140,7 +132,7 @@
                     android:id="@+id/radio_High"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="고등학교를 졸업했어요"
+                    android:text="고등학교"
                     android:textSize="25sp">
 
                 </RadioButton>
@@ -149,7 +141,7 @@
                     android:id="@+id/radio_Univ"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="대학교를 졸업했어요"
+                    android:text="대학교(원) 이상"
                     android:textSize="25sp">
 
                 </RadioButton>
@@ -158,19 +150,36 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_next"
-            android:layout_width="347dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="40dp"
-            android:fontFamily="@font/inter_semibold"
-            android:gravity="right"
+        <!-- 다음 버튼 -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginEnd="130dp"
+            android:layout_marginBottom="100dp"
+            android:width="1dp"
+            android:background="@drawable/button_next"
             android:text="다음"
-            android:textColor="@color/main"
-            android:textSize="30dp"
+            android:textColor="@color/mint"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_subject2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="치매 선별 검사 시 정확한 판별을 위해 최종 학력 정보를 입력해 주세요."
+            android:textColor="#BFBFBF"
+            android:textSize="23sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_next" />
 
         <!-- 메인 END -->
 

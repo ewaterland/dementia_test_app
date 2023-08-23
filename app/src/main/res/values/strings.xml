@@ -1,10 +1,11 @@
 <resources>
-<!-- 앱 이름 -->
-<string name="app_name">하얀 나비</string>
+    <!-- 앱 이름 -->
+    <string name="app_name">chatbot_test</string>
 
-<!-- 치매 선별 검사 -->
-<string name="remember_text">나무 자동차 모자</string>
+    <!-- 치매 선별 검사 -->
+    <string name="remember_text">나무 자동차 모자</string>
+    <string name="pass_text">5초 후에 자동으로 넘어갑니다.</string>
 
-<!-- 기억력 검사 -->
-<string name="explain">이 아이콘은 어쩌고 저쩌고\n이 아이콘은 저쩌고 어쩌고</string>
+    <!-- 기억력 검사 -->
+    <string name="explain">이 아이콘은 어쩌고 저쩌고\n이 아이콘은 저쩌고 어쩌고</string>
 </resources>

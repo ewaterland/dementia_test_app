@@ -7,7 +7,7 @@
     <item>
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/main" />
+            <solid android:color="@color/mint" />
             <!-- 모서리 -->
             <corners
                 android:topLeftRadius="45dp"

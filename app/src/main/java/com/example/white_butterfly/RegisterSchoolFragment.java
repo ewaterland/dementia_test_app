@@ -2,17 +2,14 @@ package com.example.white_butterfly;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,8 +24,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Locale;
-
 public class RegisterSchoolFragment extends Fragment {
     // Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -37,7 +32,7 @@ public class RegisterSchoolFragment extends Fragment {
 
     // 페이지 이전, 다음 버튼
     TextView text_before;
-    TextView text_next;
+    Button btn_next;
 
     // 정보 선택 버튼
     RadioButton radio_no;
@@ -70,7 +65,7 @@ public class RegisterSchoolFragment extends Fragment {
 
         Log.w(TAG, "User: " + id);
 
-        text_next = rootView.findViewById(R.id.text_next);
+        btn_next = rootView.findViewById(R.id.btn_next);
 
         // 임시 데이터 공간
         infoModel = new ViewModelProvider(requireActivity()).get(InfoModel.class);
@@ -149,15 +144,15 @@ public class RegisterSchoolFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId != -1) {
-                    text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
+                    btn_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.mint));
                 } else {
-                    text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
+                    btn_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
                 }
             }
         });
 
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.textView_before);
+        text_before = rootView.findViewById(R.id.textView_before);
         text_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,11 +166,10 @@ public class RegisterSchoolFragment extends Fragment {
         });
 
         // 다음 버튼 누른 경우
-        text_next.setOnClickListener(v -> {
-            int textColor = text_next.getCurrentTextColor();
-            if (textColor == ContextCompat.getColor(requireContext(), R.color.main)) {
-                onNextButtonClick();
-            }
+        btn_next.setOnClickListener(v -> {
+            Log.w(TAG, "다음 버튼 누름");
+
+            onNextButtonClick();
         });
 
         return rootView;

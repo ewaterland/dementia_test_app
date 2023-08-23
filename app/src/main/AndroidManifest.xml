@@ -6,11 +6,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- 위치 정보 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <!-- 마이크 권한 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.White_butterfly"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="7dbd9a5212706340ef14160f7b431a33" />
 
         <activity
             android:name=".SplashActivity"
@@ -32,11 +41,30 @@
 
         <!-- 로그인 및 회원가입 -->
         <activity
+            android:name=".LoginMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterFinishActivity"
             android:exported="false" />
+
+        <!-- 카카오 로그인 -->
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao7dbd9a5212706340ef14160f7b431a33" />
+            </intent-filter>
+        </activity>
 
         <!-- 메인 페이지 -->
         <activity
@@ -58,15 +86,6 @@
             android:name=".TestMainActivity"
             android:label="TestMainActivity" />
         <activity
-            android:name=".Test1Activity"
-            android:label="Test1Activity" />
-        <activity
-            android:name=".Test2Activity"
-            android:label="Test2Activity" />
-        <activity
-            android:name=".Test3Activity"
-            android:label="Test3Activity" />
-        <activity
             android:name=".ResultActivity"
             android:exported="false" />
 
@@ -80,13 +99,15 @@
         <activity
             android:name=".Memory03Activity"
             android:label="Memory03Activity" />
-        <activity
-            android:name=".Memory04Activity"
-            android:label="Memory04Activity" />
 
         <!-- 마이페이지 -->
         <activity
             android:name=".UserActivity"
+            android:label="UserActivity" />
+
+        <!-- 카카오 지도 -->
+        <activity
+            android:name=".CenterActivity"
             android:label="UserActivity" />
 
 </application>

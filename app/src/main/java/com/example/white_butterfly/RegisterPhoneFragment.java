@@ -7,13 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -33,7 +33,7 @@ public class RegisterPhoneFragment extends Fragment {
 
     // 페이지 이전, 다음 버튼
     TextView text_before;
-    TextView text_next;
+    Button btn_next;
 
     // 입력 있으면 1, 입력 없으면 0
     int myfirst_active = 0;
@@ -72,7 +72,7 @@ public class RegisterPhoneFragment extends Fragment {
 
         Log.w(TAG, "User: " + id);
 
-        text_next = rootView.findViewById(R.id.text_next);
+        btn_next = rootView.findViewById(R.id.btn_next);
 
         // 임시 데이터 공간
         infoModel = new ViewModelProvider(requireActivity()).get(InfoModel.class);
@@ -105,13 +105,17 @@ public class RegisterPhoneFragment extends Fragment {
         editText_GuardianMiddle.setText(savedGuardianMiddle);
         editText_GuardianLast.setText(savedGuardianLast);
 
-        if (savedMyLast.length() == 4)
-        {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
+        try {
+            if (savedMyLast.length() == 4) {
+                btn_next.setEnabled(true);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
         }
 
+
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.textView_before);
+        text_before = rootView.findViewById(R.id.textView_before);
         text_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,11 +129,10 @@ public class RegisterPhoneFragment extends Fragment {
         });
 
         // 다음 버튼 누른 경우
-        text_next.setOnClickListener(v -> {
-            int textColor = text_next.getCurrentTextColor();
-            if (textColor == ContextCompat.getColor(requireContext(), R.color.main)) {
-                onNextButtonClick();
-            }
+        btn_next.setOnClickListener(v -> {
+            Log.w(TAG, "다음 버튼 누름");
+
+            onNextButtonClick();
         });
 
         // 정보가 입력됐을 때 다음 버튼 활성화를 위함
@@ -271,9 +274,9 @@ public class RegisterPhoneFragment extends Fragment {
     // 칸이 모두 채워졌는지 확인
     public void check() {
         if (myfirst_active == 1 && mymiddle_active == 1 && mylast_active == 1) {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
+            btn_next.setEnabled(true);
         } else {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
+            btn_next.setEnabled(false);
         }
     }
 }

@@ -1,10 +1,6 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -33,7 +28,7 @@ public class RegisterGenderFragment extends Fragment {
 
     // 페이지 이전, 다음 버튼
     TextView text_before;
-    TextView text_next;
+    Button btn_next;
 
     // 입력 있으면 1, 입력 없으면 0
     int gender_active = 0;
@@ -68,7 +63,7 @@ public class RegisterGenderFragment extends Fragment {
         Log.w(TAG, "User: " + id);
 
         text_before = rootView.findViewById(R.id.textView_before);
-        text_next = rootView.findViewById(R.id.text_next);
+        btn_next = rootView.findViewById(R.id.btn_next);
         btn_female = rootView.findViewById(R.id.btn_female);
         btn_male = rootView.findViewById(R.id.btn_male);
 
@@ -82,14 +77,13 @@ public class RegisterGenderFragment extends Fragment {
         // 가져온 데이터 사용
         if (savedGender != null)
         {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
+            btn_next.setEnabled(true);
 
             if (savedGender.equals("남성")) { btn_male.setSelected(true); }
             else if (savedGender.equals("여성")) { btn_female.setSelected(true); }
         }
 
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.textView_before);
         text_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +99,10 @@ public class RegisterGenderFragment extends Fragment {
         });
 
         // 다음 버튼 누른 경우
-        text_next.setOnClickListener(v -> {
+        btn_next.setOnClickListener(v -> {
             Log.w(TAG, "다음 버튼 누름");
-            int textColor = text_next.getCurrentTextColor();
-            if (textColor == ContextCompat.getColor(requireContext(), R.color.main)) {
-                onNextButtonClick();
-            }
+
+            onNextButtonClick();
         });
 
         // 정보가 입력됐을 때 다음 버튼 활성화를 위함
@@ -220,9 +212,9 @@ public class RegisterGenderFragment extends Fragment {
     // 칸이 모두 채워졌는지 확인
     public void check() {
         if (gender_active == 1) {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
+            btn_next.setEnabled(true);
         } else {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
+            btn_next.setEnabled(false);
         }
     }
 }

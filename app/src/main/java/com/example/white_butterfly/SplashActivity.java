@@ -1,10 +1,7 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -94,7 +91,12 @@ public class SplashActivity extends AppCompatActivity {
                                 .commit();
 
                         findViewById(R.id.page_splash).setVisibility(View.GONE);
-                    } else {
+                    } else if (documentSnapshot.getLong("School").equals(0)) {
+
+                    }
+                    else {
+                        Log.d(TAG, "< 모든 정보 입력 완료 > Email: " + id);
+
                         Intent intent = new Intent(getApplication(), MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -108,6 +110,7 @@ public class SplashActivity extends AppCompatActivity {
 
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
+            finish();
         }
 
         /*

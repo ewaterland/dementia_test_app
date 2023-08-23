@@ -8,13 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,7 +34,7 @@ public class RegisterEmailFragment extends Fragment {
     private String id;
 
     // 페이지 다음 버튼
-    TextView text_next;
+    Button btn_next;
 
     // 입력 있으면 1, 입력 없으면 0
     private int email_active = 0;
@@ -91,12 +91,11 @@ public class RegisterEmailFragment extends Fragment {
         });
 
         // 다음 버튼 누른 경우
-        text_next = rootView.findViewById(R.id.text_next);
-        text_next.setOnClickListener(v -> {
-            int textColor = text_next.getCurrentTextColor();
-            if (textColor == ContextCompat.getColor(requireContext(), R.color.main)) {
-                onNextButtonClick();
-            }
+        btn_next = rootView.findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(v -> {
+            Log.w(TAG, "다음 버튼 누름");
+
+            onNextButtonClick();
         });
 
         // 정보가 입력됐을 때 다음 버튼 활성화를 위함
@@ -175,7 +174,7 @@ public class RegisterEmailFragment extends Fragment {
         user.put("School", 0);    // 최종 학력
         user.put("My", "");        // 본인 연락처
         user.put("Guardian", "");  // 보호자 연락처
-        user.put("Data", "");      // 마지막 치매선별검사 날짜
+        user.put("Date", "아직 검사를 하지 않았습니다");      // 마지막 치매선별검사 날짜
         user.put("Score", 0);     // 마지막 치매선별검사 점수
 
 
@@ -229,9 +228,9 @@ public class RegisterEmailFragment extends Fragment {
 
     private void check() {
         if (email_active == 1 && pw_active == 1 && pwc_active == 1) {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
+            btn_next.setEnabled(true);
         } else {
-            text_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
+            btn_next.setEnabled(false);
         }
     }
 }

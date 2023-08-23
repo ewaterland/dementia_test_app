@@ -89,7 +89,10 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
-                    Text_Name.setText(documentSnapshot.getString("Name"));
+
+                    String name = documentSnapshot.getString("Name");
+                    String fullName = name + "님";
+                    Text_Name.setText(fullName);
                     Text_Birthday.setText(String.valueOf(documentSnapshot.getString("Birth")));
                     EditText_Address.setText(documentSnapshot.getString("Address"));
                     EditText_My.setText(documentSnapshot.getString("My"));
@@ -134,6 +137,8 @@ public class UserActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference().child("images");
 
+        onPageTransition();
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +152,22 @@ public class UserActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    private void onPageTransition() {
+        // StorageReference를 통해 이미지 파일을 가져옵니다.
+        StorageReference fileReference = storageReference.child("image.jpg");
+
+        fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
+            // 이미지가 존재하는 경우, 이미지 다운로드 URL을 가져와 ImageView에 표시
+            Glide.with(this)
+                    .load(uri)
+                    .into(imageView);
+            Log.d(TAG, "저장된 프로필: " + "프로필 사진을 불러옴");
+        }).addOnFailureListener(urlFailure -> {
+            // 이미지가 존재하지 않는 경우, 토스트 메시지 띄우기
+            Toast.makeText(this, "프로필 사진을 등록해주세요.", Toast.LENGTH_SHORT).show();
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,64 +175,29 @@ public class UserActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri imageUri = data.getData();
 
-            // 기존 이미지 파일 가져오기 (기존 이미지 이름을 image.jpg로 가정)
-            StorageReference oldFileReference = storageReference.child("image.jpg");
+            StorageReference fileReference = storageReference.child("image.jpg");
 
-            oldFileReference.getDownloadUrl().addOnSuccessListener(uri -> {
-                // 기존 이미지가 있는 경우, 삭제를 시도하고 업로드 수행
-                oldFileReference.delete().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // 이미지 삭제 성공한 경우에만 업로드 수행
-                        StorageReference fileReference = storageReference.child("image.jpg");
+            // 이미지 업로드 수행
+            UploadTask uploadTask = fileReference.putFile(imageUri);
 
-                        UploadTask uploadTask = fileReference.putFile(imageUri);
-
-                        uploadTask.addOnSuccessListener(taskSnapshot -> {
-                            // 이미지 업로드 성공 시, 이미지 다운로드 URL을 가져와 ImageView에 표시
-                            fileReference.getDownloadUrl().addOnSuccessListener(newDownloadUri -> {
-                                if (newDownloadUri != null) {
-                                    // 이미지 다운로드 URL(uri)을 이용하여 이미지뷰에 이미지 설정
-                                    // Glide 라이브러리 등을 사용하여 이미지 로딩 가능
-                                    Glide.with(this)
-                                            .load(newDownloadUri)
-                                            .into(imageView);
-                                } else {
-                                    // 저장소에 이미지가 없는 경우, 토스트 메시지 띄우기
-                                    Toast.makeText(this, "이미지가 없습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-                        }).addOnFailureListener(uploadFailure -> {
-                            Toast.makeText(this, "업로드 실패", Toast.LENGTH_SHORT).show();
-                        });
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
+                // 이미지 업로드 성공 시, 이미지 다운로드 URL을 가져와 ImageView에 표시
+                fileReference.getDownloadUrl().addOnSuccessListener(newDownloadUri -> {
+                    if (newDownloadUri != null) {
+                        // 이미지 다운로드 URL(uri)을 이용하여 이미지뷰에 이미지 설정
+                        // Glide 라이브러리 등을 사용하여 이미지 로딩 가능
+                        Glide.with(this)
+                                .load(newDownloadUri)
+                                .into(imageView);
+                        Toast.makeText(this, "프로필 사진을 변경하셨습니다.", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "프로필 변경: " + "프로필 사진을 변경함");
                     } else {
-                        Toast.makeText(this, "이미지 삭제 실패", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "저장소에 이미지가 없습니다.");
                     }
                 });
-            }).addOnFailureListener(urlFailure -> {
-                // 기존 이미지가 없는 경우, 바로 업로드 수행
-                StorageReference fileReference = storageReference.child("image.jpg");
 
-                UploadTask uploadTask = fileReference.putFile(imageUri);
-
-                uploadTask.addOnSuccessListener(taskSnapshot -> {
-                    // 이미지 업로드 성공 시, 이미지 다운로드 URL을 가져와 ImageView에 표시
-                    fileReference.getDownloadUrl().addOnSuccessListener(newDownloadUri -> {
-                        if (newDownloadUri != null) {
-                            // 이미지 다운로드 URL(uri)을 이용하여 이미지뷰에 이미지 설정
-                            // Glide 라이브러리 등을 사용하여 이미지 로딩 가능
-                            Glide.with(this)
-                                    .load(newDownloadUri)
-                                    .into(imageView);
-                        } else {
-                            // 저장소에 이미지가 없는 경우, 토스트 메시지 띄우기
-                            Toast.makeText(this, "이미지가 없습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }).addOnFailureListener(uploadFailure -> {
-                    Toast.makeText(this, "업로드 실패", Toast.LENGTH_SHORT).show();
-                });
+            }).addOnFailureListener(uploadFailure -> {
+                Toast.makeText(this, "업로드 실패", Toast.LENGTH_SHORT).show();
             });
         }
     }

@@ -8,13 +8,13 @@
 
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/Human" />
+            <solid android:color="@color/mint" />
             <!-- 모서리 -->
             <corners
-                android:bottomLeftRadius="23dp"
-                android:bottomRightRadius="23dp"
-                android:topLeftRadius="23dp"
-                android:topRightRadius="23dp" />
+                android:bottomLeftRadius="30dp"
+                android:bottomRightRadius="30dp"
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp" />
         </shape>
     </item>
 
@@ -22,16 +22,16 @@
     <item android:state_selected="false">
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/white" />
+            <solid android:color="#FCF6F6" />
             <stroke
-                android:width="2dp"
-                android:color="@color/unable" />
+                android:width="1dp"
+                android:color="#A6A6A6" />
             <!-- 모서리 -->
             <corners
-                android:bottomLeftRadius="23dp"
-                android:bottomRightRadius="23dp"
-                android:topLeftRadius="23dp"
-                android:topRightRadius="23dp" />
+                android:bottomLeftRadius="30dp"
+                android:bottomRightRadius="30dp"
+                android:topLeftRadius="30dp"
+                android:topRightRadius="30dp" />
         </shape>
     </item>
 

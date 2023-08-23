@@ -1,14 +1,12 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TestMainActivity extends AppCompatActivity {
 
@@ -25,7 +23,7 @@ public class TestMainActivity extends AppCompatActivity {
         btn_testStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), Test1Activity.class);
+                Intent intent = new Intent(getApplication(), TestActivity_old.class);
                 startActivity(intent);
             }
         });
