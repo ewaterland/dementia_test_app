@@ -24,12 +24,12 @@ public class LoadingActivity extends AppCompatActivity {
             {
                 Log.w(TAG, "================== TEST FINISH ==================");
 
-                //startActivity(new Intent(LoadingActivity.this, ResultActivity.class));
+                //startActivity(new Intent(LoadingActivity.this, MemoryResultActivity.class));
                 //finish();
                 //overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
 
 
-                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MemoryResultActivity.class);
                 startActivity(intent);
                 finish();
             }

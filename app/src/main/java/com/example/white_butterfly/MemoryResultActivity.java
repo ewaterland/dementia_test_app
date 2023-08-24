@@ -11,17 +11,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ResultActivity extends AppCompatActivity {
+public class MemoryResultActivity extends AppCompatActivity {
 
-    // 임시 데이터 저장 모델
-    public InfoModel infoModel;
+    private String TAG = "MemoryResultActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_memory_result);
 
-        Log.w(TAG, "--- ResultActivity ---");
+        Log.w(TAG, "--- MemoryResultActivity ---");
 
         // 임시 데이터 공간
         int score = getIntent().getIntExtra("Score", 0);
@@ -33,7 +32,7 @@ public class ResultActivity extends AppCompatActivity {
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ResultActivity.this, MainActivity.class);
+                Intent intent = new Intent(MemoryResultActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

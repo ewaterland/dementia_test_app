@@ -108,7 +108,7 @@ public class SplashActivity extends AppCompatActivity {
         {
             Log.d(TAG, "< 로그인 기록 없음 >");
 
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginMainActivity.class);
             startActivity(intent);
             finish();
         }

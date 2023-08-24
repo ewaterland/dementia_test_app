@@ -37,8 +37,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
 //CurrentPageListener,
-public class TestActivity_old extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class CogTestActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
     // Firebase
     FirebaseFirestore user_db;
     DocumentReference docRef;
@@ -118,7 +119,7 @@ public class TestActivity_old extends AppCompatActivity implements TextToSpeech.
         random = new Random();
 
         // Firebase
-        FirebaseApp.initializeApp(TestActivity_old.this);
+        FirebaseApp.initializeApp(CogTestActivity.this);
         question_db = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user_db = FirebaseFirestore.getInstance();
@@ -181,7 +182,7 @@ public class TestActivity_old extends AppCompatActivity implements TextToSpeech.
         test();
 
         progressBar = findViewById(R.id.progress);
-        progressModel = new ViewModelProvider(TestActivity_old.this).get(ProgressModel.class);
+        progressModel = new ViewModelProvider(CogTestActivity.this).get(ProgressModel.class);
     }
 
     private void initializeViews() {
@@ -682,7 +683,7 @@ public class TestActivity_old extends AppCompatActivity implements TextToSpeech.
 
             text_q_num.setText(String.valueOf(currentPage));
 
-            progressModel.getProgressLiveData().observe(TestActivity_old.this, progress -> {
+            progressModel.getProgressLiveData().observe(CogTestActivity.this, progress -> {
                 progressBar.setProgress(currentProgress);
                 Log.w(TAG, "프로그레스: " + currentProgress);
             });

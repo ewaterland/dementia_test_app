@@ -43,11 +43,13 @@ public class LoginMainActivity extends AppCompatActivity {
 
         Log.e("Debug", Utility.INSTANCE.getKeyHash(this));
 
+
         // SDK 초기화
         KakaoSdk.init(this, "7dbd9a5212706340ef14160f7b431a33");
 
         kakaologinButton = findViewById(R.id.kakaologin);
         emailloginButton = findViewById(R.id.emaillogin);
+
 
         // 카카오톡이 설치되어 있는지 확인하는 메서드 , 카카오에서 제공함. 콜백 객체를 이용합.
         Function2<OAuthToken, Throwable, Unit> callback =new Function2<OAuthToken, Throwable, Unit>() {
@@ -68,12 +70,11 @@ public class LoginMainActivity extends AppCompatActivity {
             }
         };
 
+
         // 카카오 로그인
-        kakaologinButton.setOnClickListener(new View.OnClickListener() { //로그인 버튼 눌렀을때
+        kakaologinButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //if문이 무슨의미냐하면, 카카오톡이 깔려있냐 없냐 를 구분하고
-                //있으면 연동, 없으면 카카오톡 인터넷같이 해서 로그인하기 입니다.
-                //로그인이 되거나 오류가 있으면 저기 callback 함수에서 판단하여 위에 Function2 callback 함수가 작동합니다.
+            public void onClick(View v) {
                 if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginMainActivity.this)){
                     UserApiClient.getInstance().loginWithKakaoTalk(LoginMainActivity.this,callback);
                 }else{
@@ -82,8 +83,9 @@ public class LoginMainActivity extends AppCompatActivity {
             }
         });
 
+
         // 이메일 로그인
-        emailloginButton.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 눌렀을 때
+        emailloginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), LoginActivity.class);
@@ -94,10 +96,12 @@ public class LoginMainActivity extends AppCompatActivity {
             }
         });
 
+
         // 구글 로그인
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail() // email addresses도 요청함
                 .build();
+
 
         // 위에서 만든 GoogleSignInOptions을 사용해 GoogleSignInClient 객체를 만듬
         mGoogleSignInClient = GoogleSignIn.getClient(LoginMainActivity.this, gso);

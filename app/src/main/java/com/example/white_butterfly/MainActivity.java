@@ -13,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import me.relex.circleindicator.CircleIndicator3;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 3;
     private CircleIndicator3 mIndicator;
+    String id = "";
 
     // 태그
     private static final String TAG = "MainActivity";
@@ -37,28 +44,29 @@ public class MainActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- MainActivity ---");
 
-        /**
-         * 가로 슬라이드 뷰 Fragment
-         */
+        getToken();
+
+        // firebase 접근 권한 갖기
+        FirebaseApp.initializeApp(MainActivity.this);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        id = currentUser.getEmail();
 
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
+
         //Adapter
         pagerAdapter = new MyAdapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
+
         //Indicator
         mIndicator = findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
         mIndicator.createIndicators(num_page,0);
+
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-
-        /**
-         * 이 부분 조정하여 처음 시작하는 이미지 설정.
-         * 2000장 생성하였으니 현재위치 1002로 설정하여
-         * 좌 우로 슬라이딩 할 수 있게 함. 거의 무한대로
-         */
-
         mPager.setCurrentItem(999); //시작 지점
         mPager.setOffscreenPageLimit(3); //최대 이미지 수
 
@@ -77,43 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 mIndicator.animatePageSelected(position%num_page);
             }
         });
-
-        /*
-        adRecyclerView = findViewById(R.id.view_ad);
-        adList = new ArrayList<>();
-        adList.add(R.drawable.image_ad_1);
-        adList.add(R.drawable.image_ad_2);
-        adList.add(R.drawable.image_ad_3);
-
-        adAdapter = new AdAdapter(adList);
-        adRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adRecyclerView.setAdapter(adAdapter);
-
-        ImageView ad_count_1 = (ImageView) findViewById(R.id.ad_count_1);
-        ad_count_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        ImageView ad_count_2 = (ImageView) findViewById(R.id.ad_count_2);
-        ad_count_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        ImageView ad_count_3 = (ImageView) findViewById(R.id.ad_count_3);
-        ad_count_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-         */
 
         Button btn_dementiaTest = (Button) findViewById(R.id.btn_dementiaTest);
         btn_dementiaTest.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +119,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), UserActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+    }
+
+    void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                String token = task.getResult();
+                Log.i("My Token",token);
+
+                /* 로그인 된 계정에 업로드 된다는 가정으로 코드를 작성함 */
+                // id: 해당 유저의 이메일(아이디)
+                FirebaseFirestore.getInstance().collection("Users").document(id).update("fcmToken",token);
             }
         });
     }
