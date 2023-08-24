@@ -209,7 +209,7 @@ public class Memory03Activity extends AppCompatActivity implements TextToSpeech.
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Memory03Activity.this, LoadingActivity.class);
+                Intent intent = new Intent(Memory03Activity.this, TestLoadingActivity.class);
                 startActivity(intent);
             }
         });

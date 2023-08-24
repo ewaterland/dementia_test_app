@@ -7,37 +7,74 @@
     tools:context=".MemoryResultActivity">
 
     <TextView
-        android:id="@+id/text_score"
+        android:id="@+id/text_cog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="치매"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_cog_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="100dp"
-        android:text="score"
+        android:text="치매 정상"
+        android:textColor="@color/black"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_result" />
+        app:layout_constraintTop_toBottomOf="@+id/text_cog" />
 
     <TextView
-        android:id="@+id/text_result"
+        android:id="@+id/text_dep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:text="점수"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="우울증"
         android:textSize="40dp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_cog_result" />
 
-    <Button
-        android:id="@+id/btn_main"
+    <TextView
+        android:id="@+id/text_dep_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginBottom="245dp"
-        android:text="돌아가기"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="우울증 정상"
         android:textSize="40dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dep" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_main"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="125dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_round_main"
+        android:text="돌아가기"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

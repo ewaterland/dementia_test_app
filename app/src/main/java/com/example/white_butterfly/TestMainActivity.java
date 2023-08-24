@@ -23,7 +23,7 @@ public class TestMainActivity extends AppCompatActivity {
         btn_testStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), CogTestActivity.class);
+                Intent intent = new Intent(getApplication(), TestCogActivity.class);
                 startActivity(intent);
             }
         });

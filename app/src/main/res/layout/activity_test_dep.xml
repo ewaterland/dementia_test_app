@@ -42,7 +42,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="14"
+            android:max="9"
             android:progress="0"
             android:progressDrawable="@drawable/progressbar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text=" / 15"
+            android:text=" / 10"
             android:textSize="40dp"
             app:layout_constraintStart_toEndOf="@+id/text_q_num"
             app:layout_constraintTop_toTopOf="parent">
@@ -76,8 +76,8 @@
         </TextView>
 
         <ImageView
-            android:id="@+id/image_speak"
-            android:background="@drawable/speak"
+            android:id="@+id/image_speaker"
+            android:background="@drawable/speaker"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
@@ -136,46 +136,31 @@
 
         <!-- 객관식 답 -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_reply1"
+            android:id="@+id/btn_reply_yes"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/button_next"
-            android:text="아니다"
+            android:text="예"
             android:textSize="30dp"
             android:fontFamily="@font/pretendard_regular"
-            app:layout_constraintBottom_toTopOf="@+id/btn_reply2"
+            app:layout_constraintBottom_toTopOf="@+id/btn_reply_no"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_reply2"
+            android:id="@+id/btn_reply_no"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="140dp"
             android:background="@drawable/button_next"
-            android:text="가끔(조금) 그렇다"
-            android:textSize="30dp"
             android:fontFamily="@font/pretendard_regular"
-            app:layout_constraintBottom_toTopOf="@+id/btn_reply3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_reply3"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/button_next"
-            android:text="자주(많이) 그렇다"
+            android:text="아니오"
             android:textSize="30dp"
-            android:fontFamily="@font/pretendard_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

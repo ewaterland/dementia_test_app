@@ -73,7 +73,7 @@
 
         <!-- 로딩 페이지 -->
         <activity
-            android:name=".LoadingActivity"
+            android:name=".TestLoadingActivity"
             android:exported="false" />
 
         <!-- 말동무(챗봇) -->
@@ -86,11 +86,11 @@
             android:name=".TestMainActivity"
             android:label="TestMainActivity" />
         <activity
-            android:name=".CogTestActivity"
-            android:label="CogTestActivity" />
+            android:name=".TestCogActivity"
+            android:label="TestCogActivity" />
         <activity
-            android:name=".DepTestActivity"
-            android:label="DepTestActivity" />
+            android:name=".TestDepActivity"
+            android:label="TestDepActivity" />
         <activity
             android:name=".TestResultActivity"
             android:label="TestResultActivity" />

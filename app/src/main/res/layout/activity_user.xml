@@ -98,8 +98,7 @@
                         android:id="@+id/profileImageView"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/profile_default"
+                        android:background="@drawable/profile_default"
                         android:padding="0dp"
                         android:layout_gravity="center" />
 
@@ -251,7 +250,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
 
             <TextView
-                android:id="@+id/text_score"
+                android:id="@+id/text_score_cog"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -306,22 +305,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/back"
-                    android:text="회원을 탈퇴 하시겠습니까?"
+                    android:onClick="withdraw"
+                    android:text="회원 탈퇴"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btn_yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/back"
-                    android:onClick="withdraw"
-                    android:text="네"
-                    android:textAllCaps="false"
-                    android:textColor="#81CDCB"
                     android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>

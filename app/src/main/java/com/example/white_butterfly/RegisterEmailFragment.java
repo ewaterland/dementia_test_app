@@ -168,15 +168,12 @@ public class RegisterEmailFragment extends Fragment {
         user.put("Gender", "");    // 성별
         user.put("Address", "");   // 주소
         user.put("Birth", "");     // 생년월일
-        //user.put("Year", "");
-        //user.put("Month", "");
-        //user.put("Day", "");
         user.put("School", 0);    // 최종 학력
         user.put("My", "");        // 본인 연락처
         user.put("Guardian", "");  // 보호자 연락처
-        user.put("Date", "아직 검사를 하지 않았습니다");      // 마지막 치매선별검사 날짜
-        user.put("Score", 0);     // 마지막 치매선별검사 점수
-
+        user.put("Date", "아직 검사를 하지 않았습니다");  // 마지막 치매선별검사 날짜
+        user.put("Score_cog", "검사한 적이 없어요!");   // 마지막 치매 선별 검사 레벨
+        user.put("Score_dep", "검사한 적이 없어요!");   // 마지막 우울증 검사 레벨
 
         db.collection("Users").document(id).set(user)
                 .addOnSuccessListener(unused -> Log.d(TAG, "< 데이터베이스에 유저 정보 저장 성공 >"))

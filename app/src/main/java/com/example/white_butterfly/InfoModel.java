@@ -49,7 +49,8 @@ public class InfoModel extends ViewModel {
     private int inputSchool;
 
     // 점수
-    private int inputScore;
+    private int inputScore_cog;
+    private int inputScore_dep;
 
     // ---------------------------------
 
@@ -228,10 +229,16 @@ public class InfoModel extends ViewModel {
 
 
     // 검사 점수
-    public int getInputScore() {
-        return inputScore;
+    public int getInputScore_cog() {
+        return inputScore_cog;
     }
-    public void setInputScore(int inputScore) {
-        this.inputScore = inputScore;
+    public void setInputScore_cog(int inputScore_cog) {
+        this.inputScore_cog = inputScore_cog;
+    }
+    public int getInputScore_dep() {
+        return inputScore_dep;
+    }
+    public void setInputScore_dep(int inputScore_dep) {
+        this.inputScore_dep = inputScore_dep;
     }
 }

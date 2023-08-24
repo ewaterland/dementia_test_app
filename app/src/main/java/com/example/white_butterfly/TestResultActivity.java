@@ -20,11 +20,27 @@ public class TestResultActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- TestResultActivity ---");
 
-        // 임시 데이터 공간
-        int score = getIntent().getIntExtra("Score", 0);
+        int score_cog = getIntent().getIntExtra("score_cog", 0);
+        int score_dep = getIntent().getIntExtra("score_dep", 0);
 
-        TextView text_score = findViewById(R.id.text_score);
-        text_score.setText(String.format("%d점", score));
+        Log.w(TAG, "치매 점수: " + score_cog);
+        Log.w(TAG, "우울증 점수: " + score_dep);
+
+        // 텍스트 뷰
+        TextView text_cog_result = findViewById(R.id.text_cog_result);
+        TextView text_dep_result = findViewById(R.id.text_dep_result);
+
+        // 점수에 따른 결과 표시
+        if (score_cog >= 6)
+        {
+            text_cog_result.setText("치매 의심");
+        }
+
+        if (score_dep >= 5)
+        {
+            text_dep_result.setText("우울증 의심");
+        }
+
 
         Button btn_main = (Button) findViewById(R.id.btn_main);
         btn_main.setOnClickListener(new View.OnClickListener() {

@@ -9,12 +9,12 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoadingActivity extends AppCompatActivity {
+public class TestLoadingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loading);
+        setContentView(R.layout.activity_test_loading);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()
@@ -24,13 +24,12 @@ public class LoadingActivity extends AppCompatActivity {
             {
                 Log.w(TAG, "================== TEST FINISH ==================");
 
-                //startActivity(new Intent(LoadingActivity.this, MemoryResultActivity.class));
-                //finish();
-                //overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-
-
-                Intent intent = new Intent(getApplicationContext(), MemoryResultActivity.class);
-                startActivity(intent);
+                Intent intent_result = new Intent(getApplicationContext(), TestResultActivity.class);
+                int score_cog = getIntent().getIntExtra("score_cog", 0);
+                int score_dep = getIntent().getIntExtra("score_dep", 0);
+                intent_result.putExtra("score_cog", score_cog);
+                intent_result.putExtra("score_dep", score_dep);
+                startActivity(intent_result);
                 finish();
             }
         }, 3000);

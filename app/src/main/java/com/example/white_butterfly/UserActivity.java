@@ -47,7 +47,7 @@ public class UserActivity extends AppCompatActivity {
     EditText EditText_My;
     EditText EditText_Guardian;
     TextView Text_Date;
-    TextView Text_Score;
+    TextView Text_Score_cog;
     TextView Text_School;
 
     // 입력 받은 정보를 저장할 공간
@@ -72,7 +72,7 @@ public class UserActivity extends AppCompatActivity {
         EditText_My = findViewById(R.id.editText_my);
         EditText_Guardian = findViewById(R.id.editText_guardian);
         Text_Date = findViewById(R.id.text_date);
-        Text_Score = findViewById(R.id.text_score);
+        Text_Score_cog = findViewById(R.id.text_score_cog);
         Text_School = findViewById(R.id.text_school);
         imageView = findViewById(R.id.profileImageView);
 
@@ -98,7 +98,7 @@ public class UserActivity extends AppCompatActivity {
                     EditText_My.setText(documentSnapshot.getString("My"));
                     EditText_Guardian.setText(documentSnapshot.getString("Guardian"));
                     Text_Date.setText(documentSnapshot.getString("Date"));
-                    Text_Score.setText(String.valueOf(documentSnapshot.getLong("Score")));
+                    Text_Score_cog.setText(String.valueOf(documentSnapshot.getString("Score_cog")));
 
                     switch (Integer.parseInt(documentSnapshot.getLong("School").toString()))
                     {
@@ -123,14 +123,6 @@ public class UserActivity extends AppCompatActivity {
                         default:
                             break;
                     }
-/*
-                    // 이미지 URL 가져와서 이미지뷰에 표시
-                    String imageUrl = documentSnapshot.getString("images");
-                    if (imageUrl != null && !imageUrl.isEmpty()) {
-                        Glide.with(UserActivity.this)
-                                .load(imageUrl)
-                                .into(imageView); // imageView: 이미지를 표시할 ImageView 객체
-                    }*/
                 }
             }
         });
