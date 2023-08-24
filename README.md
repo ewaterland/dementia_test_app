@@ -23,7 +23,7 @@
 		<img src="https://img.shields.io/badge/지윤-40AEF0?style=flat&logo=Gmail&logoColor=white" />
 	<a href="mailto:schosjz@gmail.com">
 		<img src="https://img.shields.io/badge/수지-68BC71?style=flat&logo=Gmail&logoColor=white" />
-	<a href="mailto:schosjz@gmail.com">
+	<a href="mailto:tjddus9974@naver.com">
 		<img src="https://img.shields.io/badge/성연-9999FF?style=flat&logo=Gmail&logoColor=white" />
 	<a href="mailto:kiminsu0412@naver.com">
 		<img src="https://img.shields.io/badge/민서-FFB71B?style=flat&logo=Gmail&logoColor=white" />
