@@ -15,10 +15,12 @@
     <!-- 로고 START -->
     <ImageView
         android:id="@+id/image_logo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,12 +30,12 @@
         android:id="@+id/textView_subject1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:text="치매 예방을 위한 첫걸음"
         android:textColor="@color/user"
-        android:textSize="32sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/pretendard_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
@@ -41,32 +43,39 @@
         android:id="@+id/textView_subject2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="당신의 내일을 응원합니다"
         android:textColor="@color/user"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="25sp"
+        android:fontFamily="@font/pretendard_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_subject1" />
     <!-- 로고 END -->
 
     <!-- 메인 START -->
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/kakaologin"
         android:layout_width="320dp"
         android:layout_height="56dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/kakao"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="    카카오로 시작하기"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_subject2" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/emaillogin"
         android:layout_width="320dp"
         android:layout_height="56dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/email"
+        android:text="    이메일로 시작하기"
+        android:textSize="20sp"
+        android:fontFamily="@font/pretendard_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kakaologin" />

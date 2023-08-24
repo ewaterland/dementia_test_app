@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,8 +32,8 @@ public class LoginMainActivity extends AppCompatActivity {
     private final int RC_SIGN_IN = 123;
 
     // 버튼
-    private ImageButton kakaologinButton;
-    private ImageButton emailloginButton;
+    private Button kakaologinButton;
+    private Button emailloginButton;
 
     // TAG
     private static final String TAG = "LoginMainActivity";
@@ -107,6 +109,10 @@ public class LoginMainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(LoginMainActivity.this, gso);
 
         SignInButton btn_google = findViewById(R.id.btn_google);
+        TextView textView = (TextView) btn_google.getChildAt(0);
+        textView.setText("    구글로 시작하기");
+
+
         btn_google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

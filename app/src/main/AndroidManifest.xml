@@ -86,8 +86,14 @@
             android:name=".TestMainActivity"
             android:label="TestMainActivity" />
         <activity
-            android:name=".MemoryResultActivity"
-            android:exported="false" />
+            android:name=".CogTestActivity"
+            android:label="CogTestActivity" />
+        <activity
+            android:name=".DepTestActivity"
+            android:label="DepTestActivity" />
+        <activity
+            android:name=".TestResultActivity"
+            android:label="TestResultActivity" />
 
         <!-- 기억력 검사 -->
         <activity
@@ -99,6 +105,9 @@
         <activity
             android:name=".Memory03Activity"
             android:label="Memory03Activity" />
+        <activity
+            android:name=".MemoryResultActivity"
+            android:exported="false" />
 
         <!-- 마이페이지 -->
         <activity
@@ -108,8 +117,9 @@
         <!-- 카카오 지도 -->
         <activity
             android:name=".CenterActivity"
-            android:label="UserActivity" />
+            android:label="CenterActivity" />
 
+        <!-- 푸쉬 알림 -->
         <service
             android:name=".FCMNotificationService" android:exported="false">
             <intent-filter>
