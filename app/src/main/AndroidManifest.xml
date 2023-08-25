@@ -89,6 +89,9 @@
             android:name=".TestCogActivity"
             android:label="TestCogActivity" />
         <activity
+            android:name=".TestDepMainActivity"
+            android:label="TestDepMainActivity" />
+        <activity
             android:name=".TestDepActivity"
             android:label="TestDepActivity" />
         <activity

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:foregroundGravity="center"
-    tools:context=".TestActivity_old">
+    android:foregroundGravity="center">
 
     <ProgressBar
         android:id="@+id/loadBar"
@@ -31,7 +30,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_top"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,8 +40,8 @@
             android:id="@+id/progress"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="9"
+            android:layout_height="15dp"
+            android:max="10"
             android:progress="0"
             android:progressDrawable="@drawable/progressbar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,40 +49,58 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- 질문 수 표시 -->
-        <TextView
-            android:id="@+id/text_q_num"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/view_q"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:text="1"
-            android:textSize="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/progress">
 
-        </TextView>
+            <TextView
+                android:id="@+id/text_q_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="1"
+                android:textColor="@color/mint"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_q_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text=" / 10"
-            android:textSize="40dp"
-            app:layout_constraintStart_toEndOf="@+id/text_q_num"
-            app:layout_constraintTop_toTopOf="parent">
+            </TextView>
 
-        </TextView>
+            <TextView
+                android:id="@+id/text_q_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text=" / 10"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintStart_toEndOf="@+id/text_q_num"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/image_speaker"
-            android:background="@drawable/speaker"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toEndOf="@+id/text_q_total"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/speaker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_q" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -122,10 +139,11 @@
                     android:id="@+id/text_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:gravity="center"
+                    android:text="..."
                     android:textColor="@color/black"
-                    android:textSize="45sp"
-                    android:fontFamily="@font/pretendard_regular"
+                    android:textSize="38sp"
+                    android:fontFamily="@font/pretendard_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -142,7 +160,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/button_next"
+            android:background="@drawable/button_round_main"
             android:text="예"
             android:textSize="30dp"
             android:fontFamily="@font/pretendard_regular"
@@ -157,7 +175,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="140dp"
-            android:background="@drawable/button_next"
+            android:background="@drawable/button_round_main"
             android:fontFamily="@font/pretendard_regular"
             android:text="아니오"
             android:textSize="30dp"

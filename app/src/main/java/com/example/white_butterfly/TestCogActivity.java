@@ -162,7 +162,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         //numberList = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
     }
 
-    private class QuestionChangeTask extends AsyncTask<Void, Void, Void> {
+    private class getDataTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             // 로딩 화면 표시
@@ -187,6 +187,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             String value = dataSnapshot.getValue(String.class);
+                            value = value.replace("\\n", "\n");
                             text_question.setText(value);
                             Log.w(TAG, currentPage + " 질문 세팅 완료");
                         } else {
@@ -212,7 +213,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     // "question()" 함수를 AsyncTask로 호출하는 부분
     private void question() {
         // AsyncTask 실행
-        new QuestionChangeTask().execute();
+        new getDataTask().execute();
     }
 
     public void test() {
@@ -283,7 +284,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
             docRef.update("Score_cog", score_cog);
 
             // 우울증 검사 페이지 출력
-            Intent intent_dep = new Intent(getApplication(), TestDepActivity.class);
+            Intent intent_dep = new Intent(getApplication(), TestDepMainActivity.class);
             intent_dep.putExtra("score_cog", score_cog);
             startActivity(intent_dep);
             finish();

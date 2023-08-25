@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +38,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class UserActivity extends AppCompatActivity {
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
-    private FirebaseAuth mAuth;
+public class UserActivity extends AppCompatActivity {
 
     // 정보 입력 받을 공간
     TextView Text_Name;
@@ -48,7 +51,9 @@ public class UserActivity extends AppCompatActivity {
     EditText EditText_Guardian;
     TextView Text_Date;
     TextView Text_Score_cog;
+    TextView Text_Score_dep;
     TextView Text_School;
+    private ProgressBar loadBar;
 
     // 입력 받은 정보를 저장할 공간
     public String name;
@@ -60,11 +65,23 @@ public class UserActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private StorageReference storageReference;
+    Number school = 0;
+    int year = 0;
+    int month = 0;
+    int day = 0;
+    String date = "";
+
+    LocalDate today;
+    LocalDate Testday;
+
+    private final int ONE_DAY = 24 * 60 * 60 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+        Log.w(TAG, "--- UserActivity ---");
 
         Text_Name = findViewById(R.id.text_Name);
         Text_Birthday = findViewById(R.id.text_birthday);
@@ -75,57 +92,19 @@ public class UserActivity extends AppCompatActivity {
         Text_Score_cog = findViewById(R.id.text_score_cog);
         Text_School = findViewById(R.id.text_school);
         imageView = findViewById(R.id.profileImageView);
+        Text_Score_dep = findViewById(R.id.text_score_dep);
+        loadBar = findViewById(R.id.loadBar);
 
         // firebase 접근 권한 갖기
         FirebaseApp.initializeApp(UserActivity.this);
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         TextView Text_Email = findViewById(R.id.text_email);
         Text_Email.setText(id);
 
+        today = LocalDate.now();
+
         // DocumentSnapshot 객체 생성, 데이터 가져오기
-        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-
-                    String name = documentSnapshot.getString("Name");
-                    String fullName = name + "님";
-                    Text_Name.setText(fullName);
-                    Text_Birthday.setText(String.valueOf(documentSnapshot.getString("Birth")));
-                    EditText_Address.setText(documentSnapshot.getString("Address"));
-                    EditText_My.setText(documentSnapshot.getString("My"));
-                    EditText_Guardian.setText(documentSnapshot.getString("Guardian"));
-                    Text_Date.setText(documentSnapshot.getString("Date"));
-                    Text_Score_cog.setText(String.valueOf(documentSnapshot.getString("Score_cog")));
-
-                    switch (Integer.parseInt(documentSnapshot.getLong("School").toString()))
-                    {
-                        case 0:
-                            Text_School.setText("졸업한 학교가 없어요");
-                            break;
-                        case 1:
-                            Text_School.setText("초등학교를 졸업했어요");
-                            break;
-                        case 2:
-                            Text_School.setText("중학교를 졸업했어요");
-                            break;
-                        case 3:
-                            Text_School.setText("고등학교를 졸업했어요");
-                            break;
-                        case 4:
-                            Text_School.setText("대학교를 졸업했어요");
-                            break;
-                        case 5:
-                            Text_School.setText("대학원을 졸업했어요");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        });
+        getData();
 
         storageReference = FirebaseStorage.getInstance().getReference().child("images");
 
@@ -137,6 +116,99 @@ public class UserActivity extends AppCompatActivity {
                 openGallery();
             }
         });
+    }
+
+    private class getDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            // 로딩 화면 표시
+            loadBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            // 백그라운드 작업 수행
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String name = documentSnapshot.getString("Name");
+                            String fullName = name + "님";
+
+                            Text_Name.setText(fullName);
+                            Text_Birthday.setText(String.valueOf(documentSnapshot.getString("Birth")));
+
+                            EditText_Address.setText(documentSnapshot.getString("Address"));
+                            EditText_My.setText(documentSnapshot.getString("My"));
+                            EditText_Guardian.setText(documentSnapshot.getString("Guardian"));
+
+                            Text_Score_cog.setText(String.valueOf(documentSnapshot.getLong("Score_cog")));
+                            Text_Score_dep.setText(String.valueOf(documentSnapshot.getLong("Score_dep")));
+
+                            year = Integer.parseInt(documentSnapshot.getLong("year").toString());
+                            month = Integer.parseInt(documentSnapshot.getLong("month").toString());
+                            day = Integer.parseInt(documentSnapshot.getLong("day").toString());
+
+                            school = documentSnapshot.getLong("School");
+
+                            setData();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error getting document", e);
+                    }
+                });
+
+            // 작업 완료 후 로딩 화면 숨김
+            loadBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void getData() {
+        // AsyncTask 실행
+        new getDataTask().execute();
+    }
+
+    private void setData() {
+        try {
+            Log.w(TAG, String.format("%d.%d.%d.: ", year, month, day));
+            Testday = LocalDate.of(year, month, day);
+            long daysBetween = ChronoUnit.DAYS.between(Testday, today);
+            Text_Date.setText(String.valueOf(daysBetween));
+        } catch (Exception e) {
+            Log.w(TAG, "Error: " + e);
+        }
+
+        switch (Integer.parseInt(school.toString()))
+        {
+            case 0:
+                Text_School.setText("졸업한 학교가 없어요");
+                break;
+            case 1:
+                Text_School.setText("초등학교를 졸업했어요");
+                break;
+            case 2:
+                Text_School.setText("중학교를 졸업했어요");
+                break;
+            case 3:
+                Text_School.setText("고등학교를 졸업했어요");
+                break;
+            case 4:
+                Text_School.setText("대학교를 졸업했어요");
+                break;
+            case 5:
+                Text_School.setText("대학원을 졸업했어요");
+                break;
+            default:
+                break;
+        }
     }
 
     private void openGallery() {
@@ -156,7 +228,7 @@ public class UserActivity extends AppCompatActivity {
             Log.d(TAG, "저장된 프로필: " + "프로필 사진을 불러옴");
         }).addOnFailureListener(urlFailure -> {
             // 이미지가 존재하지 않는 경우, 토스트 메시지 띄우기
-            Toast.makeText(this, "프로필 사진을 등록해주세요.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "프로필 사진을 등록해 주세요.", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -296,7 +368,7 @@ public class UserActivity extends AppCompatActivity {
     public void withdraw(View target) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("회원 탈퇴");
-        builder.setMessage("정말 회원을 탈퇴 하시겠습니까?");
+        builder.setMessage("정말 탈퇴하시겠습니까?");
 
         // '네' 버튼 설정
         builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
@@ -312,7 +384,7 @@ public class UserActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(UserActivity.this, "회원을 탈퇴하셨습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserActivity.this, "탈퇴하셨습니다.", Toast.LENGTH_SHORT).show();
 
                                 // 로그인 화면으로 이동
                                 Intent intent = new Intent(getApplication(), LoginActivity.class);

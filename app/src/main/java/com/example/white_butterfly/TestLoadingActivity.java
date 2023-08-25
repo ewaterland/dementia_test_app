@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +18,13 @@ public class TestLoadingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_loading);
+
+        // 애니메이션 리소스 로드
+        Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+
+        // 뷰에 애니메이션 적용
+        View viewToRotate = findViewById(R.id.image_loading);
+        viewToRotate.startAnimation(rotateAnimation);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()

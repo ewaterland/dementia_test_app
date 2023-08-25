@@ -105,6 +105,11 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
         btn_reply_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if ((currentPage < 9) && (currentPage != 5))
+                {
+                    score_dep++;
+                }
+
                 loadNextQuestion();
             }
         });
@@ -112,7 +117,10 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
         btn_reply_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                score_dep += 1;
+                if ((currentPage == 5) || (currentPage > 8))
+                {
+                    score_dep++;
+                }
 
                 loadNextQuestion();
             }
@@ -180,6 +188,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             String value = dataSnapshot.getValue(String.class);
+                            value = value.replace("\\n", "\n");
                             text_question.setText(value);
                             Log.w(TAG, currentPage + " 질문 세팅 완료");
                         } else {
@@ -209,11 +218,6 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
     }
 
     public void test() {
-        //Log.w(TAG, "numberList: " + numberList);
-        //now = random.nextInt(14) + 1;
-        //numberList.remove(Integer.valueOf(now));
-        //Log.w(TAG, "numberList: " + numberList);
-
         path = "D" + String.format("%02d", currentPage);
         Log.w(TAG, "# test " + currentPage + " / 현재 질문 " + path);
 

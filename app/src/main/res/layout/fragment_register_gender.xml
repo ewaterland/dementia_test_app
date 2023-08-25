@@ -98,12 +98,12 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
 
-                android:background="@drawable/button_gender"
+                android:background="@drawable/button_gender_female"
 
                 android:fontFamily="@font/pretendard_regular"
                 android:text="여성"
                 android:textAllCaps="false"
-                android:textColor="@drawable/text_gender"
+                android:textColor="@drawable/text_gender_female"
                 android:textSize="25sp"
 
                 app:layout_constraintEnd_toStartOf="@+id/btn_male"
@@ -121,12 +121,12 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
 
-                android:background="@drawable/button_gender"
+                android:background="@drawable/button_gender_male"
 
                 android:fontFamily="@font/pretendard_regular"
                 android:text="남성"
                 android:textAllCaps="false"
-                android:textColor="@drawable/text_gender"
+                android:textColor="@drawable/text_gender_male"
                 android:textSize="25sp"
 
                 app:layout_constraintEnd_toEndOf="parent"

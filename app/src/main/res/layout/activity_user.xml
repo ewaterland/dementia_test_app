@@ -7,6 +7,17 @@
     android:background="@color/white"
     tools:context=".UserActivity">
 
+    <ProgressBar
+        android:id="@+id/loadBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- 메인 START -->
     <ScrollView
         android:id="@+id/view_main"
@@ -54,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="치매 선별검사를 "
+                        android:text="치매 선별 검사를 "
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="@+id/text_date"
@@ -76,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="전에 시행했어요."
+                        android:text="일 전에 시행했어요."
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="@+id/text_date"
@@ -98,6 +109,7 @@
                         android:id="@+id/profileImageView"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
+                        android:scaleType="centerCrop"
                         android:background="@drawable/profile_default"
                         android:padding="0dp"
                         android:layout_gravity="center" />
@@ -132,132 +144,282 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/text_email"
-                android:layout_width="320dp"
+            <!-- 정보 -->
+            <LinearLayout
+                android:id="@+id/view_email"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="이메일"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/text_birth"
-                android:layout_width="320dp"
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="이메일"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_email"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="이메일"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
+
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_01"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_birth"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="생일"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/text_birthday"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="생년월일"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/text_birth"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="생일"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
 
-            <TextView
-                android:id="@+id/text_address"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="주소"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
+                <TextView
+                    android:id="@+id/text_birthday"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="생년월일"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/editText_address"
-                android:layout_width="320dp"
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_02"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_address"
+                android:layout_width="400dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_rounded_corner_rectangle"
-                android:inputType="text"
-                android:paddingStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/text_phone"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="본인 연락처 / 보호자 연락처"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
+                <TextView
+                    android:id="@+id/text_address"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="주소"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
 
-            <EditText
-                android:id="@+id/editText_my"
-                android:layout_width="320dp"
+                <EditText
+                    android:id="@+id/editText_address"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_rounded_corner_rectangle"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
+            </LinearLayout>
+
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_03"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_my_phone"
+                android:layout_width="400dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_rounded_corner_rectangle"
-                android:inputType="numberDecimal"
-                android:paddingStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editText_guardian"
-                android:layout_width="320dp"
+                <TextView
+                    android:id="@+id/text_my_phone"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="본인 연락처"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
+
+                <EditText
+                    android:id="@+id/editText_my"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_rounded_corner_rectangle"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
+            </LinearLayout>
+
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_04"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_guardian_phone"
+                android:layout_width="400dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_rounded_corner_rectangle"
-                android:inputType="numberDecimal"
-                android:paddingStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_guardian_phone"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="보호자 연락처"
+                    android:textColor="#000000"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
+
+                <EditText
+                    android:id="@+id/editText_guardian"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_rounded_corner_rectangle"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
+            </LinearLayout>
+
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_05"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/text_school"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="학력"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textStyle="bold"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/text_dementia"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="치매 점수"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_06"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/text_score_cog"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Score"
+                android:layout_marginTop="20dp"
+                android:text="치매가 의심 돼요"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textStyle="bold"
+                android:gravity="center"
+                android:fontFamily="@font/pretendard_regular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 선 -->
+            <LinearLayout
+                android:id="@+id/line_07"
+                android:layout_width="400dp"
+                android:layout_height="3dp"
+                android:gravity="center"
+                android:background="@color/more_gray"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_score_dep"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="우울증이 의심 돼요"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:fontFamily="@font/pretendard_regular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -266,7 +428,7 @@
                 android:layout_width="320dp"
                 android:layout_height="60dp"
 
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_round_main"
 
                 android:fontFamily="@font/pretendard_regular"
@@ -288,8 +450,9 @@
                 android:onClick="Logout"
                 android:text="로그아웃"
                 android:textColor="#81CDCB"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendard_regular"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -310,7 +473,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/pretendard_regular"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

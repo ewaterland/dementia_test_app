@@ -6,18 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".TestLoadingActivity">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="137dp"
-        android:layout_height="228dp"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="251dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginBottom="252dp"
-        android:foregroundGravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_loading"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/image_loading">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_extrabold"
+            android:text="결과를 분석 중입니다."
+            android:textColor="@color/mint"
+            android:textSize="37sp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="조금만 기다려주세요."
+            android:textColor="@color/mint"
+            android:textSize="35sp">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:background="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

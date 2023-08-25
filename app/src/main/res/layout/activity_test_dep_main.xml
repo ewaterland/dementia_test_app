@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="지금부터 치매 선별 검사를\n시작하겠습니다."
+            android:text="이어서\n기분에 관한 문항입니다."
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -88,16 +88,17 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/pretendard_regular"
             android:gravity="center"
-            android:text="인지능력검사와 우울증척도검사를\n진행합니다."
+            android:text="현재 느낌대로 답을 골라주시고\n검사 준비가 되셨다면"
             android:textColor="@color/black"
             android:textSize="25sp"
-            android:fontFamily="@font/pretendard_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
 
@@ -105,44 +106,29 @@
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="검사지는 총  "
-                android:textColor="@color/black"
-                android:textSize="25sp"
                 android:fontFamily="@font/pretendard_regular"
-                >
-
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25문항"
+                android:text="시작하기"
                 android:textColor="@color/mint"
-                android:textStyle="bold"
                 android:textSize="25sp"
-                android:fontFamily="@font/pretendard_regular"
-                >
+                android:textStyle="bold">
 
             </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 입니다."
-                android:textColor="@color/black"
-                android:textSize="25sp"
                 android:fontFamily="@font/pretendard_regular"
-                >
+                android:text="를 눌러주세요."
+                android:textColor="@color/black"
+                android:textSize="25sp">
 
             </TextView>
 
@@ -158,7 +144,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="100dp"
-        android:background="@drawable/button_round_main"
+        android:background="@drawable/image_dementia_start"
         android:text="검사 시작하기"
         android:textColor="@color/white"
         android:textSize="25sp"
