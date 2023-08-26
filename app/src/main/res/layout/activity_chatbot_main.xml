@@ -22,10 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="대화 로봇과 이야기 하기!"
+        android:text="말동무가 필요하신가요?"
         android:textColor="@color/user"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:fontFamily="@font/pretendard_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_logo" />
@@ -34,9 +35,10 @@
         android:id="@+id/textView_subject2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="어쩌고 저쩌고"
+        android:text="원하는 사람을 선택해 주세요"
         android:textColor="@color/user"
         android:textSize="28sp"
+        android:fontFamily="@font/pretendard_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_subject1" />
@@ -51,8 +53,8 @@
 
         android:background="@drawable/button_round_main"
 
-        android:fontFamily="@font/pretendard_regular"
-        android:text="5살 남자 아이"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="7살 남자아이 하준이"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -68,10 +70,9 @@
         android:layout_marginTop="30dp"
 
         android:background="@drawable/button_round_main"
-        android:enabled="false"
 
-        android:fontFamily="@font/pretendard_regular"
-        android:text="5살 여자 아이"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="13살 여자아이 다인이"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -87,10 +88,9 @@
         android:layout_marginTop="30dp"
 
         android:background="@drawable/button_round_main"
-        android:enabled="false"
 
-        android:fontFamily="@font/pretendard_regular"
-        android:text="전문 상담사"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="치매 전문 상담사"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="25sp"

@@ -71,7 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:max="10"
-            android:progress="0"
+            android:progress="1"
+            android:secondaryProgress="0"
             android:progressDrawable="@drawable/progressbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +97,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="0"
+                android:text="1"
                 android:textSize="40dp"
                 android:textStyle="bold"
                 android:textColor="@color/mint"
@@ -129,7 +130,7 @@
         android:layout_below="@id/startButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="210dp"
-        android:text="\n로딩중...\n"
+        android:text=""
         android:textColor="@color/black"
         android:textAlignment="center"
         android:textSize="30sp"
@@ -142,24 +143,27 @@
         android:id="@+id/editText_ex"
         android:layout_width="320dp"
         android:layout_height="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:inputType="text"
         android:paddingStart="10dp"
         app:layout_constraintBottom_toTopOf="@+id/view_top01"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataTextView" />
 
     <LinearLayout
         android:id="@+id/view_top01"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="120dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintBottom_toTopOf="@+id/endButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataTextView">
 
         <ImageButton
             android:id="@+id/speak"
@@ -178,24 +182,6 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/startButton"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/button_round_main"
-        android:enabled="true"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="시작"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/endButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/endButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -203,9 +189,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/button_round_main"
-        android:enabled="false"
         android:fontFamily="@font/pretendard_regular"
-        android:text="종료"
+        android:text="다음"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"

@@ -23,30 +23,29 @@ public class ChatbotMainActivity extends AppCompatActivity {
         Button girlButton = findViewById(R.id.btn_girl);
         Button professionalButton = findViewById(R.id.btn_professional);
 
-        // 5살 남자 아이
+        // 7살 남자 아이 하준이
         boyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Chatbot2Activity.class);
+                Intent intent = new Intent(getApplication(), ChatbotBoyActivity.class);
                 startActivity(intent);
             }
         });
 
-        // 5살 여자 아이
+        // 13살 여자 아이 다인이
         girlButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Chatbot2Activity.class);
+                Intent intent = new Intent(getApplication(), ChatbotGirlActivity.class);
                 startActivity(intent);
             }
         });
 
-        // 전문가
-
+        // 30대 치매 전문 상담사
         professionalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Chatbot2Activity.class);
+                Intent intent = new Intent(getApplication(), ChatbotCounActivity.class);
                 startActivity(intent);
             }
         });

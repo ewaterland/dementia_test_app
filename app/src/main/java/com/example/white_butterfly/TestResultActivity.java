@@ -110,6 +110,7 @@ public class TestResultActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(TestResultActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

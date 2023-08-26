@@ -87,8 +87,14 @@
             android:name=".ChatbotActivity"
             android:label="ChatbotActivity" />
         <activity
-            android:name=".Chatbot2Activity"
-            android:label="Chatbot2Activity" />
+            android:name=".ChatbotBoyActivity"
+            android:label="ChatbotBoyActivity" />
+        <activity
+            android:name=".ChatbotGirlActivity"
+            android:label="ChatbotGirlActivity" />
+        <activity
+            android:name=".ChatbotCounActivity"
+            android:label="ChatbotCounActivity" />
 
         <!-- 치매 선별 검사 -->
         <activity
@@ -118,8 +124,11 @@
             android:name=".Memory03Activity"
             android:label="Memory03Activity" />
         <activity
+            android:name=".MemoryLoadingActivity"
+            android:label="MemoryLoadingActivity" />
+        <activity
             android:name=".MemoryResultActivity"
-            android:exported="false" />
+            android:label="MemoryResultActivity" />
 
         <!-- 마이페이지 -->
         <activity

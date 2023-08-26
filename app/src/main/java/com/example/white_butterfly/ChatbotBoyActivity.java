@@ -40,7 +40,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Chatbot2Activity extends AppCompatActivity {
+public class ChatbotBoyActivity extends AppCompatActivity {
     // Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference docRef;
@@ -58,20 +58,15 @@ public class Chatbot2Activity extends AppCompatActivity {
     private String url = "https://api.openai.com/v1/chat/completions";
 
     private String MY_SECRET_KEY = "";
-
     OkHttpClient client;
 
-
     //-------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------
-    private String lastAssistantResponse = "나는 치매를 앓고있는 60대 할머니야."
-            + "너는 만 5세 남자 아이 하준이야. 5살 아이처럼 대답해줘."
+    private String lastAssistantResponse = "너는 7살 남자 아이 하준이야."
+            + "너와 대화하는 사람은 치매를 앓고있는 60대 할머니야. 할머니라고 불러."
             + "(예시 : 할머니 안녕하세요! 할머니가 슬프다니까 하준이도 슬퍼요. 할머니 아프지 마세요!)"
-            + "모든 대화는 100자 이내로 대답해줘"
-            + "가장 마지막에 적힌 [계속 대화하기] 칸을 기준으로 대답을 해 줘. 없다면 안녕하세요! 라고 대답해줘"
-            + "마지막을 제외한 [너] 칸은 내 질문에 너가 이전에 응답한 내용이야."
-            + "모든 [너],[나] 칸을 참고하여 나랑 대화를 이어나가자";
+            + "항상 100자 이내로 대답해줘";
     //-------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------
@@ -79,9 +74,9 @@ public class Chatbot2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatbot2);
+        setContentView(R.layout.activity_chatbot_boy);
 
-        Log.w(TAG, "--- Chatbot2Activity ---");
+        Log.w(TAG, "--- ChatbotBoyActivity ---");
 
         getKey();
 
@@ -144,7 +139,6 @@ public class Chatbot2Activity extends AppCompatActivity {
                     MY_SECRET_KEY = String.valueOf(documentSnapshot.getString("Key"));
 
                     initializeViews();
-                    text_chatbot.setText("할머니, 안녕하세요! 오늘은 뭐 하셨어요?");
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -270,8 +264,7 @@ public class Chatbot2Activity extends AppCompatActivity {
                                 .getJSONObject("message").getString("content");
                         addResponse(result.trim());
 
-                        // 수정된 코드 (확인 시 주석 삭제 및 주석 수정)
-                        lastAssistantResponse = lastAssistantResponse + " [계속 대화하기] "+ "[나] "+question+", [너]" + result.trim();
+                        lastAssistantResponse = lastAssistantResponse + question;
                         Log.w(TAG, lastAssistantResponse);
                         // ------------------------------------
                     } catch (JSONException e){

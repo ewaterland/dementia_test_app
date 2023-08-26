@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,8 +33,7 @@ import java.util.Random;
 public class Memory02Activity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private ProgressBar progressBar;
-    private int progress = 0; // 진행 상태 변수 추가
-    private ProgressBar loadBar;
+    private int progress = 1; // 진행 상태 변수 추가
     private TextToSpeech textToSpeech;
 
     private FirebaseDatabase memory_db, temporarily_db;
@@ -41,23 +41,20 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
     private Button nextButton;
     private ImageButton speak;
     private Button startButton;
-
-    private List<String> startingWithQDataList;
-    private Map<String, Boolean> usedQuestionsMap;
-
     int questionCounter = 1;
-    //private int questionCounter01 = 1;
 
     TextView text_q_num; // 현재 질문 개수
     String path_m = "";
     Random random;
     private List<Integer> numberList;  // 아직 안 한 질문 리스트
-    //int now;  // 현재 출력된 질문 넘버
+    private static final String TAG = "Memory02Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory02);
+
+        Log.w(TAG, "--- Memory02Activity ---");
 
         progressBar = findViewById(R.id.progress);
 
@@ -67,38 +64,27 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
 
         initializeViews();
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            boolean isFirstClick = true; // 처음 클릭 여부를 추적하기 위한 변수
+        random_question();
 
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // 처음 클릭 시 버튼 이름을 '다음'으로 변경
-                if (isFirstClick) {
-                    nextButton.setText("다음");
-                    isFirstClick = false;
+                ++questionCounter;
+
+                if (questionCounter == 10) {
+                    nextButton.setEnabled(false);
+                    startButton.setEnabled(true);
                 }
 
                 if (questionCounter < 11) {
                     progress++; // 진행 상태 증가
                     progressBar.setProgress(progress); // 프로그래스바 갱신
 
-                    // 랜덤한 인덱스 생성
-                    int randomIndex = random.nextInt(numberList.size());
-                    int randomValue = numberList.get(randomIndex);
-                    numberList.remove(Integer.valueOf(randomValue));
-
-                    Log.d(TAG, "randomValue : " + randomValue);
-                    memory(randomValue);
+                    random_question();
 
                     text_q_num.setText(String.valueOf(questionCounter));
                     Log.d("questionCounter", "questionCounter : " + questionCounter);
-
-                    questionCounter++;
-                }
-                else {
-                    nextButton.setEnabled(false);
-                    startButton.setEnabled(true);
                 }
             }
         });
@@ -129,14 +115,12 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
         // 초기에는 NextButton은 비활성화 상태로 시작
         startButton.setEnabled(false);
     }
-
     private void initializeViews() {
         text_q_num = findViewById(R.id.text_q_num);
         dataTextView = findViewById(R.id.dataTextView);
         nextButton = findViewById(R.id.nextButton);
         startButton = findViewById(R.id.startButton);
         speak = findViewById(R.id.speak);
-        loadBar = findViewById(R.id.loadBar);
 
         // TextToSpeech 초기화
         textToSpeech = new TextToSpeech(this, this);
@@ -146,6 +130,17 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
 
         // 랜덤 인덱스
         random = new Random();
+    }
+
+    private void random_question() {
+        // 랜덤한 인덱스 생성
+        int randomIndex = random.nextInt(numberList.size());
+        int randomValue = numberList.get(randomIndex);
+        numberList.remove(Integer.valueOf(randomValue));
+
+        Log.d(TAG, "randomValue : " + randomValue);
+
+        memory(randomValue);
     }
 
     private void memory(int randomNumber) {
