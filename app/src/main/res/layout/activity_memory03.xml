@@ -69,11 +69,10 @@
             android:id="@+id/progress"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="5"
+            android:layout_height="15dp"
+            android:max="10"
             android:progress="0"
             android:progressDrawable="@drawable/progressbar"
-            android:secondaryProgress="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -143,23 +142,24 @@
         android:id="@+id/editText_ex"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:inputType="text"
         android:paddingStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/view_top01"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataTextView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/view_top01"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_ex">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/speak"
@@ -183,17 +183,17 @@
         android:layout_height="70dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/button_round_main"
+        android:enabled="true"
         android:fontFamily="@font/pretendard_regular"
         android:text="시작"
-        android:enabled="true"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/endButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top01" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/endButton"
@@ -201,16 +201,16 @@
         android:layout_height="70dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/button_round_main"
+        android:enabled="false"
         android:fontFamily="@font/pretendard_regular"
         android:text="종료"
-        android:enabled="false"
-        android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startButton" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

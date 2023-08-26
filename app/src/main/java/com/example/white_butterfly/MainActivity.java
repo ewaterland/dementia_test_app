@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         btn_chatbot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), ChatbotActivity.class);
+                Intent intent = new Intent(getApplication(), ChatbotMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -121,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     void getToken(){

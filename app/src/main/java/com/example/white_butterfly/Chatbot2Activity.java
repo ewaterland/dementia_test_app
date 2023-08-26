@@ -1,5 +1,7 @@
 package com.example.white_butterfly;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -38,64 +40,50 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class ChatbotActivity extends AppCompatActivity {
+public class Chatbot2Activity extends AppCompatActivity {
     // Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference docRef;
 
-    // 변수
     RecyclerView recycler_view;
     TextView tv_welcome;
     EditText et_msg;
     ImageButton btn_send;
+    TextView text_chatbot;
     List<Message> messageList;
     MessageAdapter messageAdapter;
     TextToSpeech tts;
-    TextView text_chatbot;
-    TextView text_user;
 
-    // Chat GPT
-    OkHttpClient client;
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private String url = "https://api.openai.com/v1/chat/completions";
-    private static String MY_SECRET_KEY = "";
 
-    // TAG
-    private String TAG = "ChatbotActivity";
+    private String MY_SECRET_KEY = "";
+
+    OkHttpClient client;
+
+
+    //-------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    private String lastAssistantResponse = "나는 치매를 앓고있는 60대 할머니야."
+            + "너는 만 5세 남자 아이 하준이야. 5살 아이처럼 대답해줘."
+            + "(예시 : 할머니 안녕하세요! 할머니가 슬프다니까 하준이도 슬퍼요. 할머니 아프지 마세요!)"
+            + "모든 대화는 100자 이내로 대답해줘"
+            + "가장 마지막에 적힌 [계속 대화하기] 칸을 기준으로 대답을 해 줘. 없다면 안녕하세요! 라고 대답해줘"
+            + "마지막을 제외한 [너] 칸은 내 질문에 너가 이전에 응답한 내용이야."
+            + "모든 [너],[나] 칸을 참고하여 나랑 대화를 이어나가자";
+    //-------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot2);
 
-        Log.w(TAG, "--- ChatbotActivity ---");
+        Log.w(TAG, "--- Chatbot2Activity ---");
 
         getKey();
-        initializeViews();
-        text_chatbot.setText("할머니, 안녕하세요! 오늘은 뭐 했어요?");
-
-
-        // EditText에서 엔터 키 눌렀을 때 이벤트 처리
-        et_msg.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    sendMessage();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String question = et_msg.getText().toString().trim();
-                addToChat(question, Message.SENT_BY_ME);
-                et_msg.setText("");
-                callAPI(question);
-            }
-        });
 
         client = new OkHttpClient().newBuilder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -154,6 +142,9 @@ public class ChatbotActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     MY_SECRET_KEY = String.valueOf(documentSnapshot.getString("Key"));
+
+                    initializeViews();
+                    text_chatbot.setText("할머니, 안녕하세요! 오늘은 뭐 하셨어요?");
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -177,16 +168,14 @@ public class ChatbotActivity extends AppCompatActivity {
             @Override
             public void run() {
                 messageList.add(new Message(message, sentBy));
-                /*
-                messageAdapter.notifyDataSetChanged();
-                recycler_view.smoothScrollToPosition(messageAdapter.getItemCount());
-                 */
+                //messageAdapter.notifyDataSetChanged();
+                //recycler_view.smoothScrollToPosition(messageAdapter.getItemCount());
             }
         });
     }
 
     void addResponse(String response){
-        //messageList.remove(messageList.size()-1);
+        messageList.remove(messageList.size()-1);
         addToChat(response, Message.SENT_BY_BOT);
 
         runOnUiThread(new Runnable() {
@@ -200,12 +189,8 @@ public class ChatbotActivity extends AppCompatActivity {
         tts = new TextToSpeech(getApplicationContext(), status -> {
             if (status == TextToSpeech.SUCCESS) {
                 tts.setLanguage(Locale.KOREA);
-
                 // TextView의 텍스트를 TTS로 읽기
                 String textToRead = response.toString();
-
-                tts.setPitch(1.0f);  // 음성 톤 설정 (1.0은 기본 값)
-                tts.setSpeechRate(1.0f); // 음성 속도 설정 (1.0은 기본 값)
                 tts.speak(textToRead, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
@@ -222,33 +207,27 @@ public class ChatbotActivity extends AppCompatActivity {
 
     void callAPI(String question){
         //okhttp
-        //messageList.add(new Message("...", Message.SENT_BY_BOT));
+        //messageList.add(new Message("작성 중...", Message.SENT_BY_BOT));
 
         text_chatbot.setText("...");
 
         JSONArray arr = new JSONArray();
-        JSONObject baseAi_system = new JSONObject();
-        JSONObject baseAi_assistant = new JSONObject();
+        JSONObject baseAi = new JSONObject();
         JSONObject userMsg = new JSONObject();
         try {
             // AI 속성 설정
-            baseAi_system.put("role", "system");
-            baseAi_system.put("content", "너는 할머니와 대화하고 있는 5살 남자아이야. 50자 이내로 대답해.");
-
-            baseAi_assistant.put("role", "assistant");
-            baseAi_assistant.put("content", messageList);
+            baseAi.put("role", "user");
+            baseAi.put("content", lastAssistantResponse);
 
             // 유저 메세지
             userMsg.put("role", "user");
             userMsg.put("content", question);
 
-            //text_user.setText(question);
             btn_send.setEnabled(false);
             text_chatbot.setText("");
 
             // array로 담아서 한번에 보낸다
-            arr.put(baseAi_system);
-            arr.put(baseAi_assistant);
+            arr.put(baseAi);
             arr.put(userMsg);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -258,7 +237,6 @@ public class ChatbotActivity extends AppCompatActivity {
         try {
             object.put("model", "gpt-3.5-turbo");
             object.put("messages", arr);
-
             /*
             object.put("model", "text-davinci-003");
             object.put("prompt", question);
@@ -291,12 +269,17 @@ public class ChatbotActivity extends AppCompatActivity {
                         String result = jsonArray.getJSONObject(0)
                                 .getJSONObject("message").getString("content");
                         addResponse(result.trim());
+
+                        // 수정된 코드 (확인 시 주석 삭제 및 주석 수정)
+                        lastAssistantResponse = lastAssistantResponse + " [계속 대화하기] "+ "[나] "+question+", [너]" + result.trim();
+                        Log.w(TAG, lastAssistantResponse);
+                        // ------------------------------------
                     } catch (JSONException e){
                         e.printStackTrace();
                     }
                 } else {
                     addResponse("Failed to load response due to "+response.body().string());
-                    Log.w(TAG, "Failed to load response due to unsuccessful response: " + response);
+                    Log.w(TAG, "Failed to load response due to unsuccessful response: " + response.body().string());
                 }
             }
         });

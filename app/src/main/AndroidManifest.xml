@@ -78,8 +78,14 @@
 
         <!-- 말동무(챗봇) -->
         <activity
+            android:name=".ChatbotMainActivity"
+            android:label="ChatbotMainActivity" />
+        <activity
             android:name=".ChatbotActivity"
             android:label="ChatbotActivity" />
+        <activity
+            android:name=".Chatbot2Activity"
+            android:label="Chatbot2Activity" />
 
         <!-- 치매 선별 검사 -->
         <activity
@@ -130,6 +136,6 @@
             </intent-filter>
         </service>
 
-</application>
+    </application>
 
 </manifest>

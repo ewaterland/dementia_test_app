@@ -1,14 +1,12 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayoutStates;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayoutStates;
 
 public class MemoryLoadingActivity extends AppCompatActivity {
     private static final String TAG = "MemoryLoadingActivity";

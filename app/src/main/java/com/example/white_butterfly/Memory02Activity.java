@@ -5,7 +5,6 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +50,9 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
 
     TextView text_q_num; // 현재 질문 개수
     String path_m = "";
+    Random random;
+    private List<Integer> numberList;  // 아직 안 한 질문 리스트
+    //int now;  // 현재 출력된 질문 넘버
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +65,7 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
         memory_db = FirebaseDatabase.getInstance();
         temporarily_db = FirebaseDatabase.getInstance();
 
-        text_q_num = findViewById(R.id.text_q_num);
-        dataTextView = findViewById(R.id.dataTextView);
-        nextButton = findViewById(R.id.nextButton);
-        startButton = findViewById(R.id.startButton);
-        speak = findViewById(R.id.speak);
-        loadBar = findViewById(R.id.loadBar);
-
-        // TextToSpeech 초기화
-        textToSpeech = new TextToSpeech(this, this);
-
-        startingWithQDataList = new ArrayList<>();
-        usedQuestionsMap = new HashMap<>();
+        initializeViews();
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             boolean isFirstClick = true; // 처음 클릭 여부를 추적하기 위한 변수
@@ -87,23 +79,27 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
                     isFirstClick = false;
                 }
 
-                if (questionCounter <= 5) {
+                if (questionCounter < 11) {
                     progress++; // 진행 상태 증가
                     progressBar.setProgress(progress); // 프로그래스바 갱신
 
-                    if (questionCounter == 5) {
-                        nextButton.setEnabled(false);
-                        startButton.setEnabled(true);
-                    }
+                    // 랜덤한 인덱스 생성
+                    int randomIndex = random.nextInt(numberList.size());
+                    int randomValue = numberList.get(randomIndex);
+                    numberList.remove(Integer.valueOf(randomValue));
+
+                    Log.d(TAG, "randomValue : " + randomValue);
+                    memory(randomValue);
+
+                    text_q_num.setText(String.valueOf(questionCounter));
+                    Log.d("questionCounter", "questionCounter : " + questionCounter);
+
+                    questionCounter++;
                 }
-                memory(questionCounter);
-                //String randomValue = getRandomStartingWithQValue(questionCounter);
-                //dataTextView.setText(randomValue);
-
-                text_q_num.setText(String.valueOf(questionCounter));
-                Log.d("questionCounter", "questionCounter : " + questionCounter);
-
-                questionCounter++;
+                else {
+                    nextButton.setEnabled(false);
+                    startButton.setEnabled(true);
+                }
             }
         });
 
@@ -134,21 +130,39 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
         startButton.setEnabled(false);
     }
 
-    private void memory(int questionCounter) {
-        path_m = "M" + String.format("%02d", questionCounter);
+    private void initializeViews() {
+        text_q_num = findViewById(R.id.text_q_num);
+        dataTextView = findViewById(R.id.dataTextView);
+        nextButton = findViewById(R.id.nextButton);
+        startButton = findViewById(R.id.startButton);
+        speak = findViewById(R.id.speak);
+        loadBar = findViewById(R.id.loadBar);
+
+        // TextToSpeech 초기화
+        textToSpeech = new TextToSpeech(this, this);
+
+        // 아직 안 한 질문 리스트
+        numberList = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+        // 랜덤 인덱스
+        random = new Random();
+    }
+
+    private void memory(int randomNumber) {
+        path_m = "M" + String.format("%02d", randomNumber);
+        String path_t = "T" + String.format("%02d", questionCounter);
         Log.d("path_m", "path_m : " + path_m);
 
         // 질문 가져오기
         memory_db.getReference(path_m).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                startingWithQDataList.clear();
-                usedQuestionsMap.clear();
                 String value = dataSnapshot.getValue(String.class);
-                startingWithQDataList.add(value);
-                Log.w(TAG, "startingWithQDataList: " + startingWithQDataList);
+                dataTextView.setText(value);
 
-                getRandomStartingWithQValue(questionCounter);
+                temporarily_db.getReference(path_t).setValue(value);
+
+                Log.w(TAG, "numberList: " + numberList);
             }
 
             @Override
@@ -156,35 +170,6 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
                 // Handle error
             }
         });
-    }
-
-    private void getRandomStartingWithQValue(int questionCounter) {
-        if (startingWithQDataList.isEmpty()) {
-            return;
-        }
-
-        List<String> unusedQuestions = new ArrayList<>();
-        for (String question : startingWithQDataList) {
-            if (!usedQuestionsMap.containsKey(question)) {
-                unusedQuestions.add(question);
-            }
-        }
-
-        if (unusedQuestions.isEmpty()) {
-            usedQuestionsMap.clear();
-            unusedQuestions.addAll(startingWithQDataList);
-        }
-
-        int randomIndex = new Random().nextInt(unusedQuestions.size());
-        String selectedQuestion = unusedQuestions.get(randomIndex);
-        usedQuestionsMap.put(selectedQuestion, true);
-
-        // Save the selected question under "temporarily" with 'Q01', 'Q02', ...
-        temporarily_db.getReference("T" + String.format("%02d", questionCounter)).setValue(selectedQuestion);
-
-        dataTextView.setText(selectedQuestion);
-        String data = dataTextView.getText().toString();
-        Log.d("문제", "문제" + questionCounter + " : " + data);
     }
 
     @Override

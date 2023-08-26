@@ -32,46 +32,34 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     // Firebase
     FirebaseFirestore user_db;
     DocumentReference docRef;
-
-    // 데이터 저장 모델
-    private InfoModel infoModel;
+    String path;  // Firebase DB 메인 주소
+    private FirebaseDatabase question_db;
+    private FirebaseAuth mAuth;
 
     // 검사 페이지 진행바
     public ProgressModel progressModel;
     public ProgressBar progressBar;
     private ProgressBar loadBar;
 
-    // Firebase Database 인스턴스 생성
-    private FirebaseDatabase question_db;
-    private FirebaseAuth mAuth;
-    String path;  // Firebase DB 메인 주소
-    //String temp;  // Firebase DB 서브 주소
-
-    private int currentPage = 1;  // 테스트 페이지 추적 (1~25)
+    // 페이지 추적
+    private int currentPage = 1;  // 현재 페이지 (1~25)
     private int currentProgress = 0; // (0~24)
-    //int button_number = 0;  // 정답 외의 내용이 들어갈 버튼 랜덤 선택
-    //int button_number_answer = 0;  // 정답이 들어갈 버튼 랜덤 선택
 
+    // TTS
+    private TextToSpeech textToSpeech;
+
+    // 변수
     TextView text_q_num; // 현재 질문 개수
     TextView text_question;  // 질문 텍스트뷰
     Button btn_reply1;
     Button btn_reply2;
     Button btn_reply3;
     ImageView image_speak;
-    //Random random;
-
-    // 마이크
-    private TextToSpeech textToSpeech;
-    //private EditText editText_mic;
-
-    // 스피커
-    private static final int REQUEST_CODE_SPEECH_INPUT = 200;
-
-    // 변수
     private List<Integer> numberList;  // 아직 안 한 질문 리스트
     //int now;  // 현재 출력된 질문 넘버
     int score_cog = 0;
 
+    // TAG
     private static final String TAG = "TestCogActivity";
 
     @Override
@@ -82,9 +70,6 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         Log.w(TAG, "--- TestCogActivity ---");
 
         initializeViews();
-        infoModel = new ViewModelProvider(this).get(InfoModel.class);
-
-        //random = new Random();
 
         // Firebase
         FirebaseApp.initializeApp(TestCogActivity.this);
@@ -156,8 +141,6 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         image_speak = findViewById(R.id.image_speaker);
 
         loadBar = findViewById(R.id.loadBar);
-
-        infoModel = new ViewModelProvider(this).get(InfoModel.class);
 
         //numberList = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
     }

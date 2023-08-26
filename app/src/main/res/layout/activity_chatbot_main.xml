@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 로고 START -->
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView_subject1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="대화 로봇과 이야기 하기!"
+        android:textColor="@color/user"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+
+    <TextView
+        android:id="@+id/textView_subject2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="어쩌고 저쩌고"
+        android:textColor="@color/user"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_subject1" />
+    <!-- 로고 END -->
+
+    <!-- 메인 START -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_boy"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+
+        android:background="@drawable/button_round_main"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="5살 남자 아이"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_subject2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_girl"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+
+        android:background="@drawable/button_round_main"
+        android:enabled="false"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="5살 여자 아이"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_boy" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_professional"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+
+        android:background="@drawable/button_round_main"
+        android:enabled="false"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:text="전문 상담사"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_girl" />
+
+    <!-- 메인 END -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

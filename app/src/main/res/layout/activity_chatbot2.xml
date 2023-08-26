@@ -4,18 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_chatbot3"
-    tools:context=".ChatbotActivity">
+    android:background="@drawable/bg_chatbot">
 
-    <LinearLayout
-        android:id="@+id/view_chat"
+    <ImageView
+        android:id="@+id/image_chatbot_boy"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/image_chatbot_boy"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/view_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ImageView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:orientation="horizontal"
+        android:layout_height="200dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/image_chatbot_chat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/text_chatbot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="center"
+            android:text="..."
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_chat"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/image_user_chat"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -26,53 +72,34 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
             android:layout_weight="2"
-            android:background="@drawable/rounded_corner"
+            android:background="@null"
+            android:ems="100"
             android:hint="뭐라고 얘기할까요?"
-            android:padding="16dp"
+            android:padding="20dp"
+            android:fontFamily="@font/pretendard_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_send"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_weight="0"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="0dp"
-            android:src="@drawable/ic_send" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/text_chatbot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GPT 채팅"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/text_user"
+    <ImageButton
+        android:id="@+id/btn_send"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_weight="0"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_send2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/text_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="유저 채팅"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/view_chat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

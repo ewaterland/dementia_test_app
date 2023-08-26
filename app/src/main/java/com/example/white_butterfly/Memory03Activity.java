@@ -1,7 +1,5 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -62,29 +60,15 @@ public class Memory03Activity extends AppCompatActivity implements TextToSpeech.
         Log.w(TAG, "--- Memory03Activity ---");
 
         // Firebase 초기화
+        FirebaseApp.initializeApp(Memory03Activity.this);
         memory_db = FirebaseDatabase.getInstance();
         temporarily_db = FirebaseDatabase.getInstance();
         empty_db = FirebaseDatabase.getInstance();
         answer_db = FirebaseDatabase.getInstance();
 
+        initializeViews();
+
         progressBar = findViewById(R.id.progress);
-
-        FirebaseApp.initializeApp(Memory03Activity.this);
-        memory_db = FirebaseDatabase.getInstance();
-        temporarily_db = FirebaseDatabase.getInstance();
-
-        text_q_num = findViewById(R.id.text_q_num);
-        dataTextView = findViewById(R.id.dataTextView);
-        startButton = findViewById(R.id.startButton);
-        endButton = findViewById(R.id.endButton);
-        speak = findViewById(R.id.speak);
-        microphone = findViewById(R.id.microphone);
-
-        // TextToSpeech 초기화
-        textToSpeech = new TextToSpeech(this, this);
-
-        startingWithQDataList = new ArrayList<>();
-        usedQuestionsMap = new HashMap<>();
 
         startButton.setOnClickListener(new View.OnClickListener() {
             boolean isFirstClick = true; // 처음 클릭 여부를 추적하기 위한 변수
@@ -105,6 +89,7 @@ public class Memory03Activity extends AppCompatActivity implements TextToSpeech.
                 Log.d("path_t", "path_t : " + path_t);
                 Log.d("path_e", "path_e : " + path_e);
                 Log.d("path_a", "path_a : " + path_a);
+                Log.w(TAG, "path_e: " + path_e);
 
                 if (questionCounter01 == 6) {
                     startButton.setEnabled(false);
@@ -254,6 +239,19 @@ public class Memory03Activity extends AppCompatActivity implements TextToSpeech.
         // 초기에는 endButton 비활성화 상태로 시작
         endButton.setEnabled(false);
     }
+
+    private void initializeViews() {
+        text_q_num = findViewById(R.id.text_q_num);
+        dataTextView = findViewById(R.id.dataTextView);
+        startButton = findViewById(R.id.startButton);
+        endButton = findViewById(R.id.endButton);
+        speak = findViewById(R.id.speak);
+        microphone = findViewById(R.id.microphone);
+
+        // TextToSpeech 초기화
+        textToSpeech = new TextToSpeech(this, this);
+    }
+
     private void memory(int questionCounter) {
         path_m = "M" + String.format("%02d", questionCounter);
         Log.d("path_m", "path_m : " + path_m);
@@ -262,11 +260,7 @@ public class Memory03Activity extends AppCompatActivity implements TextToSpeech.
         memory_db.getReference(path_m).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                startingWithQDataList.clear();
-                usedQuestionsMap.clear();
                 String value = dataSnapshot.getValue(String.class);
-                startingWithQDataList.add(value);
-                Log.w(TAG, "startingWithQDataList: " + startingWithQDataList);
             }
 
             @Override
