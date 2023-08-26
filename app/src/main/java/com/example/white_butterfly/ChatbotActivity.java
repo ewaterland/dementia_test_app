@@ -50,25 +50,31 @@ public class ChatbotActivity extends AppCompatActivity {
     private static final String MY_SECRET_KEY = "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";
 
     OkHttpClient client;
+    TextView text_chatbot;
+    TextView text_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chatbot);
+        setContentView(R.layout.activity_chatbot2);
 
-        recycler_view = findViewById(R.id.recycler_view);
-        tv_welcome = findViewById(R.id.tv_welcome);
+        //recycler_view = findViewById(R.id.recycler_view);
+        //tv_welcome = findViewById(R.id.tv_welcome);
+        text_chatbot = findViewById(R.id.text_chatbot);
+        text_user = findViewById(R.id.text_user);
         et_msg = findViewById(R.id.et_msg);
         btn_send = findViewById(R.id.btn_send);
 
-        recycler_view.setHasFixedSize(true);
+
+        //recycler_view.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setStackFromEnd(true);
-        recycler_view.setLayoutManager(manager);
+        //recycler_view.setLayoutManager(manager);
 
         messageList = new ArrayList<>();
         messageAdapter = new MessageAdapter(messageList);
-        recycler_view.setAdapter(messageAdapter);
+        //recycler_view.setAdapter(messageAdapter);
+
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +83,7 @@ public class ChatbotActivity extends AppCompatActivity {
                 addToChat(question, Message.SENT_BY_ME);
                 et_msg.setText("");
                 callAPI(question);
-                tv_welcome.setVisibility(View.GONE);
+                //tv_welcome.setVisibility(View.GONE);
             }
         });
 
@@ -93,9 +99,12 @@ public class ChatbotActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                /*
                 messageList.add(new Message(message, sentBy));
                 messageAdapter.notifyDataSetChanged();
                 recycler_view.smoothScrollToPosition(messageAdapter.getItemCount());
+
+                 */
             }
         });
     }
@@ -103,6 +112,14 @@ public class ChatbotActivity extends AppCompatActivity {
     void addResponse(String response){
         messageList.remove(messageList.size()-1);
         addToChat(response, Message.SENT_BY_BOT);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                text_chatbot.setText(response);
+                btn_send.setEnabled(true);
+            }
+        });
 
         tts = new TextToSpeech(getApplicationContext(), status -> {
             if (status == TextToSpeech.SUCCESS) {
@@ -125,11 +142,16 @@ public class ChatbotActivity extends AppCompatActivity {
         try {
             // AI 속성 설정
             baseAi.put("role", "user");
-            baseAi.put("content", "You are a helpful and kind AI Assistant.");
+            baseAi.put("content", "너는 5살 남자아이야. 50자 이내로 대답해.");
 
             // 유저 메세지
             userMsg.put("role", "user");
             userMsg.put("content", question);
+
+            text_user.setText(question);
+            btn_send.setEnabled(false);
+
+            text_chatbot.setText("");
 
             // array로 담아서 한번에 보낸다
             arr.put(baseAi);
