@@ -115,42 +115,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_top">
 
-        <ScrollView
-            android:id="@+id/view_main"
+        <!-- 질문 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- 질문 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+            <TextView
+                android:id="@+id/text_question"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="38sp"
+                android:fontFamily="@font/pretendard_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/text_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="..."
-                    android:textColor="@color/black"
-                    android:textSize="38sp"
-                    android:fontFamily="@font/pretendard_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/text_ex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="질문을 가져오고 있어요!\n조금만 기다려 주세요 :)"
+                android:textColor="@color/more_gray"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_question" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- 객관식 답 -->
         <androidx.appcompat.widget.AppCompatButton
@@ -160,12 +162,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/button_round_main"
+            android:background="@drawable/button_round_test"
             android:text="아니다"
-            android:textStyle="bold"
             android:textSize="30sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_medium"
+            android:enabled="false"
             app:layout_constraintBottom_toTopOf="@+id/btn_reply_no"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -177,12 +179,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/button_round_main"
+            android:background="@drawable/button_round_test"
             android:text="가끔(조금) 그렇다"
-            android:textStyle="bold"
             android:textSize="30sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_medium"
+            android:enabled="false"
             app:layout_constraintBottom_toTopOf="@+id/btn_reply3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -194,12 +196,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/button_round_main"
+            android:background="@drawable/button_round_test"
             android:text="자주(많이) 그렇다"
-            android:textStyle="bold"
             android:textSize="30sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_medium"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -5,6 +5,8 @@
     <!-- 치매 선별 검사 -->
     <string name="remember_text">나무 자동차 모자</string>
     <string name="pass_text">5초 후에 자동으로 넘어갑니다.</string>
+    <string name="ex09">예시) 물건 값이나 거스름돈 계산을 못한다.</string>
+    <string name="ex11">(세탁기, 밥솥, 경운기 등)</string>
 
     <!-- 기억력 검사 -->
     <string name="explain">이 아이콘은 어쩌고 저쩌고\n이 아이콘은 저쩌고 어쩌고</string>

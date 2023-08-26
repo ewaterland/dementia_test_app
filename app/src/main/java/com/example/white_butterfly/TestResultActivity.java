@@ -22,6 +22,11 @@ public class TestResultActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference docRef;
 
+    // 변수
+    String Score_cog = "";
+    String Score_dep = "";
+    String Score = "";
+
     // TAG
     private String TAG = "TestResultActivity";
 
@@ -50,28 +55,55 @@ public class TestResultActivity extends AppCompatActivity {
         TextView text_dep_result2 = findViewById(R.id.text_dep_result2);
 
         // 점수에 따른 결과 표시
-        if (score_cog >= 6)
+        if (score_cog >= 6) // 치매 의심
         {
+            Score = "치매가 의심돼요";
             text_cog_result1.setText("치매");
-            text_cog_result2.setText("가 의심 돼요");
-
+            text_cog_result2.setText("가 의심돼요");
             text_cog_result1.setTextColor(ContextCompat.getColor(this, R.color.mint));
             text_cog_result2.setTextColor(ContextCompat.getColor(this, R.color.black));
-        }
 
-        if (score_dep < 5)
+            if (score_dep >= 5) // 우울증 의심
+            {
+                Score = "치매와 우울증이 의심돼요";
+            }
+            else  // 우울증 아님
+            {
+                text_dep_result1.setText("");
+                text_dep_result2.setText("");
+            }
+        }
+        else  // 치매 아님
         {
-            text_dep_result1.setText("");
-            text_dep_result2.setText("");
+            if (score_dep >= 5)  // 우울증 의심
+            {
+                Score = "우울증이 의심돼요";
+            }
+            else  // 우울증 아님
+            {
+                text_dep_result1.setText("");
+                text_dep_result2.setText("");
+                Score = "아주 건강한 상태예요";
+            }
         }
 
+        docRef.update("Score", Score);
+        Log.w(TAG, "Score: " + Score);
+
+        // 마지막 검사일
         LocalDate currentDate = LocalDate.now();
         int year = currentDate.getYear();        // 2023
         int month = currentDate.getMonthValue(); // 8
         int day = currentDate.getDayOfMonth();   // 21
 
-        docRef.update("Date", String.format("%s년 %s월 %s일", year, month, day));
+        docRef.update("year", year);
+        docRef.update("month", month);
+        docRef.update("day", day);
 
+        //docRef.update("Date", String.format("%s년 %s월 %s일", year, month, day));
+
+
+        // 돌아가기 버튼 누른 경우
         Button btn_main = (Button) findViewById(R.id.btn_main);
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override

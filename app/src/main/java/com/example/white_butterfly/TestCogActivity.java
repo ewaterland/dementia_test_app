@@ -1,8 +1,14 @@
 package com.example.white_butterfly;
 
+import static android.view.View.GONE;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +56,8 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
 
     // 변수
     TextView text_q_num; // 현재 질문 개수
-    TextView text_question;  // 질문 텍스트뷰
+    TextView text_question;  // 질문 텍스트 뷰
+    TextView text_ex;
     Button btn_reply1;
     Button btn_reply2;
     Button btn_reply3;
@@ -58,6 +65,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     private List<Integer> numberList;  // 아직 안 한 질문 리스트
     //int now;  // 현재 출력된 질문 넘버
     int score_cog = 0;
+    Vibrator vibrator;
 
     // TAG
     private static final String TAG = "TestCogActivity";
@@ -87,6 +95,17 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         btn_reply1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 진동 500ms
+                if (Build.VERSION.SDK_INT >= 26) {
+                    // VibrationEffect.createOneShot()는 지정한 시간 동안 한 번 진동을 생성합니다.
+                    // 첫 번째 파라미터는 진동 시간 (ms), 두 번째 파라미터는 진동 강도 (-255 ~ 255)
+                    VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
+                    vibrator.vibrate(effect);
+                } else {
+                    // API 26 미만 버전에서는 기존 방식을 사용
+                    vibrator.vibrate(500);
+                }
+
                 loadNextQuestion();
             }
         });
@@ -94,6 +113,17 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         btn_reply2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 진동 500ms
+                if (Build.VERSION.SDK_INT >= 26) {
+                    // VibrationEffect.createOneShot()는 지정한 시간 동안 한 번 진동을 생성합니다.
+                    // 첫 번째 파라미터는 진동 시간 (ms), 두 번째 파라미터는 진동 강도 (-255 ~ 255)
+                    VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
+                    vibrator.vibrate(effect);
+                } else {
+                    // API 26 미만 버전에서는 기존 방식을 사용
+                    vibrator.vibrate(500);
+                }
+
                 score_cog += 1;
 
                 loadNextQuestion();
@@ -103,6 +133,17 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         btn_reply3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 진동 500ms
+                if (Build.VERSION.SDK_INT >= 26) {
+                    // VibrationEffect.createOneShot()는 지정한 시간 동안 한 번 진동을 생성합니다.
+                    // 첫 번째 파라미터는 진동 시간 (ms), 두 번째 파라미터는 진동 강도 (-255 ~ 255)
+                    VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
+                    vibrator.vibrate(effect);
+                } else {
+                    // API 26 미만 버전에서는 기존 방식을 사용
+                    vibrator.vibrate(500);
+                }
+
                 score_cog += 2;
 
                 loadNextQuestion();
@@ -132,6 +173,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     private void initializeViews() {
         text_q_num = findViewById(R.id.text_q_num);
         text_question = findViewById(R.id.text_question);
+        text_ex = findViewById(R.id.text_ex);
 
         btn_reply1 = findViewById(R.id.btn_reply_yes);
         btn_reply2 = findViewById(R.id.btn_reply_no);
@@ -142,7 +184,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
 
         loadBar = findViewById(R.id.loadBar);
 
-        //numberList = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     private class getDataTask extends AsyncTask<Void, Void, Void> {
@@ -172,6 +214,21 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
                             String value = dataSnapshot.getValue(String.class);
                             value = value.replace("\\n", "\n");
                             text_question.setText(value);
+                            button_enable();
+
+                            switch (currentPage)
+                            {
+                                case 9:
+                                    text_ex.setText(R.string.ex09);
+                                    break;
+                                case 11:
+                                    text_ex.setText(R.string.ex11);
+                                    break;
+                                default:
+                                    text_ex.setText("");
+                                    break;
+                            }
+
                             Log.w(TAG, currentPage + " 질문 세팅 완료");
                         } else {
                             Log.w(TAG, currentPage + " 질문 경로가 존재하지 않음. path: " + path);
@@ -189,7 +246,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
             }
 
             // 작업 완료 후 로딩 화면 숨김
-            loadBar.setVisibility(View.GONE);
+            loadBar.setVisibility(GONE);
         }
     }
 
@@ -200,11 +257,6 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     }
 
     public void test() {
-        //Log.w(TAG, "numberList: " + numberList);
-        //now = random.nextInt(14) + 1;
-        //numberList.remove(Integer.valueOf(now));
-        //Log.w(TAG, "numberList: " + numberList);
-
         path = "C" + String.format("%02d", currentPage);
         Log.w(TAG, "# test " + currentPage + " / 현재 질문 " + path);
 
@@ -213,6 +265,22 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
 
         // 질문 표시
         question();
+    }
+
+    // 버튼 활성화
+    private void button_enable()
+    {
+        btn_reply1.setEnabled(true);
+        btn_reply2.setEnabled(true);
+        btn_reply3.setEnabled(true);
+    }
+
+    // 버튼 비활성화
+    private void button_disable()
+    {
+        btn_reply1.setEnabled(false);
+        btn_reply2.setEnabled(false);
+        btn_reply3.setEnabled(false);
     }
 
     // 스피커

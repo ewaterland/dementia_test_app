@@ -277,6 +277,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
 
         if (currentPage <= 10)
         {
+
             test();
 
             text_q_num.setText(String.valueOf(currentPage));

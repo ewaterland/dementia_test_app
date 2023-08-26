@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:shape="rectangle">
 
     <!-- click -->
     <item android:state_pressed="true">
-        <layer-list>
-            <!-- 그림자 레이어 -->
-            <item android:right="2dp" android:bottom="2dp"> <!-- 오른쪽 및 아래로 그림자 오프셋 적용 -->
-                <shape android:shape="rectangle">
-                    <solid android:color="#50000000"/> <!-- 반투명한 그림자 색상 -->
-                    <corners android:radius="10dp"/>
-                </shape>
-            </item>
-            <!-- 실제 배경 레이어 -->
-            <item>
-                <shape>
-                    <!-- 배경 -->
-                    <solid android:color="@color/pressed2"/>
-                    <!-- 모서리 -->
-                    <corners android:radius="10dp"/>
-                </shape>
-            </item>
-        </layer-list>
+        <shape>
+            <!-- 배경 -->
+            <solid android:color="@color/pressed2" />
+            <!-- 모서리 -->
+            <corners
+                android:bottomLeftRadius="20dp"
+                android:bottomRightRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp" />
+        </shape>
     </item>
 
     <!-- active -->
     <item android:state_enabled="true">
-        <layer-list>
-            <!-- 그림자 레이어 -->
-            <item android:right="2dp" android:bottom="2dp"> <!-- 오른쪽 및 아래로 그림자 오프셋 적용 -->
-                <shape android:shape="rectangle">
-                    <solid android:color="#50000000"/> <!-- 반투명한 그림자 색상 -->
-                    <corners android:radius="10dp"/>
-                </shape>
-            </item>
-            <!-- 실제 배경 레이어 -->
-            <item>
-                <shape>
-                    <!-- 배경 -->
-                    <solid android:color="@color/active2"/>
-                    <!-- 모서리 -->
-                    <corners android:radius="10dp"/>
-                </shape>
-            </item>
-        </layer-list>
+        <shape>
+            <!-- 배경 -->
+            <solid android:color="@color/active2" />
+            <!-- 모서리 -->
+            <corners
+                android:bottomLeftRadius="20dp"
+                android:bottomRightRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp" />
+        </shape>
+    </item>
+
+    <!-- default -->
+    <item android:state_enabled="false">
+        <shape>
+            <!-- 배경 -->
+            <solid android:color="@color/unable2" />
+            <!-- 모서리 -->
+            <corners
+                android:bottomLeftRadius="20dp"
+                android:bottomRightRadius="20dp"
+                android:topLeftRadius="20dp"
+                android:topRightRadius="20dp" />
+        </shape>
     </item>
 
 </selector>

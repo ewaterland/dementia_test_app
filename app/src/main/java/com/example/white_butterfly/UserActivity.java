@@ -50,8 +50,7 @@ public class UserActivity extends AppCompatActivity {
     EditText EditText_My;
     EditText EditText_Guardian;
     TextView Text_Date;
-    TextView Text_Score_cog;
-    TextView Text_Score_dep;
+    TextView Text_Score;
     TextView Text_School;
     private ProgressBar loadBar;
 
@@ -89,10 +88,9 @@ public class UserActivity extends AppCompatActivity {
         EditText_My = findViewById(R.id.editText_my);
         EditText_Guardian = findViewById(R.id.editText_guardian);
         Text_Date = findViewById(R.id.text_date);
-        Text_Score_cog = findViewById(R.id.text_score_cog);
+        Text_Score = findViewById(R.id.text_score_cog);
         Text_School = findViewById(R.id.text_school);
         imageView = findViewById(R.id.profileImageView);
-        Text_Score_dep = findViewById(R.id.text_score_dep);
         loadBar = findViewById(R.id.loadBar);
 
         // firebase 접근 권한 갖기
@@ -147,8 +145,8 @@ public class UserActivity extends AppCompatActivity {
                             EditText_My.setText(documentSnapshot.getString("My"));
                             EditText_Guardian.setText(documentSnapshot.getString("Guardian"));
 
-                            Text_Score_cog.setText(String.valueOf(documentSnapshot.getLong("Score_cog")));
-                            Text_Score_dep.setText(String.valueOf(documentSnapshot.getLong("Score_dep")));
+                            Text_Score.setText(String.valueOf(documentSnapshot.getString("Score")));
+                            //Text_Score_dep.setText(String.valueOf(documentSnapshot.getString("Score_dep")));
 
                             year = Integer.parseInt(documentSnapshot.getLong("year").toString());
                             month = Integer.parseInt(documentSnapshot.getLong("month").toString());
