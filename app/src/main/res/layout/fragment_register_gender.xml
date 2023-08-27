@@ -26,24 +26,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 상단바 START -->
+        <ImageView
+            android:id="@+id/image_before"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:background="@drawable/icon_back"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="@+id/view_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
         <LinearLayout
             android:id="@+id/view_top"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView_before"
+                android:id="@+id/textView_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:fontFamily="@font/pretendard_regular"
-                android:gravity="start"
-                android:text="이전"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:fontFamily="@font/pretendard_extrabold"
+                android:gravity="center"
+                android:text="아까치매"
+                android:textColor="@color/main"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view_top">
 
@@ -53,18 +68,6 @@
         <!-- 상단바 END -->
 
         <!-- 로고 START -->
-        <ImageView
-            android:id="@+id/image_logo"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/icon_register"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_top">
-
-        </ImageView>
         <!-- 로고 END -->
 
         <!-- 메인 START -->
@@ -72,20 +75,22 @@
             android:id="@+id/textView_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="120dp"
+            android:text="성별을\n선택해 주세요"
             android:fontFamily="@font/pretendard_regular"
-            android:text="성별"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
+            android:textSize="34sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
         <LinearLayout
             android:id="@+id/view_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
             android:fadingEdge="vertical"
             android:gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,10 +98,28 @@
             app:layout_constraintTop_toBottomOf="@+id/textView_subject">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_female"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:id="@+id/btn_male"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_gender_male"
+
+                android:fontFamily="@font/pretendard_regular"
+                android:text="남성"
+                android:textAllCaps="false"
+                android:textColor="@drawable/text_gender_male"
+                android:textSize="25sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_female"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
 
                 android:background="@drawable/button_gender_female"
 
@@ -110,57 +133,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
 
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="100dp"
-                android:background="@color/back" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_male"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-
-                android:background="@drawable/button_gender_male"
-
-                android:fontFamily="@font/pretendard_regular"
-                android:text="남성"
-                android:textAllCaps="false"
-                android:textColor="@drawable/text_gender_male"
-                android:textSize="25sp"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
-
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="성별을 선택해 주세요"
-            android:textColor="#BFBFBF"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_gender">
-
-        </TextView>
 
         <!-- 다음 버튼 -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginEnd="130dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="70dp"
             android:width="1dp"
-            android:background="@drawable/button_round_stroke"
+            android:background="@drawable/button_fill"
             android:text="다음"
-            android:textColor="@color/main"
+            android:textColor="@drawable/text_enable"
             android:textSize="30sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/pretendard_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

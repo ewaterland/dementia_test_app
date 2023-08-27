@@ -22,42 +22,46 @@
         android:background="@color/white" >
 
         <!-- 상단바 START -->
-        <GridLayout
-            android:id="@+id/view_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/image_before"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:background="@drawable/icon_back"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="@+id/view_top"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- 로고 START -->
-            <ImageView
-                android:id="@+id/image_logo"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon" />
-            <!-- 로고 END -->
+        </ImageView>
 
-        </GridLayout>
-        <!-- 상단바 END -->
-
-        <TextView
-            android:id="@+id/textView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/view_top"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_marginStart="30dp"
-            android:gravity="start"
-            android:text="이전"
-            android:textColor="#000000"
-            android:textSize="25sp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_top">
+            app:layout_constraintTop_toTopOf="parent">
 
-        </TextView>
+            <TextView
+                android:id="@+id/textView_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_extrabold"
+                android:gravity="center"
+                android:text="아까치매"
+                android:textColor="@color/main"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_top">
+
+            </TextView>
+
+        </LinearLayout>
+        <!-- 상단바 END -->
 
         <!-- 메인 START -->
         <TextView
@@ -71,7 +75,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView01" />
+            app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
         <EditText
             android:id="@+id/editText_EmailAddress"
@@ -125,20 +129,16 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginEnd="130dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="70dp"
             android:width="1dp"
-            android:background="@drawable/button_round_stroke"
+            android:background="@drawable/button_fill"
             android:text="다음"
-            android:textColor="@color/main"
+            android:textColor="@drawable/text_enable"
             android:textSize="30sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/pretendard_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
         <!-- 메인 END -->
 

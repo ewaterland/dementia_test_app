@@ -110,7 +110,7 @@ public class RegisterAddressFragment extends Fragment {
         //editText_address.setText(savedAddress);
 
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.textView_before);
+        TextView text_before = rootView.findViewById(R.id.image_before);
         text_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,14 +181,11 @@ public class RegisterAddressFragment extends Fragment {
     private void navigateToNextFragment() {
         Log.w(TAG, "navigateToNextFragment");
 
-        Fragment fragment2 = new RegisterSchoolFragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.view_fragment, fragment2);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
         rootView.findViewById(R.id.page_register).setVisibility(View.GONE);
+
+        Intent intent = new Intent(requireActivity(), RegisterFinishActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
 
     @Override

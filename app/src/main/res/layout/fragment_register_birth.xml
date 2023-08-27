@@ -26,24 +26,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 상단바 START -->
+        <ImageView
+            android:id="@+id/image_before"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="50dp"
+            android:background="@drawable/icon_back"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="@+id/view_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
         <LinearLayout
             android:id="@+id/view_top"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView_before"
+                android:id="@+id/textView_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:gravity="start"
-                android:text="이전"
-                android:fontFamily="@font/pretendard_regular"
-                android:textColor="#000000"
-                android:textSize="25sp"
+                android:fontFamily="@font/pretendard_extrabold"
+                android:gravity="center"
+                android:text="아까치매"
+                android:textColor="@color/main"
+                android:textSize="30sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view_top">
 
@@ -53,18 +68,6 @@
         <!-- 상단바 END -->
 
         <!-- 로고 START -->
-        <ImageView
-            android:id="@+id/image_logo"
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="30dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/icon_register"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_top">
-
-        </ImageView>
         <!-- 로고 END -->
 
         <!-- 메인 START -->
@@ -72,25 +75,40 @@
             android:id="@+id/textView_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="내 생일"
-            android:textColor="#000000"
-            android:textSize="30sp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="120dp"
             android:fontFamily="@font/pretendard_regular"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="생년월일을\n입력해 주세요"
+            android:textColor="@color/black"
+            android:textSize="34sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
         <!-- 생년월일 입력칸 -->
         <LinearLayout
             android:id="@+id/MyPhone"
             android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
+            android:layout_height="50sp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/button_round_stroke15_gray_"
+            android:gravity="left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_subject">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:fontFamily="@font/pretendard_light"
+                android:gravity="center"
+                android:text="  "
+                android:textSize="25sp">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/editText_MyFirst"
@@ -98,11 +116,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
+                android:fontFamily="@font/pretendard_light"
                 android:gravity="center"
-                android:hint="연도"
-                android:maxLength="4"
+                android:hint="1900"
                 android:inputType="date"
-                android:textSize="30sp">
+                android:maxLength="4"
+                android:textColor="@color/black"
+                android:textSize="25sp">
 
             </EditText>
 
@@ -112,9 +132,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
+                android:fontFamily="@font/pretendard_light"
                 android:gravity="center"
-                android:text=" / "
-                android:textSize="30sp">
+                android:text="/"
+                android:textSize="25sp">
 
             </TextView>
 
@@ -124,11 +145,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
+                android:fontFamily="@font/pretendard_light"
                 android:gravity="center"
-                android:hint="월"
-                android:maxLength="2"
+                android:hint="01"
                 android:inputType="date"
-                android:textSize="30sp">
+                android:maxLength="2"
+                android:textColor="@color/black"
+                android:textSize="25sp">
 
             </EditText>
 
@@ -137,9 +160,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/pretendard_light"
                 android:gravity="center"
-                android:text=" / "
-                android:textSize="30sp">
+                android:text="/"
+                android:textSize="25sp">
 
             </TextView>
 
@@ -149,11 +173,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
+                android:fontFamily="@font/pretendard_light"
                 android:gravity="center"
-                android:hint="일"
-                android:maxLength="2"
+                android:hint="01"
                 android:inputType="date"
-                android:textSize="30sp">
+                android:maxLength="2"
+                android:textColor="@color/black"
+                android:textSize="25sp">
 
             </EditText>
 
@@ -166,16 +192,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginEnd="130dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="70dp"
             android:width="1dp"
-            android:background="@drawable/button_round_stroke"
+            android:background="@drawable/button_fill"
             android:text="다음"
-            android:textColor="@color/main"
+            android:textColor="@drawable/text_enable"
             android:textSize="30sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/pretendard_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

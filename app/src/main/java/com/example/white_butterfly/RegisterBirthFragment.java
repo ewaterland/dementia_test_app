@@ -86,7 +86,7 @@ public class RegisterBirthFragment extends Fragment {
         editText_dd.setText(savedDay);
 
         // 이전 버튼 누른 경우
-        text_before = rootView.findViewById(R.id.textView_before);
+        text_before = rootView.findViewById(R.id.image_before);
         text_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

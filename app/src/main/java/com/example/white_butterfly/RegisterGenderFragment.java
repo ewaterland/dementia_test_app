@@ -62,7 +62,7 @@ public class RegisterGenderFragment extends Fragment {
 
         Log.w(TAG, "User: " + id);
 
-        text_before = rootView.findViewById(R.id.textView_before);
+        text_before = rootView.findViewById(R.id.image_before);
         btn_next = rootView.findViewById(R.id.btn_next);
         btn_female = rootView.findViewById(R.id.btn_female);
         btn_male = rootView.findViewById(R.id.btn_male);

@@ -10,4 +10,7 @@
 
     <!-- 기억력 검사 -->
     <string name="explain">이 아이콘은 어쩌고 저쩌고\n이 아이콘은 저쩌고 어쩌고</string>
+
+    <!-- 회원가입 -->
+    <string name="forgot_your_password"><u>비밀번호를 잊으셨나요?</u></string>
 </resources>

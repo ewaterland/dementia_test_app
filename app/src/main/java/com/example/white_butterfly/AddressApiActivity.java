@@ -1,8 +1,10 @@
 package com.example.white_butterfly;
-
+// https://ewaterland.blogspot.com/2023/08/api.html
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 

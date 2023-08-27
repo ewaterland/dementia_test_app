@@ -52,6 +52,9 @@
         <activity
             android:name=".RegisterFinishActivity"
             android:exported="false" />
+        <activity
+            android:name=".AddressApiActivity"
+            android:exported="false" />
 
         <!-- 카카오 로그인 -->
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
