@@ -53,19 +53,20 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
 
     private int currentPage = 1;  // 테스트 페이지 추적 (1~25)
     private int currentProgress = 0; // (0~24)
-    //int button_number = 0;  // 정답 외의 내용이 들어갈 버튼 랜덤 선택
-    //int button_number_answer = 0;  // 정답이 들어갈 버튼 랜덤 선택
 
     TextView text_q_num; // 현재 질문 개수
     TextView text_question;  // 질문 텍스트뷰
-    Button btn_reply_yes;
-    Button btn_reply_no;
+    Button btn_next;
+    ImageView btn_reply_yes;
+    ImageView btn_reply_no;
+    Boolean reply_yes_Selected = false;
+    Boolean reply_no_Selected = false;
+    Boolean selected = false;
     ImageView image_speak;
     Random random;
 
     // 마이크
     private TextToSpeech textToSpeech;
-    private EditText editText_mic;
 
     // 스피커
     private static final int REQUEST_CODE_SPEECH_INPUT = 200;
@@ -101,27 +102,36 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
             docRef = db.collection("Users").document(id);
         }
 
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadNextQuestion();
+            }
+        });
+
         btn_reply_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((currentPage < 9) && (currentPage != 5))
-                {
-                    score_dep++;
-                }
+                reply_no_Selected = false;
+                btn_reply_no.setSelected(false);
 
-                loadNextQuestion();
+                reply_yes_Selected = true;
+                btn_reply_yes.setSelected(true);
+
+                button_state_check();
             }
         });
 
         btn_reply_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((currentPage == 5) || (currentPage > 8))
-                {
-                    score_dep++;
-                }
+                reply_no_Selected = true;
+                btn_reply_no.setSelected(true);
 
-                loadNextQuestion();
+                reply_yes_Selected = false;
+                btn_reply_yes.setSelected(false);
+
+                button_state_check();
             }
         });
 
@@ -129,13 +139,15 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
             @Override
             public void onClick(View v) {
                 String text = text_question.getText().toString();
-                if (textToSpeech.isSpeaking()) {
-                    textToSpeech.stop();
-                }
-                // 읽을 텍스트를 설정하고 음성 출력 시작
-                HashMap<String, String> params = new HashMap<>();
-                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
-                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+                TTS(text);
+            }
+        });
+
+        text_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = text_question.getText().toString();
+                TTS(text);
             }
         });
 
@@ -149,6 +161,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
         text_q_num = findViewById(R.id.text_q_num);
         text_question = findViewById(R.id.text_question);
 
+        btn_next = findViewById(R.id.btn_next);
         btn_reply_yes = findViewById(R.id.btn_reply_yes);
         btn_reply_no = findViewById(R.id.btn_reply_no);
 
@@ -210,6 +223,43 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
         }
     }
 
+    private void button_state_check() {
+        if (!reply_yes_Selected && !reply_no_Selected) { selected = false; }
+        else { selected = true; }
+
+        if (selected) { // 버튼이 선택되어 있다면
+            btn_next.setEnabled(true);
+        } else { // 버튼이 선택되어 있지 않다면
+            btn_next.setEnabled(false);
+        }
+    }
+
+    private void score_check() {
+        if (reply_yes_Selected) {
+            if ((currentPage < 9) && (currentPage != 5))
+            {
+                score_dep++;
+            }
+        }
+        else if (reply_no_Selected) {
+            if ((currentPage == 5) || (currentPage > 8))
+            {
+                score_dep++;
+            }
+        }
+    }
+
+    private void TTS(String text) {
+        if (textToSpeech.isSpeaking()) {
+            textToSpeech.stop();
+        }
+
+        // 읽을 텍스트를 설정하고 음성 출력 시작
+        HashMap<String, String> params = new HashMap<>();
+        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+    }
+
     // "question()" 함수를 AsyncTask로 호출하는 부분
     private void question() {
         // AsyncTask 실행
@@ -251,33 +301,16 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
         super.onDestroy();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_SPEECH_INPUT) {
-            if (resultCode == RESULT_OK && data != null) {
-                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                if (result != null && result.size() > 0) {
-                    String recognizedText = result.get(0);
-                    // 음성 인식 결과를 두 번째 화면의 텍스트뷰에 표시
-                    editText_mic.setText(recognizedText);
-                }
-            }
-        }
-    }
-
     // 다음 질문 페이지를 표시하는 메서드
     public void loadNextQuestion() {
         Log.w(TAG, "loadNextQuestion");
 
-        //onPageUpdated(++currentPage);
         currentPage++;
         currentProgress++;
 
         if (currentPage <= 10)
         {
-
+            score_check();
             test();
 
             text_q_num.setText(String.valueOf(currentPage));

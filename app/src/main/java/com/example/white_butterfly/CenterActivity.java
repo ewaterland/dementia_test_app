@@ -63,10 +63,11 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
         Log.w(TAG, "--- CenterActivity ---");
 
         if (!checkLocationServicesStatus()) {
-            showDialogForLocationServiceSetting();
+            checkRunTimePermission();
+            //showDialogForLocationServiceSetting();
         } else {
-            //checkRunTimePermission();
-            showDialogForLocationServiceSetting();
+            checkRunTimePermission();
+            //showDialogForLocationServiceSetting();
         }
 
         //지도를 띄우자
@@ -75,17 +76,23 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
         mapView.setCurrentLocationEventListener(this);
         mapViewContainer.addView(mapView);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+
+        // 3.  위치 값을 가져올 수 있음
+        //mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
     }
 
+    /*
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.w(TAG, "--- onDestroy ---");
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
         mapView.setShowCurrentLocationMarker(false);
-    }
+    }*/
 
     @Override
     public void onCurrentLocationUpdate(MapView mapView, MapPoint currentLocation, float accuracyInMeters) {
+        Log.w(TAG, "--- onCurrentLocationUpdate ---");
         mapPointGeo = currentLocation.getMapPointGeoCoord();
         Log.w("mapPointGeo", String.valueOf(mapPointGeo.latitude));
         Log.w("mapPointGeo", String.valueOf(mapPointGeo.longitude));
@@ -113,7 +120,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
         customMarker.setTag(1);
         customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.1389928, 126.9262664));
         customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-        customMarker.setCustomImageResourceId(R.drawable.custom_marker_red); // 마커 이미지.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
         customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
         customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
         mapView.addPOIItem(customMarker);
@@ -122,7 +129,52 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
         customMarker.setTag(1);
         customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.186926, 126.8669109));
         customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-        customMarker.setCustomImageResourceId(R.drawable.custom_marker_red); // 마커 이미지.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+        mapView.addPOIItem(customMarker);
+
+        customMarker.setItemName("광주광역시 동구 치매안심센터");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.1449058, 126.9231704));
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+        mapView.addPOIItem(customMarker);
+
+        customMarker.setItemName("광주 치매예방관리센터");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.0984271, 126.8958843));
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+        mapView.addPOIItem(customMarker);
+
+        customMarker.setItemName("광주광역시 서구 치매안심센터");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.148835, 126.8603062));
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+        mapView.addPOIItem(customMarker);
+
+        customMarker.setItemName("행복드림치매예방센터");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.1668584, 126.8027295));
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
+        customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
+        customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
+        mapView.addPOIItem(customMarker);
+
+        customMarker.setItemName("백세형통치매예방센터");
+        customMarker.setTag(1);
+        customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(35.1829907, 126.8950438));
+        customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
+        customMarker.setCustomImageResourceId(R.drawable.image_marker); // 마커 이미지.
         customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
         customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
         mapView.addPOIItem(customMarker);
@@ -130,38 +182,41 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
 
     @Override
     public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
-
+        Log.w(TAG, "--- onCurrentLocationDeviceHeadingUpdate ---");
     }
 
     @Override
     public void onCurrentLocationUpdateFailed(MapView mapView) {
-
+        Log.w(TAG, "--- onCurrentLocationUpdateFailed ---");
     }
 
     @Override
     public void onCurrentLocationUpdateCancelled(MapView mapView) {
-
+        Log.w(TAG, "--- onCurrentLocationUpdateCancelled ---");
     }
 
     @Override
     public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String s) {
+        Log.w(TAG, "--- onReverseGeoCoderFoundAddress ---");
         mapReverseGeoCoder.toString();
         onFinishReverseGeoCoding(s);
     }
 
     @Override
     public void onReverseGeoCoderFailedToFindAddress(MapReverseGeoCoder mapReverseGeoCoder) {
+        Log.w(TAG, "--- onReverseGeoCoderFailedToFindAddress ---");
         onFinishReverseGeoCoding("Fail");
     }
 
     private void onFinishReverseGeoCoding(String result) {
-
+        Log.w(TAG, "--- onFinishReverseGeoCoding ---");
     }
 
     // ActivityCompat.requestPermissions를 사용한 퍼미션 요청의 결과를 리턴받는 메소드입니다.
     @Override
     public void onRequestPermissionsResult(int permsRequestCode, @NonNull String[] permissions, @NonNull int[] grandResults) {
 
+        Log.w(TAG, "--- onRequestPermissionsResult ---");
         super.onRequestPermissionsResult(permsRequestCode, permissions, grandResults);
         if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
@@ -193,6 +248,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
     }
 
     void checkRunTimePermission() {
+        Log.w(TAG, "--- checkRunTimePermission ---");
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(CenterActivity.this,
@@ -205,7 +261,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
             Log.d("같음", "hasFineLocationPermission == PackageManager.PERMISSION_GRANTED : 같음");
 
             // 3.  위치 값을 가져올 수 있음
-            mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
+            //mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading);
 
         } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
@@ -229,6 +285,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
 
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
+        Log.w(TAG, "--- showDialogForLocationServiceSetting ---");
         AlertDialog.Builder builder = new AlertDialog.Builder(CenterActivity.this);
         builder.setTitle("위치 서비스 비활성화");
         builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
@@ -255,23 +312,21 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.w(TAG, "--- onActivityResult ---");
 
-        switch (requestCode) {
-            case GPS_ENABLE_REQUEST_CODE:
-                //사용자가 GPS 활성 시켰는지 검사
+        if (requestCode == GPS_ENABLE_REQUEST_CODE) {//사용자가 GPS 활성 시켰는지 검사
+            if (checkLocationServicesStatus()) {
                 if (checkLocationServicesStatus()) {
-                    if (checkLocationServicesStatus()) {
-                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
-                        checkRunTimePermission();
-                        return;
-                    }
+                    Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
+                    checkRunTimePermission();
+                    return;
                 }
-
-                break;
+            }
         }
     }
 
     public boolean checkLocationServicesStatus() {
+        Log.w(TAG, "--- checkLocationServicesStatus ---");
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -280,6 +335,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
 
     //위도와 경도를 주소로 바꿔주는 함수
     public static String getCompleteAddressString(Context context, double LATITUDE, double LONGITUDE) {
+        Log.w(TAG, "--- getCompleteAddressString ---");
         String strAdd = "";
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
@@ -309,34 +365,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+        Log.w(TAG, "--- onPointerCaptureChanged ---");
         super.onPointerCaptureChanged(hasCapture);
     }
 }
-/*
-    // 주소를 위도와 경도로 변환하여 맵에 마커 표시하는 메소드
-    private void showAddressOnMap(String address) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocationName(address, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-                Address firstAddress = addresses.get(0);
-                double latitude = firstAddress.getLatitude();
-                double longitude = firstAddress.getLongitude();
-
-                // MapPOIItem에 위도와 경도 설정
-                MapPOIItem customMarker = new MapPOIItem();
-                customMarker.setItemName("현재 위치");
-                customMarker.setTag(1);
-                customMarker.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude)); // 위도와 경도로 MapPoint 생성
-                customMarker.setMarkerType(MapPOIItem.MarkerType.CustomImage); // 마커타입을 커스텀 마커로 지정.
-                customMarker.setCustomImageResourceId(R.drawable.custom_marker_red); // 마커 이미지.
-                customMarker.setCustomImageAutoscale(false); // hdpi, xhdpi 등 안드로이드 플랫폼의 스케일을 사용할 경우 지도 라이브러리의 스케일 기능을 꺼줌.
-                customMarker.setCustomImageAnchor(0.5f, 1.0f); // 마커 이미지중 기준이 되는 위치(앵커포인트) 지정 - 마커 이미지 좌측 상단 기준 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f) 값.
-
-                // 마커 추가
-                mapView.addPOIItem(customMarker);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/

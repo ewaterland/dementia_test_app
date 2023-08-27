@@ -60,7 +60,7 @@ public class TestResultActivity extends AppCompatActivity {
             Score = "치매가 의심돼요";
             text_cog_result1.setText("치매");
             text_cog_result2.setText("가 의심돼요");
-            text_cog_result1.setTextColor(ContextCompat.getColor(this, R.color.mint));
+            text_cog_result1.setTextColor(ContextCompat.getColor(this, R.color.main));
             text_cog_result2.setTextColor(ContextCompat.getColor(this, R.color.black));
 
             if (score_dep >= 5) // 우울증 의심

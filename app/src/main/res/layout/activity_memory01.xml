@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10문항"
-                android:textColor="@color/mint"
+                android:textColor="@color/main"
                 android:textStyle="bold"
                 android:textSize="25sp"
                 android:fontFamily="@font/pretendard_regular">

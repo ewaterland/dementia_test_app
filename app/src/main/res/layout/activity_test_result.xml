@@ -24,7 +24,7 @@
         android:layout_marginTop="70dp"
         android:fontFamily="@font/pretendard_extrabold"
         android:text="진 단 결 과"
-        android:textColor="@color/mint"
+        android:textColor="@color/main"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_semibold"
             android:text="건강한 정신상태"
-            android:textColor="@color/mint"
+            android:textColor="@color/main"
             android:textSize="40sp" />
 
     </LinearLayout>
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="우울증"
-            android:textColor="@color/mint"
+            android:textColor="@color/main"
             android:textSize="40sp"
             android:fontFamily="@font/pretendard_semibold"/>
 

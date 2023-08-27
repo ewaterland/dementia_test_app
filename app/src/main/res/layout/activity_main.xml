@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <!-- 상단바 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_top"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="130dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +26,7 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="130dp"
+            android:layout_width="110dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/logo"
@@ -52,8 +53,9 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:text="치매안심센터"
-            android:textSize="25sp"
-            android:fontFamily="@font/pretendard_regular"
+            android:textSize="20sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/black"
             android:onClick="Center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo">
@@ -65,8 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="홈"
-            android:textSize="25sp"
-            android:fontFamily="@font/pretendard_regular"
+            android:textSize="20sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo">
@@ -79,11 +82,123 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:text="네이버 카페"
-            android:textSize="25sp"
-            android:fontFamily="@font/pretendard_regular"
+            android:textSize="20sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/black"
             android:onClick="Naver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo">
+
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 간단 마이페이지 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_mypage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/view_round_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_top">
+
+        <LinearLayout
+            android:id="@+id/layout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="이수지"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="님,"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="치매 검사를 시행한 지"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_name">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="127일"
+            android:textColor="@color/main"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="치매와 우울증이 의심돼요"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="내정보"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
 
@@ -96,11 +211,11 @@
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top">
+        app:layout_constraintTop_toBottomOf="@+id/layout_button">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
@@ -126,20 +241,26 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_chatbot"
         android:layout_width="match_parent"
-        android:layout_height="170sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/button_chatbot"
+        android:layout_height="60sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/button_round_main"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="말동무"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_mypage" />
 
     <LinearLayout
+        android:id="@+id/layout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,15 +270,16 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_dementiaTest"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_margin="10sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@drawable/button_dementia"
+            android:background="@drawable/button_round_white"
+            android:fontFamily="@font/pretendard_medium"
             android:scaleType="fitCenter"
+            android:text="치매검사"
+            android:textColor="@color/black"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_chatbot" />
@@ -165,16 +287,16 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_rememberTest"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
             android:layout_margin="10sp"
+            android:layout_weight="1"
+            android:background="@drawable/button_round_white"
+            android:fontFamily="@font/pretendard_medium"
             android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:background="@drawable/button_remember"
+            android:text="기억력 검사"
+            android:textColor="@color/black"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_dementiaTest"
             app:layout_constraintTop_toBottomOf="@+id/btn_chatbot" />

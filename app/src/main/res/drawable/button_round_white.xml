@@ -7,7 +7,7 @@
     <item android:state_pressed="true">
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/pressed" />
+            <solid android:color="@color/gray" />
             <!-- 모서리 -->
             <corners
                 android:bottomLeftRadius="10dp"
@@ -21,21 +21,7 @@
     <item android:state_enabled="true">
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/active" />
-            <!-- 모서리 -->
-            <corners
-                android:bottomLeftRadius="10dp"
-                android:bottomRightRadius="10dp"
-                android:topLeftRadius="10dp"
-                android:topRightRadius="10dp" />
-        </shape>
-    </item>
-
-    <!-- default -->
-    <item android:state_enabled="false">
-        <shape>
-            <!-- 배경 -->
-            <solid android:color="@color/unable" />
+            <solid android:color="@color/white" />
             <!-- 모서리 -->
             <corners
                 android:bottomLeftRadius="10dp"

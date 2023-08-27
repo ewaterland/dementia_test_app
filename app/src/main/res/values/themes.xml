@@ -13,7 +13,7 @@
     <style name="Theme.White_butterfly" parent="Base.Theme.White_butterfly" />
 
     <style name="ThemeOverlay.Chatbot_test.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/mint</item>
+        <item name="fullscreenBackgroundColor">@color/main</item>
         <item name="fullscreenTextColor">@color/pressed</item>
     </style>
 

@@ -13,6 +13,8 @@
         android:layout_marginTop="40dp"
         android:text="기억력 테스트"
         android:textSize="40dp"
+        android:textColor="@color/main"
+        android:fontFamily="@font/pretendard_extrabold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +49,7 @@
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_score" />
@@ -58,6 +61,7 @@
             android:layout_marginTop="20dp"
             android:text="..."
             android:textSize="25dp"
+            android:fontFamily="@font/pretendard_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_result2" />
@@ -71,6 +75,7 @@
             android:layout_marginEnd="100dp"
             android:text="score"
             android:textSize="25dp"
+            android:fontFamily="@font/pretendard_semibold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_result3" />

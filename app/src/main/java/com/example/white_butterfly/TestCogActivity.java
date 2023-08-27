@@ -58,12 +58,15 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     TextView text_q_num; // 현재 질문 개수
     TextView text_question;  // 질문 텍스트 뷰
     TextView text_ex;
-    Button btn_reply1;
-    Button btn_reply2;
-    Button btn_reply3;
+    Button btn_next;
+    ImageView btn_reply_1;
+    ImageView btn_reply_2;
+    ImageView btn_reply_3;
+    Boolean reply_1_Selected = false;
+    Boolean reply_2_Selected = false;
+    Boolean reply_3_Selected = false;
     ImageView image_speak;
-    private List<Integer> numberList;  // 아직 안 한 질문 리스트
-    //int now;  // 현재 출력된 질문 넘버
+    Boolean selected = false;
     int score_cog = 0;
     Vibrator vibrator;
 
@@ -92,61 +95,58 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
             docRef = db.collection("Users").document(id);
         }
 
-        btn_reply1.setOnClickListener(new View.OnClickListener() {
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 진동 500ms
-                if (Build.VERSION.SDK_INT >= 26) {
-                    // VibrationEffect.createOneShot()는 지정한 시간 동안 한 번 진동을 생성합니다.
-                    // 첫 번째 파라미터는 진동 시간 (ms), 두 번째 파라미터는 진동 강도 (-255 ~ 255)
-                    VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
-                    vibrator.vibrate(effect);
-                } else {
-                    // API 26 미만 버전에서는 기존 방식을 사용
-                    vibrator.vibrate(500);
-                }
-
                 loadNextQuestion();
             }
         });
 
-        btn_reply2.setOnClickListener(new View.OnClickListener() {
+        btn_reply_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 진동 500ms
-                if (Build.VERSION.SDK_INT >= 26) {
-                    // VibrationEffect.createOneShot()는 지정한 시간 동안 한 번 진동을 생성합니다.
-                    // 첫 번째 파라미터는 진동 시간 (ms), 두 번째 파라미터는 진동 강도 (-255 ~ 255)
-                    VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
-                    vibrator.vibrate(effect);
-                } else {
-                    // API 26 미만 버전에서는 기존 방식을 사용
-                    vibrator.vibrate(500);
-                }
+                reply_2_Selected = false;
+                reply_3_Selected = false;
+                btn_reply_2.setSelected(false);
+                btn_reply_3.setSelected(false);
 
-                score_cog += 1;
+                reply_1_Selected = true;
+                btn_reply_1.setSelected(true);
 
-                loadNextQuestion();
+                vibrateDevice();
+                button_state_check();
             }
         });
 
-        btn_reply3.setOnClickListener(new View.OnClickListener() {
+        btn_reply_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 진동 500ms
-                if (Build.VERSION.SDK_INT >= 26) {
-                    // VibrationEffect.createOneShot()는 지정한 시간 동안 한 번 진동을 생성합니다.
-                    // 첫 번째 파라미터는 진동 시간 (ms), 두 번째 파라미터는 진동 강도 (-255 ~ 255)
-                    VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
-                    vibrator.vibrate(effect);
-                } else {
-                    // API 26 미만 버전에서는 기존 방식을 사용
-                    vibrator.vibrate(500);
-                }
+                reply_1_Selected = false;
+                reply_3_Selected = false;
+                btn_reply_1.setSelected(false);
+                btn_reply_3.setSelected(false);
 
-                score_cog += 2;
+                reply_2_Selected = true;
+                btn_reply_2.setSelected(true);
 
-                loadNextQuestion();
+                vibrateDevice();
+                button_state_check();
+            }
+        });
+
+        btn_reply_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reply_1_Selected = false;
+                reply_2_Selected = false;
+                btn_reply_1.setSelected(false);
+                btn_reply_2.setSelected(false);
+
+                reply_3_Selected = true;
+                btn_reply_3.setSelected(true);
+
+                vibrateDevice();
+                button_state_check();
             }
         });
 
@@ -154,13 +154,15 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
             @Override
             public void onClick(View v) {
                 String text = text_question.getText().toString();
-                if (textToSpeech.isSpeaking()) {
-                    textToSpeech.stop();
-                }
-                // 읽을 텍스트를 설정하고 음성 출력 시작
-                HashMap<String, String> params = new HashMap<>();
-                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
-                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+                TTS(text);
+            }
+        });
+
+        text_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = text_question.getText().toString();
+                TTS(text);
             }
         });
 
@@ -170,21 +172,55 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         progressModel = new ViewModelProvider(TestCogActivity.this).get(ProgressModel.class);
     }
 
+    private void button_state_check() {
+        if (!reply_1_Selected && !reply_2_Selected && !reply_3_Selected) { selected = false; }
+        else { selected = true; }
+
+        if (selected) { // 버튼이 선택되어 있다면
+            btn_next.setEnabled(true);
+        } else { // 버튼이 선택되어 있지 않다면
+            btn_next.setEnabled(false);
+        }
+    }
+
+    private void TTS(String text) {
+        if (textToSpeech.isSpeaking()) {
+            textToSpeech.stop();
+        }
+
+        // 읽을 텍스트를 설정하고 음성 출력 시작
+        HashMap<String, String> params = new HashMap<>();
+        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+    }
+
     private void initializeViews() {
         text_q_num = findViewById(R.id.text_q_num);
         text_question = findViewById(R.id.text_question);
         text_ex = findViewById(R.id.text_ex);
 
-        btn_reply1 = findViewById(R.id.btn_reply_yes);
-        btn_reply2 = findViewById(R.id.btn_reply_no);
-        btn_reply3 = findViewById(R.id.btn_reply3);
+        btn_next = findViewById(R.id.btn_next);
+
+        btn_reply_1 = findViewById(R.id.btn_reply_1);
+        btn_reply_2 = findViewById(R.id.btn_reply_2);
+        btn_reply_3 = findViewById(R.id.btn_reply_3);
 
         textToSpeech = new TextToSpeech(this, this);
+
         image_speak = findViewById(R.id.image_speaker);
 
         loadBar = findViewById(R.id.loadBar);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    }
+
+    private void vibrateDevice() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
+            vibrator.vibrate(effect);
+        } else {
+            vibrator.vibrate(500);
+        }
     }
 
     private class getDataTask extends AsyncTask<Void, Void, Void> {
@@ -270,17 +306,17 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     // 버튼 활성화
     private void button_enable()
     {
-        btn_reply1.setEnabled(true);
-        btn_reply2.setEnabled(true);
-        btn_reply3.setEnabled(true);
+        btn_reply_1.setEnabled(true);
+        btn_reply_2.setEnabled(true);
+        btn_reply_3.setEnabled(true);
     }
 
     // 버튼 비활성화
     private void button_disable()
     {
-        btn_reply1.setEnabled(false);
-        btn_reply2.setEnabled(false);
-        btn_reply3.setEnabled(false);
+        btn_reply_1.setEnabled(false);
+        btn_reply_2.setEnabled(false);
+        btn_reply_3.setEnabled(false);
     }
 
     // 스피커
@@ -307,16 +343,30 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         super.onDestroy();
     }
 
+    private void score_check() {
+        if (reply_1_Selected) {
+            score_cog += 2;
+        }
+        else if (reply_2_Selected) {
+            score_cog += 1;
+        }
+        /* // 변함이 없기 때문에 주석 처리
+        else if (reply_3_Selected) {
+            score_cog += 0;
+        }
+         */
+    }
+
     // 다음 질문 페이지를 표시하는 메서드
     public void loadNextQuestion() {
         Log.w(TAG, "loadNextQuestion");
 
-        //onPageUpdated(++currentPage);
         currentPage++;
         currentProgress++;
 
         if (currentPage <= 15)
         {
+            score_check();
             test();
 
             text_q_num.setText(String.valueOf(currentPage));

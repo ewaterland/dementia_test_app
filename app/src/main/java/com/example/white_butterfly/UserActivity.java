@@ -336,7 +336,7 @@ public class UserActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
 
                 // Login 화면으로 이동
-                Intent intent = new Intent(getApplication(), LoginActivity.class);
+                Intent intent = new Intent(getApplication(), LoginMainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -385,7 +385,7 @@ public class UserActivity extends AppCompatActivity {
                                 Toast.makeText(UserActivity.this, "탈퇴하셨습니다.", Toast.LENGTH_SHORT).show();
 
                                 // 로그인 화면으로 이동
-                                Intent intent = new Intent(getApplication(), LoginActivity.class);
+                                Intent intent = new Intent(getApplication(), LoginMainActivity.class);
                                 startActivity(intent);
                                 finish();
 

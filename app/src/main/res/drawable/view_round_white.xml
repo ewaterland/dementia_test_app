@@ -3,17 +3,16 @@
     android:padding="10dp"
     android:shape="rectangle">
 
-    <!-- default -->
     <item>
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/main" />
+            <solid android:color="@color/white" />
             <!-- 모서리 -->
             <corners
-                android:topLeftRadius="45dp"
-                android:topRightRadius="45dp"
-                android:bottomLeftRadius="45dp"
-                android:bottomRightRadius="45dp"/>
+                android:bottomLeftRadius="15dp"
+                android:bottomRightRadius="15dp"
+                android:topLeftRadius="15dp"
+                android:topRightRadius="15dp" />
         </shape>
     </item>
 

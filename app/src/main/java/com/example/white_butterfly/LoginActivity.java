@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_email);
 
         // firebase 접근 권한 갖기
         FirebaseApp.initializeApp(LoginActivity.this);

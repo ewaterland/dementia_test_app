@@ -144,7 +144,7 @@ public class RegisterSchoolFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId != -1) {
-                    btn_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.mint));
+                    btn_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.main));
                 } else {
                     btn_next.setTextColor(ContextCompat.getColor(requireContext(), R.color.unable));
                 }
