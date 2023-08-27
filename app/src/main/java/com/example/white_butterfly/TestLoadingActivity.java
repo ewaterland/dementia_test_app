@@ -19,6 +19,8 @@ public class TestLoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_loading);
 
+        Log.w(TAG, "--- TestLoadingActivity ---");
+
         // 애니메이션 리소스 로드
         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
 

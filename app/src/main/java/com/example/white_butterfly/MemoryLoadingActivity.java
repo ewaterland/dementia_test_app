@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayoutStates;
@@ -17,6 +20,13 @@ public class MemoryLoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_loading);
 
         Log.w(TAG, "--- MemoryLoadingActivity ---");
+
+        // 애니메이션 리소스 로드
+        Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+
+        // 뷰에 애니메이션 적용
+        View viewToRotate = findViewById(R.id.image_loading);
+        viewToRotate.startAnimation(rotateAnimation);
 
         // Intent에서 데이터 가져오기
         int score = getIntent().getIntExtra("score", 0);
