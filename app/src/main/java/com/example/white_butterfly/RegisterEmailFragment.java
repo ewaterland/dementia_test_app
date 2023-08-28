@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,7 +85,7 @@ public class RegisterEmailFragment extends Fragment {
         editText_password_2 = rootView.findViewById(R.id.editText_Password_2);
 
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.textView01);
+        ImageView text_before = rootView.findViewById(R.id.image_before);
         text_before.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);

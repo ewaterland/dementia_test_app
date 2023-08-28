@@ -231,7 +231,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/button_round_check"
+                    android:background="@drawable/button_round10_check"
                     android:gravity="center"
                     android:text="보기"
                     android:textColor="@color/black"
@@ -281,7 +281,7 @@
                     android:layout_height="120sp"
                     android:layout_margin="7sp"
                     android:layout_weight="1.5"
-                    android:background="@drawable/button_round_main">
+                    android:background="@drawable/button_round10_main">
 
                     <ImageView
                         android:id="@+id/icon_chatbot"
@@ -317,7 +317,7 @@
                     android:layout_height="120sp"
                     android:layout_margin="7sp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_round_white"
+                    android:background="@drawable/button_round10_white"
                     android:onClick="Center">
 
                     <ImageView
@@ -370,7 +370,7 @@
                     android:layout_height="120sp"
                     android:layout_margin="7sp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_round_white">
+                    android:background="@drawable/button_round10_white">
 
                     <ImageView
                         android:id="@+id/icon_memory"
@@ -403,7 +403,7 @@
                     android:layout_height="120sp"
                     android:layout_margin="7sp"
                     android:layout_weight="1.5"
-                    android:background="@drawable/button_round_other_blue">
+                    android:background="@drawable/button_round10_other">
 
                     <ImageView
                         android:id="@+id/icon_dementia"

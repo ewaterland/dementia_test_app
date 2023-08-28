@@ -50,7 +50,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="30dp"
 
-        android:background="@drawable/button_round_main"
+        android:background="@drawable/button_round10_main"
 
         android:fontFamily="@font/pretendard_medium"
         android:text="7살 남자아이 하준이"
@@ -68,7 +68,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="30dp"
 
-        android:background="@drawable/button_round_main"
+        android:background="@drawable/button_round10_main"
 
         android:fontFamily="@font/pretendard_medium"
         android:text="9살 여자아이 다인이"
@@ -86,7 +86,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="30dp"
 
-        android:background="@drawable/button_round_main"
+        android:background="@drawable/button_round10_main"
 
         android:fontFamily="@font/pretendard_medium"
         android:text="치매 전문 상담사"

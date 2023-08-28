@@ -84,7 +84,7 @@
         android:layout_marginStart="55dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="55dp"
-        android:background="@drawable/button_round_stroke25_gray_light"
+        android:background="@drawable/button_round25_stroke_gray_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kakaologin">
