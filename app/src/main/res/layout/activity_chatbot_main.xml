@@ -8,25 +8,24 @@
     <!-- 로고 START -->
     <ImageView
         android:id="@+id/image_logo"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/logo_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_subject1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/pretendard_medium"
         android:text="말동무가 필요하신가요?"
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:fontFamily="@font/pretendard_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_logo" />
@@ -72,7 +71,7 @@
         android:background="@drawable/button_round_main"
 
         android:fontFamily="@font/pretendard_medium"
-        android:text="13살 여자아이 다인이"
+        android:text="9살 여자아이 다인이"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="25sp"

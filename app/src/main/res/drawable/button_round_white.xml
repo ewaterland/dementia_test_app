@@ -7,7 +7,7 @@
     <item android:state_pressed="true">
         <shape>
             <!-- 배경 -->
-            <solid android:color="@color/gray" />
+            <solid android:color="@color/light_gray" />
             <!-- 모서리 -->
             <corners
                 android:bottomLeftRadius="10dp"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".UserActivity">
 
     <ProgressBar
@@ -69,7 +69,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/button_round_stroke15_gray_"
+                android:background="@drawable/view_round_white"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:gravity="left"
                     android:text="이름"
@@ -95,7 +95,7 @@
                     android:id="@+id/text_userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
                     android:fontFamily="@font/pretendard_regular"
                     android:gravity="left"

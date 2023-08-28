@@ -44,9 +44,6 @@ public class ChatbotCounActivity extends AppCompatActivity {
     // Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference docRef;
-
-    RecyclerView recycler_view;
-    TextView tv_welcome;
     EditText et_msg;
     ImageButton btn_send;
     TextView text_chatbot;
@@ -66,6 +63,7 @@ public class ChatbotCounActivity extends AppCompatActivity {
     //-------------------------------------------------------------------------------
     private String lastAssistantResponse = "너는 30대 여자이고, 치매 전문 상담사야."
             + "너와 대화하는 사람은 치매를 앓고있는 60대 할머니야. 할머니라고 불러."
+            + "노인 분들을 상대로 상담을 제공하는 서비스를 해줘."
             + "(예시 : 안녕하세요. 또 방문해 주셨네요. 오늘은 어떤 얘기를 나누고 싶으신가요?)"
             + "항상 100자 이내로 대답해줘";
     //-------------------------------------------------------------------------------

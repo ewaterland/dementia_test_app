@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 3;
     //private CircleIndicator3 mIndicator;
-    String id = "";
 
     // 뷰
     TextView text_UserName;
@@ -95,13 +94,6 @@ public class MainActivity extends AppCompatActivity {
         initializeViews();
 
         getToken();
-
-        // firebase 접근 권한 갖기
-        FirebaseApp.initializeApp(MainActivity.this);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        id = currentUser.getEmail();
 
         // DocumentSnapshot 객체 생성, 데이터 가져오기
         getData();
@@ -187,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         btn_resultCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resultHideCheck();
+                changeHideCheck(hide);
             }
         });
     }
@@ -200,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
                 /* 로그인 된 계정에 업로드 된다는 가정으로 코드를 작성함 */
                 // id: 해당 유저의 이메일(아이디)
-                FirebaseFirestore.getInstance().collection("Users").document(id).update("fcmToken",token);
+                docRef.update("fcmToken",token);
             }
         });
     }
@@ -235,9 +227,9 @@ public class MainActivity extends AppCompatActivity {
 
     ///////////////////////////////// 유저 데이터 불러오기
 
-    private void resultHideCheck() {
+    private void resultHideCheck(Boolean hide_) {
         try {
-            if (!hide) {
+            if (hide_) {
                 text_finalResult.setText("검사 결과 숨김");
                 text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.gray));
 
@@ -249,6 +241,30 @@ public class MainActivity extends AppCompatActivity {
 
                 btn_resultCheck.setText("숨김");
                 hide = false;
+            }
+        } catch (Exception e) {
+            text_finalResult.setText(result);
+            text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.black));
+            hide = false;
+        }
+    }
+
+    private void changeHideCheck(Boolean hide_) {
+        try {
+            if (!hide_) {
+                text_finalResult.setText("검사 결과 숨김");
+                text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.gray));
+
+                btn_resultCheck.setText("보기");
+                hide = true;
+                docRef.update("ResultHide", hide);
+            } else {
+                text_finalResult.setText(result);
+                text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.black));
+
+                btn_resultCheck.setText("숨김");
+                hide = false;
+                docRef.update("ResultHide", hide);
             }
         } catch (Exception e) {
             text_finalResult.setText(result);
@@ -294,9 +310,10 @@ public class MainActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 Log.w(TAG, "점수 기록 없음");
                             }
+
                             // 검사 결과 표시 여부
                             hide = documentSnapshot.getBoolean("ResultHide");
-                            resultHideCheck();
+                            resultHideCheck(hide);
                         } catch (Exception e) {
                             text_finalDay.setText("기록이 없어요.");
                             text_1.setVisibility(View.GONE);
@@ -386,7 +403,6 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(getApplication(), CenterActivity.class);
         startActivity(intent);
-        docRef.update("ResultHide", hide);
     }
 
     ///////////////////////////////// 커뮤니티
@@ -399,6 +415,5 @@ public class MainActivity extends AppCompatActivity {
         // 인텐트 생성 및 웹 브라우저로 이동
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(naverUrl));
         startActivity(intent);
-        docRef.update("ResultHide", hide);
     }
 }

@@ -60,6 +60,7 @@
 
         </ImageView>
 
+
         <!-- 메인 START -->
         <LinearLayout
             android:id="@+id/layout_email"

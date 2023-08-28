@@ -38,16 +38,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 상단 로고 START-->
-        <TextView
+        <ImageView
             android:id="@+id/textView_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/font_logo"
-            android:gravity="center"
-            android:text="아까치매"
-            android:textColor="@color/main"
-            android:textSize="38sp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/logo_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -114,11 +110,12 @@
         android:id="@+id/view_test"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top" >
+        app:layout_constraintTop_toBottomOf="@+id/view_top">
 
         <!-- 텍스트 뷰 질문 START -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,11 +132,11 @@
                 android:id="@+id/text_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="30sp"
-                android:fontFamily="@font/pretendard_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -235,8 +232,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="자주\n그렇다"
-                android:textSize="15sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -252,8 +249,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="가끔\n그렇다"
-                android:textSize="15sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -269,8 +266,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="아니다"
-                android:textSize="15sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
         <!-- 텍스트 뷰 버튼 설명 END -->
@@ -282,11 +279,11 @@
             android:layout_height="60dp"
             android:layout_gravity="bottom"
             android:background="@drawable/button_fill"
+            android:enabled="false"
             android:fontFamily="@font/pretendard_regular"
             android:text="다음"
             android:textColor="@drawable/text_enable"
             android:textSize="25sp"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

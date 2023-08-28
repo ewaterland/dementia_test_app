@@ -18,16 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 상단 로고 START-->
-        <TextView
+        <ImageView
             android:id="@+id/textView_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/font_logo"
-            android:gravity="center"
-            android:text="아까치매"
-            android:textColor="@color/main"
-            android:textSize="38sp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/logo_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

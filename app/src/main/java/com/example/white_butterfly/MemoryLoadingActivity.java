@@ -1,5 +1,7 @@
 package com.example.white_butterfly;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,15 +30,16 @@ public class MemoryLoadingActivity extends AppCompatActivity {
         View viewToRotate = findViewById(R.id.icon_loading);
         viewToRotate.startAnimation(rotateAnimation);
 
-        // Intent에서 데이터 가져오기
-        int score = getIntent().getIntExtra("score", 0);
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable()
         {
             @Override
             public void run()
             {
+                Log.w(TAG, "================== TEST FINISH ==================");
+
+                // Intent에서 데이터 가져오기
+                int score = getIntent().getIntExtra("score", 0);
                 Log.w(ConstraintLayoutStates.TAG, "Loding one: " + score);
 
                 Intent intent = new Intent(getApplicationContext(), MemoryResultActivity.class);

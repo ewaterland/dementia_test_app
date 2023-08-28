@@ -1,11 +1,8 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,24 +24,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 
 public class Memory02Activity extends AppCompatActivity implements TextToSpeech.OnInitListener {
-
-    private ProgressBar progressBar;
-    private int progress = 1; // 진행 상태 변수 추가
     private TextToSpeech textToSpeech;
 
-    private FirebaseDatabase memory_db, temporarily_db;
-    private TextView dataTextView;
+    private FirebaseDatabase memory_db;
+    private TextView dataTextView1, dataTextView2, dataTextView3, dataTextView4, dataTextView5;
     private Button nextButton;
-    private ImageButton speak;
-    private Button startButton;
-    int questionCounter = 1;
+    private ImageButton speak1, speak2, speak3, speak4, speak5;
+    int questionCounter = 0;
 
     TextView text_q_num; // 현재 질문 개수
-    String path_m = "";
     Random random;
     private List<Integer> numberList;  // 아직 안 한 질문 리스트
     private static final String TAG = "Memory02Activity";
@@ -56,11 +47,8 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
 
         Log.w(TAG, "--- Memory02Activity ---");
 
-        progressBar = findViewById(R.id.progress);
-
         FirebaseApp.initializeApp(Memory02Activity.this);
         memory_db = FirebaseDatabase.getInstance();
-        temporarily_db = FirebaseDatabase.getInstance();
 
         initializeViews();
 
@@ -72,27 +60,16 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
 
                 ++questionCounter;
 
-                if (questionCounter == 10) {
-                    nextButton.setEnabled(false);
-                    startButton.setEnabled(true);
-                }
-
-                if (questionCounter < 11) {
-                    progress++; // 진행 상태 증가
-                    progressBar.setProgress(progress); // 프로그래스바 갱신
-
+                if (questionCounter < 3) {
                     random_question();
-
-                    text_q_num.setText(String.valueOf(questionCounter));
-                    Log.d("questionCounter", "questionCounter : " + questionCounter);
                 }
             }
         });
 
-        speak.setOnClickListener(new View.OnClickListener() {
+        speak1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = dataTextView.getText().toString();
+                String text = dataTextView1.getText().toString();
                 if (textToSpeech.isSpeaking()) {
                     textToSpeech.stop();
                 }
@@ -102,25 +79,72 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
                 textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
             }
         });
-
-        startButton.setOnClickListener(new View.OnClickListener() {
+        speak2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // NextButton을 눌렀을 때 수행할 작업
-                Intent intent = new Intent(Memory02Activity.this, Memory03Activity.class);
-                startActivity(intent);
+                String text = dataTextView2.getText().toString();
+                if (textToSpeech.isSpeaking()) {
+                    textToSpeech.stop();
+                }
+                // 읽을 텍스트를 설정하고 음성 출력 시작
+                HashMap<String, String> params = new HashMap<>();
+                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
             }
         });
-
-        // 초기에는 NextButton은 비활성화 상태로 시작
-        startButton.setEnabled(false);
+        speak3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = dataTextView3.getText().toString();
+                if (textToSpeech.isSpeaking()) {
+                    textToSpeech.stop();
+                }
+                // 읽을 텍스트를 설정하고 음성 출력 시작
+                HashMap<String, String> params = new HashMap<>();
+                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+            }
+        });
+        speak4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = dataTextView4.getText().toString();
+                if (textToSpeech.isSpeaking()) {
+                    textToSpeech.stop();
+                }
+                // 읽을 텍스트를 설정하고 음성 출력 시작
+                HashMap<String, String> params = new HashMap<>();
+                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+            }
+        });
+        speak5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = dataTextView5.getText().toString();
+                if (textToSpeech.isSpeaking()) {
+                    textToSpeech.stop();
+                }
+                // 읽을 텍스트를 설정하고 음성 출력 시작
+                HashMap<String, String> params = new HashMap<>();
+                params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+                textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+            }
+        });
     }
     private void initializeViews() {
         text_q_num = findViewById(R.id.text_q_num);
-        dataTextView = findViewById(R.id.dataTextView);
+        dataTextView1 = findViewById(R.id.dataTextView1);
+        dataTextView2 = findViewById(R.id.dataTextView2);
+        dataTextView3 = findViewById(R.id.dataTextView3);
+        dataTextView4 = findViewById(R.id.dataTextView4);
+        dataTextView5 = findViewById(R.id.dataTextView5);
         nextButton = findViewById(R.id.nextButton);
-        startButton = findViewById(R.id.startButton);
-        speak = findViewById(R.id.speak);
+        speak1 = findViewById(R.id.speak1);
+        speak2 = findViewById(R.id.speak2);
+        speak3 = findViewById(R.id.speak3);
+        speak4 = findViewById(R.id.speak4);
+        speak5 = findViewById(R.id.speak5);
 
         // TextToSpeech 초기화
         textToSpeech = new TextToSpeech(this, this);
@@ -131,33 +155,37 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
         // 랜덤 인덱스
         random = new Random();
     }
-
     private void random_question() {
-        // 랜덤한 인덱스 생성
-        int randomIndex = random.nextInt(numberList.size());
-        int randomValue = numberList.get(randomIndex);
-        numberList.remove(Integer.valueOf(randomValue));
+        if (numberList.size() < 5) {
+            return;
+        }
 
-        Log.d(TAG, "randomValue : " + randomValue);
+        List<Integer> randomIndexes = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            int randomIndex = random.nextInt(numberList.size());
+            randomIndexes.add(numberList.get(randomIndex));
+            numberList.remove(randomIndex);
+        }
 
-        memory(randomValue);
+        // memory 함수 호출하여 세 개의 랜덤 인덱스에 대해 데이터 가져오기
+        memory(randomIndexes.get(0), randomIndexes.get(1), randomIndexes.get(2), randomIndexes.get(3), randomIndexes.get(4));
     }
 
-    private void memory(int randomNumber) {
-        path_m = "M" + String.format("%02d", randomNumber);
-        String path_t = "T" + String.format("%02d", questionCounter);
-        Log.d("path_m", "path_m : " + path_m);
+    private void memory(int randomNumber1, int randomNumber2, int randomNumber3, int randomNumber4, int randomNumber5) {
+        String path_m1 = "M" + String.format("%02d", randomNumber1);
+        String path_m2 = "M" + String.format("%02d", randomNumber2);
+        String path_m3 = "M" + String.format("%02d", randomNumber3);
+        String path_m4 = "M" + String.format("%02d", randomNumber4);
+        String path_m5 = "M" + String.format("%02d", randomNumber5);
 
         // 질문 가져오기
-        memory_db.getReference(path_m).addValueEventListener(new ValueEventListener() {
+        memory_db.getReference(path_m1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                dataTextView.setText(value);
 
-                temporarily_db.getReference(path_t).setValue(value);
-
-                Log.w(TAG, "numberList: " + numberList);
+                // 가져온 값들을 각각의 dataTextView에 설정
+                dataTextView1.setText(value);
             }
 
             @Override
@@ -165,12 +193,86 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
                 // Handle error
             }
         });
+
+        // 질문 가져오기
+        memory_db.getReference(path_m2).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+
+                // 가져온 값들을 각각의 dataTextView에 설정
+                dataTextView2.setText(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+
+        // 질문 가져오기
+        memory_db.getReference(path_m3).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+
+                // 가져온 값들을 각각의 dataTextView에 설정
+                dataTextView3.setText(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+
+        // 질문 가져오기
+        memory_db.getReference(path_m4).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+
+                // 가져온 값들을 각각의 dataTextView에 설정
+                dataTextView4.setText(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+
+        // 질문 가져오기
+        memory_db.getReference(path_m5).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+
+                // 가져온 값들을 각각의 dataTextView에 설정
+                dataTextView5.setText(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+        if (questionCounter == 1) {
+            nextButton.setBackgroundResource(R.drawable.btn_meory_startgame);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Memory02Activity.this, Memory03Activity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-            int langResult = textToSpeech.setLanguage(Locale.KOREA);
+            int langResult = textToSpeech.setLanguage(Locale.US);
             if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "Language is not supported or missing data");
             } else {

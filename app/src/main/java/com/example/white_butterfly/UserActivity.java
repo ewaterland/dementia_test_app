@@ -221,9 +221,9 @@ public class UserActivity extends AppCompatActivity {
     public void Save(View target)
     {
         // 입력한 정보 받기
-        address = ((EditText) findViewById(R.id.editText_address)).getText().toString();
-        my = ((EditText) findViewById(R.id.editText_my)).getText().toString();
-        guardian = ((EditText) findViewById(R.id.editText_guardian)).getText().toString();
+        //address = ((EditText) findViewById(R.id.editText_address)).getText().toString();
+        //my = ((EditText) findViewById(R.id.editText_my)).getText().toString();
+        //guardian = ((EditText) findViewById(R.id.editText_guardian)).getText().toString();
         //imageView = ((ImageView) findViewById(R.id.profileImageView));
 
         // 입력한 정보 업데이트

@@ -38,16 +38,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- 상단 로고 START-->
-        <TextView
+        <ImageView
             android:id="@+id/textView_logo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/pretendard_extrabold"
-            android:gravity="center"
-            android:text="아까치매"
-            android:textColor="@color/main"
-            android:textSize="38sp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/logo_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -135,11 +131,12 @@
                 android:id="@+id/text_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="30sp"
-                android:fontFamily="@font/pretendard_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -165,8 +162,8 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:layout_marginBottom="200dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -176,15 +173,15 @@
 
             <ImageView
                 android:id="@+id/btn_reply_yes"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 android:background="@drawable/answer_circle"
                 android:enabled="true"
                 android:scaleType="fitCenter" />
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.1">
 
@@ -192,8 +189,8 @@
 
             <ImageView
                 android:id="@+id/btn_reply_no"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 android:background="@drawable/answer_x"
                 android:enabled="true"
@@ -207,9 +204,9 @@
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="50dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -218,16 +215,16 @@
 
             <TextView
                 android:id="@+id/text_reply_yes"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="자주\n그렇다"
-                android:textSize="15sp"
-                android:textColor="@color/black" />
+                android:text="예"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.1">
 
@@ -235,13 +232,13 @@
 
             <TextView
                 android:id="@+id/text_reply_no"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="아니다"
-                android:textSize="15sp"
-                android:textColor="@color/black" />
+                android:text="아니오"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
         <!-- 텍스트 뷰 버튼 설명 END -->
