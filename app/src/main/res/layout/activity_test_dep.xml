@@ -7,6 +7,15 @@
     android:layout_gravity="center"
     android:foregroundGravity="center">
 
+    <!-- fragment -->
+    <FrameLayout
+        android:id="@+id/view_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_top">
+    </FrameLayout>
+
+    <!-- 질문 불러올 때 로딩 표시 START -->
     <ProgressBar
         android:id="@+id/loadBar"
         android:layout_width="wrap_content"
@@ -17,43 +26,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- 질문 불러올 때 로딩 표시 END -->
 
-    <!-- fragment -->
-    <FrameLayout
-        android:id="@+id/view_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/view_top">
-    </FrameLayout>
-
-    <!-- 상단 -->
+    <!-- 상단 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_top"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- 상단 진행바 -->
+        <!-- 상단 로고 START-->
+        <TextView
+            android:id="@+id/textView_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_extrabold"
+            android:gravity="center"
+            android:text="아까치매"
+            android:textColor="@color/main"
+            android:textSize="38sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- 상단 로고 END-->
+
+        <!-- 상단 진행바 START-->
         <ProgressBar
             android:id="@+id/progress"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:max="9"
-            android:progress="0"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
+            android:max="25"
+            android:progress="16"
             android:progressDrawable="@drawable/progressbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_logo" />
+        <!-- 상단 진행바 END-->
 
-        <!-- 질문 수 표시 -->
+        <!-- 질문 수 표시 START -->
         <LinearLayout
             android:id="@+id/view_q"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,48 +83,33 @@
                 android:id="@+id/text_q_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:text="1"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="16"
                 android:textColor="@color/main"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/pretendard_bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </TextView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_q_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text=" / 10"
+                android:fontFamily="@font/pretendard_bold"
+                android:text=" / 25"
                 android:textColor="@color/black"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/pretendard_bold"
                 app:layout_constraintStart_toEndOf="@+id/text_q_num"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </TextView>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/image_speaker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/speaker"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_q" />
+        <!-- 질문 수 표시 END -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 상단 END -->
 
-    <!-- 테스트 페이지 -->
+    <!-- 테스트 페이지 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_test"
         android:layout_width="match_parent"
@@ -115,44 +120,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_top">
 
-        <ScrollView
-            android:id="@+id/view_main"
+        <!-- 텍스트 뷰 질문 START -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- 질문 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+            <TextView
+                android:id="@+id/text_question"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:fontFamily="@font/pretendard_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/text_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="..."
-                    android:textColor="@color/black"
-                    android:textSize="38sp"
-                    android:fontFamily="@font/pretendard_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/text_ex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="질문을 가져오고 있어요!\n조금만 기다려 주세요 :)"
+                android:textColor="@color/more_gray"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_question" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 텍스트 뷰 질문 END -->
 
-        </ScrollView>
-
-        <!-- 답변 버튼 -->
+        <!-- 답변 버튼 START -->
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -192,7 +200,53 @@
                 android:scaleType="fitCenter" />
 
         </LinearLayout>
+        <!-- 답변 버튼 END -->
 
+        <!-- 텍스트 뷰 버튼 설명 START -->
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <TextView
+                android:id="@+id/text_reply_yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="자주\n그렇다"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.1">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/text_reply_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="아니다"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <!-- 텍스트 뷰 버튼 설명 END -->
+
+        <!-- 다음 버튼 START -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
@@ -207,6 +261,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        <!-- 다음 버튼 END -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

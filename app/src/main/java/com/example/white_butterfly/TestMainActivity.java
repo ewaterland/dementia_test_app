@@ -35,11 +35,11 @@ public class TestMainActivity extends AppCompatActivity {
 
         getData();
 
-        Button btn_testStart = (Button) findViewById(R.id.btn_testStart);
-        btn_testStart.setOnClickListener(new View.OnClickListener() {
+        Button btn_next = (Button) findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), TestCogActivity.class);
+                Intent intent = new Intent(getApplication(), TestExampleActivity.class);
                 startActivity(intent);
             }
         });

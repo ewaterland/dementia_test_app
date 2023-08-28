@@ -28,7 +28,7 @@ public class RegisterNameFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference docRef;
 
-    // 페이지 이전, 다음 버튼
+    // 페이지 다음 버튼 (이름은 정보 입력 페이지의 처음이라 이전 버튼이 없음)
     Button btn_next;
 
     // 입력 있으면 1, 입력 없으면 0

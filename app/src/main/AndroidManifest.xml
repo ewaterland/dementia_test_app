@@ -104,6 +104,9 @@
             android:name=".TestMainActivity"
             android:label="TestMainActivity" />
         <activity
+            android:name=".TestExampleActivity"
+            android:label="TestExampleActivity" />
+        <activity
             android:name=".TestCogActivity"
             android:label="TestCogActivity" />
         <activity

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,7 +111,7 @@ public class RegisterAddressFragment extends Fragment {
         //editText_address.setText(savedAddress);
 
         // 이전 버튼 누른 경우
-        TextView text_before = rootView.findViewById(R.id.image_before);
+        ImageView text_before = rootView.findViewById(R.id.image_before);
         text_before.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +181,8 @@ public class RegisterAddressFragment extends Fragment {
 
     private void navigateToNextFragment() {
         Log.w(TAG, "navigateToNextFragment");
+
+        Toast.makeText(getContext(), "정보 입력이 끝났습니다.", Toast.LENGTH_SHORT).show();
 
         rootView.findViewById(R.id.page_register).setVisibility(View.GONE);
 

@@ -8,40 +8,33 @@
     tools:context=".TestMainActivity"
     >
 
-    <!-- 상단바 -->
+    <!-- 상단 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_top"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="130dp"
-            android:layout_height="80dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="130dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/logo"
+        <!-- 상단 로고 START-->
+        <TextView
+            android:id="@+id/textView_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/font_logo"
+            android:gravity="center"
+            android:text="아까치매"
+            android:textColor="@color/main"
+            android:textSize="38sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-        </ImageView>
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- 상단 로고 END-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 상단 END -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -52,7 +45,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/view_round_white"
-        app:layout_constraintBottom_toTopOf="@+id/btn_testStart"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_top">
@@ -332,7 +325,7 @@
 
     <!-- 다음 버튼 -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_testStart"
+        android:id="@+id/btn_next"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:width="1dp"

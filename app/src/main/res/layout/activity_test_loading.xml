@@ -6,23 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".TestLoadingActivity">
 
+    <!-- 상단 START -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_top"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 상단 로고 START-->
+        <TextView
+            android:id="@+id/textView_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/font_logo"
+            android:gravity="center"
+            android:text="아까치매"
+            android:textColor="@color/main"
+            android:textSize="38sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- 상단 로고 END-->
+
+        <!-- 상단 진행바 START-->
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
+            android:max="1"
+            android:progress="1"
+            android:progressDrawable="@drawable/progressbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_logo" />
+        <!-- 상단 진행바 END-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 상단 END -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/view_top">
 
         <ImageView
-            android:id="@+id/image_loading"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:id="@+id/icon_loading"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_margin="30dp"
-            android:background="@drawable/image_loading">
+            android:background="@drawable/icon_loading">
 
         </ImageView>
 
@@ -30,33 +72,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_extrabold"
-            android:text="결과를 분석 중입니다."
+            android:text="결과 분석 중"
             android:textColor="@color/main"
-            android:textSize="37sp">
+            android:textSize="30sp">
 
         </TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="조금만 기다려주세요."
-            android:textColor="@color/main"
-            android:textSize="35sp">
+            android:fontFamily="@font/pretendard_medium"
+            android:text="잠시만 기다려주세요."
+            android:textColor="@color/black"
+            android:textSize="28sp">
 
         </TextView>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:background="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

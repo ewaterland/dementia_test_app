@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class RegisterPhoneFragment extends Fragment {
     DocumentReference docRef;
 
     // 페이지 이전, 다음 버튼
-    TextView text_before;
+    ImageView text_before;
     Button btn_next;
 
     // 입력 있으면 1, 입력 없으면 0

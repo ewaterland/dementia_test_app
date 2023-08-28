@@ -13,6 +13,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -48,13 +49,13 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     private ProgressBar loadBar;
 
     // 페이지 추적
-    private int currentPage = 1;  // 현재 페이지 (1~25)
-    private int currentProgress = 0; // (0~24)
+    private int currentPage = 1;  // 현재 페이지 (1~15)
+    private int currentProgress = 1; // (1~15)
 
     // TTS
     private TextToSpeech textToSpeech;
 
-    // 변수
+    // 뷰
     TextView text_q_num; // 현재 질문 개수
     TextView text_question;  // 질문 텍스트 뷰
     TextView text_ex;
@@ -62,13 +63,15 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     ImageView btn_reply_1;
     ImageView btn_reply_2;
     ImageView btn_reply_3;
+
+    // 버튼 선택 확인용 변수
     Boolean reply_1_Selected = false;
     Boolean reply_2_Selected = false;
     Boolean reply_3_Selected = false;
-    ImageView image_speak;
     Boolean selected = false;
+
+    // 인지 능력 점수
     int score_cog = 0;
-    Vibrator vibrator;
 
     // TAG
     private static final String TAG = "TestCogActivity";
@@ -113,7 +116,6 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
                 reply_1_Selected = true;
                 btn_reply_1.setSelected(true);
 
-                vibrateDevice();
                 button_state_check();
             }
         });
@@ -129,7 +131,6 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
                 reply_2_Selected = true;
                 btn_reply_2.setSelected(true);
 
-                vibrateDevice();
                 button_state_check();
             }
         });
@@ -145,16 +146,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
                 reply_3_Selected = true;
                 btn_reply_3.setSelected(true);
 
-                vibrateDevice();
                 button_state_check();
-            }
-        });
-
-        image_speak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = text_question.getText().toString();
-                TTS(text);
             }
         });
 
@@ -167,32 +159,9 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         });
 
         test();
-
-        progressBar = findViewById(R.id.progress);
-        progressModel = new ViewModelProvider(TestCogActivity.this).get(ProgressModel.class);
     }
 
-    private void button_state_check() {
-        if (!reply_1_Selected && !reply_2_Selected && !reply_3_Selected) { selected = false; }
-        else { selected = true; }
-
-        if (selected) { // 버튼이 선택되어 있다면
-            btn_next.setEnabled(true);
-        } else { // 버튼이 선택되어 있지 않다면
-            btn_next.setEnabled(false);
-        }
-    }
-
-    private void TTS(String text) {
-        if (textToSpeech.isSpeaking()) {
-            textToSpeech.stop();
-        }
-
-        // 읽을 텍스트를 설정하고 음성 출력 시작
-        HashMap<String, String> params = new HashMap<>();
-        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
-        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
-    }
+    ///////////////////////////////// 뷰 관련
 
     private void initializeViews() {
         text_q_num = findViewById(R.id.text_q_num);
@@ -207,20 +176,148 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
 
         textToSpeech = new TextToSpeech(this, this);
 
-        image_speak = findViewById(R.id.image_speaker);
+        progressBar = findViewById(R.id.progress);
+        progressModel = new ViewModelProvider(TestCogActivity.this).get(ProgressModel.class);
 
         loadBar = findViewById(R.id.loadBar);
-
-        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
-    private void vibrateDevice() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            VibrationEffect effect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE);
-            vibrator.vibrate(effect);
-        } else {
-            vibrator.vibrate(500);
+    ///////////////////////////////// TTS 관련
+
+    private void TTS(String text) {
+        if (textToSpeech.isSpeaking()) {
+            textToSpeech.stop();
         }
+
+        // 읽을 텍스트를 설정하고 음성 출력 시작
+        HashMap<String, String> params = new HashMap<>();
+        params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "utteranceId");
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, params);
+    }
+
+    // 스피커
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int langResult = textToSpeech.setLanguage(Locale.KOREA);
+            if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Language is not supported or missing data");
+            } else {
+                // 초기화 성공, 필요한 추가 설정 가능
+            }
+        } else {
+            Log.e("TTS", "Initialization failed");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    ///////////////////////////////// 버튼 관련
+
+    // 버튼 활성화
+    private void button_enable()
+    {
+        btn_reply_1.setEnabled(true);
+        btn_reply_2.setEnabled(true);
+        btn_reply_3.setEnabled(true);
+    }
+
+    // 모든 버튼 unselected
+    private void button_unselected()
+    {
+        btn_reply_1.setSelected(false);
+        btn_reply_2.setSelected(false);
+        btn_reply_3.setSelected(false);
+        btn_next.setEnabled(false);
+    }
+
+    private void button_state_check() {
+        if (!reply_1_Selected && !reply_2_Selected && !reply_3_Selected) { selected = false; }
+        else { selected = true; }
+
+        if (selected) { // 버튼이 선택되어 있다면
+            btn_next.setEnabled(true);
+        } else { // 버튼이 선택되어 있지 않다면
+            btn_next.setEnabled(false);
+        }
+    }
+
+    ///////////////////////////////// 점수 관련
+
+    private void score_check() {
+        if (reply_1_Selected) {
+            score_cog += 2;
+        }
+        else if (reply_2_Selected) {
+            score_cog += 1;
+        }
+        /* // 변함이 없기 때문에 주석 처리
+        else if (reply_3_Selected) {
+            score_cog += 0;
+        }
+         */
+    }
+
+    ///////////////////////////////// 다음 페이지로 넘어가는 부분
+
+    // 다음 질문 페이지를 표시하는 메서드
+    public void loadNextQuestion() {
+        Log.w(TAG, "loadNextQuestion");
+
+        currentPage++;
+        currentProgress++;
+
+        if (currentPage <= 15)
+        {
+            score_check();
+            test();
+            button_unselected();
+
+            text_q_num.setText(String.valueOf(currentPage));
+
+            progressModel.getProgressLiveData().observe(TestCogActivity.this, progress -> {
+                progressBar.setProgress(currentProgress);
+                Log.w(TAG, "프로그레스: " + currentProgress);
+            });
+
+            updateDataAndProgress();
+        }
+        else
+        {
+            Log.w(TAG, "score_cog: " + score_cog);
+
+            docRef.update("Score_cog", score_cog);
+
+            // 우울증 검사 페이지 출력
+            Intent intent_dep = new Intent(getApplication(), TestDepMainActivity.class);
+            intent_dep.putExtra("score_cog", score_cog);
+            startActivity(intent_dep);
+            finish();
+        }
+    }
+
+    private void updateDataAndProgress() {
+        progressModel.updateProgress(currentPage);
+    }
+
+    ///////////////////////////////// 질문 불러오는 부분
+
+    public void test() {
+        path = "C" + String.format("%02d", currentPage);
+        Log.w(TAG, "# test " + currentPage + " / 현재 질문 " + path);
+
+        // 데이터 로드할 때 로딩 중 표시, 완료 후 숨김
+        loadBar.setVisibility(View.VISIBLE);
+
+        // 질문 표시
+        question();
     }
 
     private class getDataTask extends AsyncTask<Void, Void, Void> {
@@ -290,109 +387,5 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     private void question() {
         // AsyncTask 실행
         new getDataTask().execute();
-    }
-
-    public void test() {
-        path = "C" + String.format("%02d", currentPage);
-        Log.w(TAG, "# test " + currentPage + " / 현재 질문 " + path);
-
-        // 데이터 로드할 때 로딩 중 표시, 완료 후 숨김
-        loadBar.setVisibility(View.VISIBLE);
-
-        // 질문 표시
-        question();
-    }
-
-    // 버튼 활성화
-    private void button_enable()
-    {
-        btn_reply_1.setEnabled(true);
-        btn_reply_2.setEnabled(true);
-        btn_reply_3.setEnabled(true);
-    }
-
-    // 버튼 비활성화
-    private void button_disable()
-    {
-        btn_reply_1.setEnabled(false);
-        btn_reply_2.setEnabled(false);
-        btn_reply_3.setEnabled(false);
-    }
-
-    // 스피커
-    @Override
-    public void onInit(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            int langResult = textToSpeech.setLanguage(Locale.KOREA);
-            if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS", "Language is not supported or missing data");
-            } else {
-                // 초기화 성공, 필요한 추가 설정 가능
-            }
-        } else {
-            Log.e("TTS", "Initialization failed");
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (textToSpeech != null) {
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-        }
-        super.onDestroy();
-    }
-
-    private void score_check() {
-        if (reply_1_Selected) {
-            score_cog += 2;
-        }
-        else if (reply_2_Selected) {
-            score_cog += 1;
-        }
-        /* // 변함이 없기 때문에 주석 처리
-        else if (reply_3_Selected) {
-            score_cog += 0;
-        }
-         */
-    }
-
-    // 다음 질문 페이지를 표시하는 메서드
-    public void loadNextQuestion() {
-        Log.w(TAG, "loadNextQuestion");
-
-        currentPage++;
-        currentProgress++;
-
-        if (currentPage <= 15)
-        {
-            score_check();
-            test();
-
-            text_q_num.setText(String.valueOf(currentPage));
-
-            progressModel.getProgressLiveData().observe(TestCogActivity.this, progress -> {
-                progressBar.setProgress(currentProgress);
-                Log.w(TAG, "프로그레스: " + currentProgress);
-            });
-
-            updateDataAndProgress();
-        }
-        else
-        {
-            Log.w(TAG, "score_cog: " + score_cog);
-
-            docRef.update("Score_cog", score_cog);
-
-            // 우울증 검사 페이지 출력
-            Intent intent_dep = new Intent(getApplication(), TestDepMainActivity.class);
-            intent_dep.putExtra("score_cog", score_cog);
-            startActivity(intent_dep);
-            finish();
-        }
-    }
-
-    private void updateDataAndProgress() {
-        progressModel.updateProgress(currentPage);
     }
 }

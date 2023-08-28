@@ -230,7 +230,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
 
-                android:background="@drawable/button_round_stroke_main"
+                android:background="@drawable/button_test_before"
 
                 android:fontFamily="@font/pretendard_medium"
                 android:onClick="Register"

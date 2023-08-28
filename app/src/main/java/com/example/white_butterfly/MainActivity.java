@@ -1,27 +1,47 @@
 package com.example.white_butterfly;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import me.relex.circleindicator.CircleIndicator3;
 
 public class MainActivity extends AppCompatActivity {
+    // Firebase
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    DocumentReference docRef;
 
     // 뒤로가기 버튼
     private static final int BACK_PRESS_INTERVAL = 2000; // 뒤로가기 버튼을 두 번 누르는 간격 (밀리초)
@@ -31,8 +51,13 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 3;
-    private CircleIndicator3 mIndicator;
+    //private CircleIndicator3 mIndicator;
     String id = "";
+
+    // 뷰
+    TextView text_UserName;
+    TextView text_FinalDay;
+    private ProgressBar loadBar;
 
     // 태그
     private static final String TAG = "MainActivity";
@@ -44,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- MainActivity ---");
 
+        initializeViews();
+
         getToken();
 
         // firebase 접근 권한 갖기
@@ -53,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         id = currentUser.getEmail();
 
+        // DocumentSnapshot 객체 생성, 데이터 가져오기
+        getData();
+
         //ViewPager2
         mPager = findViewById(R.id.viewpager);
 
@@ -60,10 +90,12 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new MyAdapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
 
+        /*
         //Indicator
         mIndicator = findViewById(R.id.indicator);
         mIndicator.setViewPager(mPager);
         mIndicator.createIndicators(num_page,0);
+         */
 
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
@@ -79,14 +111,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            /*
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 mIndicator.animatePageSelected(position%num_page);
             }
+
+             */
         });
 
-        Button btn_dementiaTest = (Button) findViewById(R.id.btn_dementiaTest);
+        ConstraintLayout btn_dementiaTest = findViewById(R.id.btn_dementia);
         btn_dementiaTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_rememberTest = (Button) findViewById(R.id.btn_rememberTest);
-        btn_rememberTest.setOnClickListener(new View.OnClickListener() {
+        ConstraintLayout btn_memoryTest = findViewById(R.id.btn_memory);
+        btn_memoryTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), Memory01Activity.class);
@@ -104,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btn_chatbot = (Button) findViewById(R.id.btn_chatbot);
+        ConstraintLayout btn_chatbot = findViewById(R.id.btn_chatbot);
         btn_chatbot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView image_profile = (ImageView) findViewById(R.id.image_profile);
-        image_profile.setOnClickListener(new View.OnClickListener() {
+        TextView text_myPage = findViewById(R.id.text_myPage);
+        text_myPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), UserActivity.class);
@@ -134,6 +169,78 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseFirestore.getInstance().collection("Users").document(id).update("fcmToken",token);
             }
         });
+    }
+
+    ///////////////////////////////// 뷰 관련
+
+    private void initializeViews() {
+        text_UserName = findViewById(R.id.text_UserName);
+        text_FinalDay = findViewById(R.id.text_finalDay);
+        loadBar = findViewById(R.id.loadBar);
+
+        // 현재 로그인 된 유저 정보 읽기
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String id = currentUser.getEmail();
+        docRef = db.collection("Users").document(id);
+    }
+
+    private class getDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            // 로딩 화면 표시
+            loadBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            // 백그라운드 작업 수행
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        text_UserName.setText(documentSnapshot.getString("Name"));
+                        int year = Integer.parseInt(documentSnapshot.getLong("year").toString());
+                        int month = Integer.parseInt(documentSnapshot.getLong("month").toString());
+                        int day = Integer.parseInt(documentSnapshot.getLong("day").toString());
+
+                        setData(year, month, day);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error getting document", e);
+                }
+            });
+
+            // 작업 완료 후 로딩 화면 숨김
+            loadBar.setVisibility(View.GONE);
+        }
+    }
+
+    private void getData() {
+        // AsyncTask 실행
+        new MainActivity.getDataTask().execute();
+    }
+
+    private void setData(int year, int month, int day) {
+        try {
+            // 테스트 디데이 계산
+            LocalDate today = LocalDate.now();
+            LocalDate Testday;
+            Testday = LocalDate.of(year, month, day);
+
+            long daysBetween = ChronoUnit.DAYS.between(Testday, today);
+            text_FinalDay.setText(String.valueOf(daysBetween));
+        } catch (Exception e) {
+            Log.w(TAG, "Error: " + e);
+        }
     }
 
     @Override

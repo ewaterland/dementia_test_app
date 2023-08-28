@@ -25,7 +25,7 @@ public class MemoryLoadingActivity extends AppCompatActivity {
         Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate);
 
         // 뷰에 애니메이션 적용
-        View viewToRotate = findViewById(R.id.image_loading);
+        View viewToRotate = findViewById(R.id.icon_loading);
         viewToRotate.startAnimation(rotateAnimation);
 
         // Intent에서 데이터 가져오기

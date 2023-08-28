@@ -23,8 +23,11 @@ public class RegisterFinishActivity extends AppCompatActivity {
         btn_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), MainActivity.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.page_register, new RegisterNameFragment())  // page_register 는 해당 액티비티의 xml에 있어야 함
+                        .commit();
+
+                findViewById(R.id.page_register_finish).setVisibility(View.GONE);
             }
         });
     }

@@ -43,7 +43,7 @@
                 android:id="@+id/view_top"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:background="@color/user"
+                android:background="@color/light_blue"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,8 +66,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="치매 선별 검사를 "
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
+                        android:fontFamily="@font/pretendard_medium"
                         app:layout_constraintEnd_toEndOf="@+id/text_date"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -78,8 +79,9 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="0"
-                        android:textColor="@color/white"
+                        android:textColor="@color/main"
                         android:textSize="25dp"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:textStyle="bold" />
 
                     <TextView
@@ -88,8 +90,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="일 전에 시행했어요."
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
+                        android:fontFamily="@font/pretendard_medium"
                         app:layout_constraintEnd_toEndOf="@+id/text_date"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -121,10 +124,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text=""
-                        android:textColor="@color/white"
+                        android:text="이름"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/pretendard_semibold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
@@ -135,9 +139,10 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="안녕하세요."
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="30sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/pretendard_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_Name" />
@@ -361,30 +366,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/text_school"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="대학교를 졸업했어요"
-                android:textColor="#000000"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_06"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <TextView
                 android:id="@+id/text_score_cog"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
@@ -400,7 +381,7 @@
 
             <!-- 선 -->
             <LinearLayout
-                android:id="@+id/line_07"
+                android:id="@+id/line_06"
                 android:layout_width="400dp"
                 android:layout_height="2dp"
                 android:gravity="center"
@@ -435,7 +416,7 @@
                 android:layout_marginTop="30dp"
                 android:onClick="Logout"
                 android:text="로그아웃"
-                android:textColor="#81CDCB"
+                android:textColor="@color/black"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/pretendard_regular"/>

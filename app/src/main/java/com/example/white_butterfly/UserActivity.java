@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,8 +44,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class UserActivity extends AppCompatActivity {
+    // Firebase
+    private StorageReference storageReference;
+    private static final int PICK_IMAGE_REQUEST = 1;
 
-    // 정보 입력 받을 공간
+    // 뷰
     TextView Text_Name;
     TextView Text_Birthday;
     EditText EditText_Address;
@@ -51,7 +56,7 @@ public class UserActivity extends AppCompatActivity {
     EditText EditText_Guardian;
     TextView Text_Date;
     TextView Text_Score;
-    TextView Text_School;
+    private ImageView imageView;
     private ProgressBar loadBar;
 
     // 입력 받은 정보를 저장할 공간
@@ -60,19 +65,15 @@ public class UserActivity extends AppCompatActivity {
     public String my;
     public String guardian;
 
-    private static final int PICK_IMAGE_REQUEST = 1;
-
-    private ImageView imageView;
-    private StorageReference storageReference;
+    // 변수
     Number school = 0;
     int year = 0;
     int month = 0;
     int day = 0;
-    String date = "";
 
+    // 테스트 디데이 계산
     LocalDate today;
     LocalDate Testday;
-
     private final int ONE_DAY = 24 * 60 * 60 * 1000;
 
     @Override
@@ -82,16 +83,7 @@ public class UserActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- UserActivity ---");
 
-        Text_Name = findViewById(R.id.text_Name);
-        Text_Birthday = findViewById(R.id.text_birthday);
-        EditText_Address = findViewById(R.id.editText_address);
-        EditText_My = findViewById(R.id.editText_my);
-        EditText_Guardian = findViewById(R.id.editText_guardian);
-        Text_Date = findViewById(R.id.text_date);
-        Text_Score = findViewById(R.id.text_score_cog);
-        Text_School = findViewById(R.id.text_school);
-        imageView = findViewById(R.id.profileImageView);
-        loadBar = findViewById(R.id.loadBar);
+        initializeViews();
 
         // firebase 접근 권한 갖기
         FirebaseApp.initializeApp(UserActivity.this);
@@ -114,6 +106,20 @@ public class UserActivity extends AppCompatActivity {
                 openGallery();
             }
         });
+    }
+
+    ///////////////////////////////// 뷰 관련
+
+    private void initializeViews() {
+        Text_Name = findViewById(R.id.text_Name);
+        Text_Birthday = findViewById(R.id.text_birthday);
+        EditText_Address = findViewById(R.id.editText_address);
+        EditText_My = findViewById(R.id.editText_my);
+        EditText_Guardian = findViewById(R.id.editText_guardian);
+        Text_Date = findViewById(R.id.text_date);
+        Text_Score = findViewById(R.id.text_score_cog);
+        imageView = findViewById(R.id.profileImageView);
+        loadBar = findViewById(R.id.loadBar);
     }
 
     private class getDataTask extends AsyncTask<Void, Void, Void> {
@@ -182,30 +188,6 @@ public class UserActivity extends AppCompatActivity {
             Text_Date.setText(String.valueOf(daysBetween));
         } catch (Exception e) {
             Log.w(TAG, "Error: " + e);
-        }
-
-        switch (Integer.parseInt(school.toString()))
-        {
-            case 0:
-                Text_School.setText("졸업한 학교가 없어요");
-                break;
-            case 1:
-                Text_School.setText("초등학교를 졸업했어요");
-                break;
-            case 2:
-                Text_School.setText("중학교를 졸업했어요");
-                break;
-            case 3:
-                Text_School.setText("고등학교를 졸업했어요");
-                break;
-            case 4:
-                Text_School.setText("대학교를 졸업했어요");
-                break;
-            case 5:
-                Text_School.setText("대학원을 졸업했어요");
-                break;
-            default:
-                break;
         }
     }
 

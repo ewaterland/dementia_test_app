@@ -13,16 +13,21 @@
     </FrameLayout>
 
     <!-- 로고 START -->
-    <ImageView
-        android:id="@+id/image_logo"
+    <TextView
+        android:id="@+id/text_logo"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="130dp"
+        android:text="아까치매"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@color/main"
+        android:fontFamily="@font/pretendard_extrabold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        />
 
     <TextView
         android:id="@+id/textView_subject1"
@@ -30,12 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="치매 예방을 위한 첫걸음"
-        android:textColor="@color/user"
+        android:textColor="@color/main"
         android:textSize="30sp"
         android:textStyle="bold"
         android:fontFamily="@font/pretendard_regular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+        app:layout_constraintTop_toBottomOf="@+id/text_logo" />
 
     <TextView
         android:id="@+id/textView_subject2"
@@ -43,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="당신의 내일을 응원합니다"
-        android:textColor="@color/user"
+        android:textColor="@color/main"
         android:textSize="25sp"
         android:fontFamily="@font/pretendard_regular"
         app:layout_constraintStart_toStartOf="parent"

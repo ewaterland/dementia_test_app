@@ -84,32 +84,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_top" />
 
-        <EditText
-            android:id="@+id/editText_Address"
+        <ImageView
+            android:id="@+id/imageView_address"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="50dp"
             android:background="@drawable/button_round_stroke15_gray_"
-            android:fontFamily="@font/pretendard_light"
-            android:gravity=""
-            android:hint="  주소 찾기"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_subject" />
 
+        <EditText
+            android:id="@+id/editText_Address"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/back"
+            android:fontFamily="@font/pretendard_light"
+            android:gravity="left|center_vertical"
+            android:hint="주소 찾기"
+            android:inputType="textPostalAddress"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView_address"
+            app:layout_constraintTop_toBottomOf="@+id/textView_subject" />
+
         <ImageView
+            android:id="@+id/icon_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:background="@drawable/icon_search"
-            app:layout_constraintBottom_toBottomOf="@+id/editText_Address"
-            app:layout_constraintEnd_toEndOf="@+id/editText_Address"
-            app:layout_constraintTop_toTopOf="@+id/editText_Address">
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_address"
+            app:layout_constraintEnd_toEndOf="@+id/imageView_address"
+            app:layout_constraintTop_toTopOf="@+id/imageView_address">
 
         </ImageView>
 
@@ -120,7 +130,7 @@
             android:layout_height="70dp"
             android:width="1dp"
             android:background="@drawable/button_fill"
-            android:text="다음"
+            android:text="완료"
             android:textColor="@drawable/text_enable"
             android:textSize="30sp"
             android:fontFamily="@font/pretendard_regular"
