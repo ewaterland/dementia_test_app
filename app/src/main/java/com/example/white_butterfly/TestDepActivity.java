@@ -47,7 +47,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
 
     // 페이지 추적
     private int currentPage = 16;  // 현재 페이지 (16~25)
-    private int currentProgress = 16; // (16~25)
+    private int currentProgress = 17; // (17~26) (16: 메인 페이지)
 
     // TTS
     private TextToSpeech textToSpeech;

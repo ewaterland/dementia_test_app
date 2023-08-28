@@ -47,34 +47,29 @@
         </GridLayout>
         <!-- 상단바 END -->
 
-        <TextView
+        <ImageView
             android:id="@+id/textView_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
-            android:layout_marginTop="70dp"
             android:layout_weight="10"
-            android:fontFamily="@font/pretendard_extrabold"
-            android:text="아까치매"
-            android:textColor="@color/main"
-            android:textSize="60sp"
+            android:background="@drawable/logo_mid"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/view_top"
             app:layout_constraintTop_toTopOf="parent">
 
-        </TextView>
+        </ImageView>
 
         <!-- 메인 START -->
         <LinearLayout
             android:id="@+id/layout_email"
             android:layout_width="320dp"
             android:layout_height="60dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="120dp"
             android:gravity="left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_top"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/view_top">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -89,8 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                >
+                android:layout_weight="1">
 
             </ImageView>
 
@@ -98,9 +92,9 @@
                 android:id="@+id/textView_subject1"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
                 android:layout_weight="10"
                 android:fontFamily="@font/pretendard_regular"
-                android:layout_gravity="center"
                 android:text="이메일을 입력해 주세요"
                 android:textColor="@color/more_gray"
                 android:textSize="20sp" />

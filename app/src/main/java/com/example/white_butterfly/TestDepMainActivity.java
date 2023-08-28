@@ -21,8 +21,8 @@ public class TestDepMainActivity extends AppCompatActivity {
 
         int score_cog = getIntent().getIntExtra("score_cog", 0);
 
-        Button btn_testStart = (Button) findViewById(R.id.btn_testStart);
-        btn_testStart.setOnClickListener(new View.OnClickListener() {
+        Button btn_next = (Button) findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent_dep = new Intent(getApplication(), TestDepActivity.class);

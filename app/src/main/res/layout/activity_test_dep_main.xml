@@ -4,154 +4,335 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".TestMainActivity"
     >
 
-    <!-- 상단바 -->
+    <!-- 상단 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view_top"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="90dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="130dp"
-            android:layout_height="80dp"
+        <!-- 상단 로고 START-->
+        <TextView
+            android:id="@+id/textView_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/font_logo"
+            android:gravity="center"
+            android:text="아까치매"
+            android:textColor="@color/main"
+            android:textSize="38sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- 상단 로고 END-->
 
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="130dp"
-            android:layout_height="60dp"
+        <!-- 상단 진행바 START-->
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/logo"
+            android:max="26"
+            android:progress="16"
+            android:progressDrawable="@drawable/progressbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/image_profile"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/logo_circle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-        </ImageView>
-
+            app:layout_constraintTop_toBottomOf="@+id/textView_logo" />
+        <!-- 상단 진행바 END-->
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 상단 END -->
 
+    <!-- 메인 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/test_main_box"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/view_round_white"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_top"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/view_top">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="이어서\n기분에 관한 문항입니다."
+            android:fontFamily="@font/pretendard_bold"
             android:gravity="center"
+            android:text="안내사항"
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:fontFamily="@font/pretendard_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/pretendard_medium"
-            android:gravity="center"
-            android:text="현재 느낌대로 답을 골라주시고\n검사 준비가 되셨다면"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
 
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:gravity="center"
+            android:text="이어서"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_subject">
+
+        </TextView>
+
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/layout_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView1">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="기분"
+                android:textColor="@color/main"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="에 관한 문항입니다."
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_1">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="현재 느낌"
+                android:textColor="@color/main"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="대로 답을 골라주세요."
+                android:textColor="@color/black"
+                android:textSize="23sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="검사의 "
+                android:textColor="@color/black"
+                android:textSize="23sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="응답"
+                android:textColor="@color/main"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="은 아래와 같은"
+                android:textColor="@color/black"
+                android:textSize="23sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+            app:layout_constraintTop_toBottomOf="@+id/layout4">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="시작하기"
+                android:text="버튼"
                 android:textColor="@color/main"
-                android:textSize="25sp"
-                android:textStyle="bold">
-
-            </TextView>
+                android:textSize="23sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_medium"
-                android:text="를 눌러주세요."
+                android:text="으로 구성되어 있습니다."
                 android:textColor="@color/black"
-                android:textSize="25sp">
-
-            </TextView>
+                android:textSize="23sp" />
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 답변 버튼 START -->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="60dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout5">
 
+            <ImageView
+                android:id="@+id/btn_reply_yes"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/answer_circle"
+                android:enabled="true"
+                android:scaleType="fitCenter" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.6" />
+
+            <ImageView
+                android:id="@+id/btn_reply_no"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/answer_x"
+                android:enabled="true"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+        <!-- 답변 버튼 END -->
+
+        <!-- 텍스트 뷰 버튼 설명 START -->
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <TextView
+                android:id="@+id/text_reply_yes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="예"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.6" />
+
+            <TextView
+                android:id="@+id/text_reply_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:text="아니오"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+        <!-- 텍스트 뷰 버튼 설명 END -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 메인 END -->
+
+    <!-- 다음 버튼 -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_testStart"
-        android:layout_width="match_parent"
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/button_round_main"
-        android:text="검사 시작하기"
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:width="1dp"
+        android:background="@drawable/button_fill"
+        android:text="다음"
+        android:textColor="@drawable/text_enable"
+        android:textSize="30sp"
         android:fontFamily="@font/pretendard_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

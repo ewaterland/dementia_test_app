@@ -1,6 +1,7 @@
 package com.example.white_butterfly;
 
 import static android.content.ContentValues.TAG;
+import static android.view.View.GONE;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -32,8 +34,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -56,8 +62,25 @@ public class MainActivity extends AppCompatActivity {
 
     // 뷰
     TextView text_UserName;
-    TextView text_FinalDay;
+    TextView text_finalDay;
+    TextView text_1;
+    TextView text_chatbot_msg;
+    TextView text_finalResult;
+    Button btn_resultCheck;
     private ProgressBar loadBar;
+
+    // 변수
+    String result;  // 검사 결과
+    Boolean hide = false;  // 검사 결과 숨길지 말지 (기본값: 결과 보임)
+
+    // 문자열
+    String chatbot_msg_breakfast;
+    String chatbot_msg_morning;
+    String chatbot_msg_lunch;
+    String chatbot_msg_afternoon;
+    String chatbot_msg_dinner;
+    String chatbot_msg_night;
+    String chatbot_msg_else;
 
     // 태그
     private static final String TAG = "MainActivity";
@@ -127,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), TestMainActivity.class);
                 startActivity(intent);
+                docRef.update("ResultHide", hide);
             }
         });
 
@@ -136,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), Memory01Activity.class);
                 startActivity(intent);
+                docRef.update("ResultHide", hide);
             }
         });
 
@@ -145,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), ChatbotMainActivity.class);
                 startActivity(intent);
+                docRef.update("ResultHide", hide);
             }
         });
 
@@ -154,6 +180,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), UserActivity.class);
                 startActivity(intent);
+                docRef.update("ResultHide", hide);
+            }
+        });
+
+        btn_resultCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resultHideCheck();
             }
         });
     }
@@ -175,7 +209,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeViews() {
         text_UserName = findViewById(R.id.text_UserName);
-        text_FinalDay = findViewById(R.id.text_finalDay);
+        text_finalDay = findViewById(R.id.text_finalDay);
+        text_chatbot_msg = findViewById(R.id.text_chatbot_msg);
+        text_finalResult = findViewById(R.id.text_finalResult);
+        text_1 = findViewById(R.id.text_1);
+
+        btn_resultCheck = findViewById(R.id.btn_resultCheck);
+
+        chatbot_msg_breakfast = getResources().getString(R.string.chatbot_msg_breakfast);
+        chatbot_msg_morning = getResources().getString(R.string.chatbot_msg_morning);
+        chatbot_msg_lunch = getResources().getString(R.string.chatbot_msg_lunch);
+        chatbot_msg_afternoon = getResources().getString(R.string.chatbot_msg_afternoon);
+        chatbot_msg_dinner = getResources().getString(R.string.chatbot_msg_dinner);
+        chatbot_msg_night = getResources().getString(R.string.chatbot_msg_night);
+        chatbot_msg_else = getResources().getString(R.string.chatbot_msg_else);
+
         loadBar = findViewById(R.id.loadBar);
 
         // 현재 로그인 된 유저 정보 읽기
@@ -183,6 +231,30 @@ public class MainActivity extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String id = currentUser.getEmail();
         docRef = db.collection("Users").document(id);
+    }
+
+    ///////////////////////////////// 유저 데이터 불러오기
+
+    private void resultHideCheck() {
+        try {
+            if (!hide) {
+                text_finalResult.setText("검사 결과 숨김");
+                text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.gray));
+
+                btn_resultCheck.setText("보기");
+                hide = true;
+            } else {
+                text_finalResult.setText(result);
+                text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.black));
+
+                btn_resultCheck.setText("숨김");
+                hide = false;
+            }
+        } catch (Exception e) {
+            text_finalResult.setText(result);
+            text_finalResult.setTextColor(ContextCompat.getColor(this, R.color.black));
+            hide = false;
+        }
     }
 
     private class getDataTask extends AsyncTask<Void, Void, Void> {
@@ -205,11 +277,32 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (documentSnapshot.exists()) {
                         text_UserName.setText(documentSnapshot.getString("Name"));
-                        int year = Integer.parseInt(documentSnapshot.getLong("year").toString());
-                        int month = Integer.parseInt(documentSnapshot.getLong("month").toString());
-                        int day = Integer.parseInt(documentSnapshot.getLong("day").toString());
 
-                        setData(year, month, day);
+                        try {
+                            // 마지막 검사일 D-Day
+                            int year = Integer.parseInt(documentSnapshot.getLong("year").toString());
+                            int month = Integer.parseInt(documentSnapshot.getLong("month").toString());
+                            int day = Integer.parseInt(documentSnapshot.getLong("day").toString());
+                            setData(year, month, day);
+                            text_1.setVisibility(View.VISIBLE);
+                            btn_resultCheck.setVisibility(View.VISIBLE);
+
+                            // 검사 결과
+                            try {
+                                result = documentSnapshot.getString("Score");
+                                text_finalResult.setText(result);
+                            } catch (Exception e) {
+                                Log.w(TAG, "점수 기록 없음");
+                            }
+                            // 검사 결과 표시 여부
+                            hide = documentSnapshot.getBoolean("ResultHide");
+                            resultHideCheck();
+                        } catch (Exception e) {
+                            text_finalDay.setText("기록이 없어요.");
+                            text_1.setVisibility(View.GONE);
+                            btn_resultCheck.setVisibility(View.GONE);
+                            text_finalResult.setText("검사는 6개월 주기를 추천해요.");
+                        }
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -220,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
             // 작업 완료 후 로딩 화면 숨김
-            loadBar.setVisibility(View.GONE);
+            loadBar.setVisibility(GONE);
         }
     }
 
@@ -237,11 +330,43 @@ public class MainActivity extends AppCompatActivity {
             Testday = LocalDate.of(year, month, day);
 
             long daysBetween = ChronoUnit.DAYS.between(Testday, today);
-            text_FinalDay.setText(String.valueOf(daysBetween));
+
+            if (daysBetween == 0) {
+                text_finalDay.setText("오늘");
+            } else {
+                text_finalDay.setText(daysBetween + "일 전");
+            }
+
+            // 현재 시간 가져오기
+            Calendar calendar = Calendar.getInstance();
+            Date currentDate = calendar.getTime();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("HH");
+            sdf.setTimeZone(TimeZone.getDefault());
+
+            int now_hour = Integer.parseInt(sdf.format(currentDate));
+
+            if (6 <= now_hour && now_hour <= 8) {
+                text_chatbot_msg.setText(chatbot_msg_breakfast);
+            } else if (9 <= now_hour && now_hour <= 10) {
+                text_chatbot_msg.setText(chatbot_msg_morning);
+            } else if (11 <= now_hour && now_hour <= 14) {
+                text_chatbot_msg.setText(chatbot_msg_lunch);
+            } else if (15 <= now_hour && now_hour <= 17) {
+                text_chatbot_msg.setText(chatbot_msg_afternoon);
+            } else if (18 <= now_hour && now_hour <= 21) {
+                text_chatbot_msg.setText(chatbot_msg_dinner);
+            } else if (22 <= now_hour && now_hour <= 23 || (0 <= now_hour && now_hour <= 5)) {
+                text_chatbot_msg.setText(chatbot_msg_night);
+            } else {
+                text_chatbot_msg.setText(chatbot_msg_else);
+            }
         } catch (Exception e) {
             Log.w(TAG, "Error: " + e);
         }
     }
+
+    ///////////////////////////////// 뒤로 가기 버튼
 
     @Override
     public void onBackPressed() {
@@ -255,11 +380,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    ///////////////////////////////// 치매안심센터
+
     public void Center(View target)
     {
         Intent intent = new Intent(getApplication(), CenterActivity.class);
         startActivity(intent);
+        docRef.update("ResultHide", hide);
     }
+
+    ///////////////////////////////// 커뮤니티
 
     public void Naver(View target)
     {
@@ -269,5 +399,6 @@ public class MainActivity extends AppCompatActivity {
         // 인텐트 생성 및 웹 브라우저로 이동
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(naverUrl));
         startActivity(intent);
+        docRef.update("ResultHide", hide);
     }
 }

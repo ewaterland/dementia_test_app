@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@drawable/bg_main">
 
     <ProgressBar
         android:id="@+id/loadBar"
@@ -91,10 +91,10 @@
 
                 <ImageView
                     android:id="@+id/icon_chatbot_msg"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/icon_trans"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/icon_info"
                     android:scaleType="fitCenter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,17 +102,25 @@
 
                 </ImageView>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_marginStart="10dp"
-                    android:text="챗봇에게 저녁식사를 추천받으세요!"
-                    android:textColor="@color/main"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/pretendard_medium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/icon_chatbot_msg"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/text_chatbot_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="챗봇에게 저녁식사를 추천받으세요!"
+                        android:textColor="@color/main"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pretendard_medium" />
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!-- 챗봇 메시지 배너 END -->
@@ -123,7 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/view_round_white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -172,14 +180,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_name">
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/text_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_medium"
@@ -196,25 +204,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="127"
+                        android:text="127일 전"
                         android:textColor="@color/main"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@+id/textView6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_medium"
-                        android:text="일 전"
-                        android:textColor="@color/main"
-                        android:textSize="18sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_name">
 
                     </TextView>
 
@@ -225,16 +220,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/pretendard_medium"
-                    android:text="치매와 우울증이 의심돼요"
+                    android:text="검사 결과"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layout_finalTestDay">
+                    app:layout_constraintTop_toBottomOf="@+id/layout_finalTestDay" />
 
-                </TextView>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_resultCheck"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/button_round_check"
+                    android:gravity="center"
+                    android:text="보기"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_finalResult"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_finalTestDay" />
+
 
                 <TextView
                     android:id="@+id/text_myPage"
@@ -256,124 +267,124 @@
 
 
             <!-- 메인 메뉴 START -->
-
-            <!-- 검사하기 부분 START -->
-            <TextView
-                android:id="@+id/textView_subject_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="검사하기"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_mypage" />
-
-            <!-- 말동무와 대화하기 버튼 START -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_chatbot"
-                android:layout_width="match_parent"
-                android:layout_height="60sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/button_round_main"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_subject_test">
-
-                <ImageView
-                    android:id="@+id/icon_chatbot"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/icon_chatbot"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:gravity=""
-                    android:text="말동무와 대화하기"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/pretendard_medium"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/icon_chatbot"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- 치매 선별 검사 및 기억력 게임 버튼 START -->
             <LinearLayout
-                android:id="@+id/layout_test_button"
+                android:id="@+id/layout_menu1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="11dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_chatbot">
+                app:layout_constraintTop_toBottomOf="@+id/layout_mypage">
 
+                <!-- 말동무와 대화하기 버튼 START -->
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/btn_dementia"
+                    android:id="@+id/btn_chatbot"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4sp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_round_white">
+                    android:layout_height="120sp"
+                    android:layout_margin="7sp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/button_round_main">
 
                     <ImageView
-                        android:id="@+id/icon_dementia"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:id="@+id/icon_chatbot"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/icon_paper"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/icon_chatbot"
+                        android:scaleType="centerCrop"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_dementia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:gravity=""
+                        android:text="말동무 로봇"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_chatbot" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 말동무와 대화하기 버튼 END -->
+
+                <!-- 치매안심센터 버튼 START -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_center"
+                    android:layout_width="0dp"
+                    android:layout_height="120sp"
+                    android:layout_margin="7sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_round_white"
+                    android:onClick="Center">
+
+                    <ImageView
+                        android:id="@+id/icon_center"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/icon_center_round"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="치매선별검사"
+                        android:gravity=""
+                        android:text="치매안심센터"
                         android:textColor="@color/black"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/icon_dementia"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_center" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 치매안심센터 버튼 END -->
+
+            </LinearLayout>
+
+
+            <!-- 치매 선별 검사 및 기억력 게임 버튼 START -->
+            <LinearLayout
+                android:id="@+id/layout_menu2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_menu1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/btn_memory"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4sp"
+                    android:layout_height="120sp"
+                    android:layout_margin="7sp"
                     android:layout_weight="1"
                     android:background="@drawable/button_round_white">
 
                     <ImageView
                         android:id="@+id/icon_memory"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/icon_game"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/icon_game_round"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -387,70 +398,47 @@
                         android:textColor="@color/black"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/icon_memory"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_memory" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_dementia"
+                    android:layout_width="0dp"
+                    android:layout_height="120sp"
+                    android:layout_margin="7sp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/button_round_other_blue">
+
+                    <ImageView
+                        android:id="@+id/icon_dementia"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/icon_adtest_round"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_dementia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="치매선별검사"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_dementia" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
             <!-- 치매 선별 검사 및 기억력 게임 버튼 END -->
             <!-- 검사하기 부분 END -->
-
-
-            <!-- 확인하기 부분 START -->
-            <TextView
-                android:id="@+id/textView_subject_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="확인하기"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_test_button" />
-
-            <!-- 치매안심센터 버튼 START -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_center"
-                android:layout_width="match_parent"
-                android:layout_height="60sp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:onClick="Center"
-                android:background="@drawable/button_round_white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_subject_check">
-
-                <ImageView
-                    android:id="@+id/icon_center"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/icon_center"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/pretendard_medium"
-                    android:gravity=""
-                    android:text="가까운 치매안심센터 찾기"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/icon_center"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!-- 확인하기 부분 END -->
 
             <!-- 메인 메뉴 END -->
 
@@ -466,7 +454,7 @@
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_center">
+                app:layout_constraintTop_toBottomOf="@+id/layout_menu2">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpager"

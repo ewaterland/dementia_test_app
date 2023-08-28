@@ -6,9 +6,11 @@
     <color name="main">@color/blue</color>
     <color name="main_trans">#592A8FF7</color>
     <color name="background">@color/light_blue</color>
+    <color name="background_check">#F2F5FA</color>
 
     <color name="light_blue">#f2f5fa</color>
     <color name="blue">#2A8FF7</color>
+    <color name="other_blue">#a0bdfd</color>
 
     <color name="red">#FB7C73</color>
     <color name="mint">#81CDCB</color>
@@ -24,7 +26,7 @@
 
     <color name="unable">#D7D7D7</color>
     <color name="active">@color/main</color>
-    <color name="pressed">#378987</color>
+    <color name="pressed">#1F6BB8</color>
 
     <color name="AI">#167C80</color>
     <color name="Human">#96B6C5</color>

@@ -18,433 +18,300 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 메인 START -->
-    <ScrollView
-        android:id="@+id/view_main"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/border"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- 개인정보 -->
-        <LinearLayout
-            android:id="@+id/view_sub"
+        <!-- 메인 START -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/view_main">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/view_top"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:background="@color/light_blue"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <!-- 치매 검사 -->
-                <LinearLayout
-                    android:id="@+id/view_date1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <!-- 치매 검사 일 -->
-                    <TextView
-                        android:id="@+id/text_DATE1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="치매 선별 검사를 "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/pretendard_medium"
-                        app:layout_constraintEnd_toEndOf="@+id/text_date"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/text_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/main"
-                        android:textSize="25dp"
-                        android:fontFamily="@font/pretendard_semibold"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/text_DATE2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="일 전에 시행했어요."
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/pretendard_medium"
-                        app:layout_constraintEnd_toEndOf="@+id/text_date"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-
-                <!-- 프로필 -->
-                <LinearLayout
-                    android:id="@+id/view_date2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
-
-                    <!-- 프로필 사진 -->
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/profileImageView"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/profile_default"
-                        android:padding="0dp"
-                        android:layout_gravity="center" />
-
-                    <!-- 프로필 이름을 표시할 TextView -->
-                    <TextView
-                        android:id="@+id/text_Name"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="이름"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/pretendard_semibold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
-
-                    <TextView
-                        android:id="@+id/text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="안녕하세요."
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/pretendard_medium"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_Name" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 정보 -->
-            <LinearLayout
-                android:id="@+id/view_email"
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="이메일"
-                    android:textColor="#000000"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/text_email"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000000"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_01"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/view_birth"
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_birth"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="생일"
-                    android:textColor="#000000"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
-
-                <TextView
-                    android:id="@+id/text_birthday"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000000"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </LinearLayout>
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_02"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/view_address"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_address"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="주소"
-                    android:textColor="#000000"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
-
-                <EditText
-                    android:id="@+id/editText_address"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/edittext_rounded_corner_rectangle"
-                    android:inputType="text"
-                    android:paddingStart="10dp"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
-            </LinearLayout>
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_03"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/view_my_phone"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_my_phone"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="본인 연락처"
-                    android:textColor="#000000"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
-
-                <EditText
-                    android:id="@+id/editText_my"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/edittext_rounded_corner_rectangle"
-                    android:inputType="numberDecimal"
-                    android:paddingStart="10dp"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
-            </LinearLayout>
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_04"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/view_guardian_phone"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_guardian_phone"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="보호자 연락처"
-                    android:textColor="#000000"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Phone" />
-
-                <EditText
-                    android:id="@+id/editText_guardian"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/edittext_rounded_corner_rectangle"
-                    android:inputType="numberDecimal"
-                    android:paddingStart="10dp"
-                    android:fontFamily="@font/pretendard_regular"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_Birthday" />
-            </LinearLayout>
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_05"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/text_score_cog"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="치매가 의심돼요"
-                android:textColor="#000000"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:fontFamily="@font/pretendard_regular"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <!-- 선 -->
-            <LinearLayout
-                android:id="@+id/line_06"
-                android:layout_width="400dp"
-                android:layout_height="2dp"
-                android:gravity="center"
-                android:background="@color/gray"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_save"
-                android:layout_width="320dp"
-                android:layout_height="60dp"
-
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_round_main"
-
-                android:fontFamily="@font/pretendard_regular"
-                android:onClick="Save"
-                android:text="저장"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="30dp"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_Weight" />
-
-            <TextView
-                android:id="@+id/text_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/image_before"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:onClick="Logout"
-                android:text="로그아웃"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/pretendard_regular"/>
+                android:background="@drawable/icon_left_arrow_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textView_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_weight="1"
+                android:fontFamily="@font/pretendard_semibold"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:text="내 정보"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/btn_withdraw"
+            <!-- 프로필 사진 -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/image_profile_default"
+                android:padding="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 프로필 정보 SATART -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout_Name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/button_round_stroke15_gray_"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileImageView">
+
+                <!-- 프로필 이름 START -->
+                <TextView
+                    android:id="@+id/text_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/back"
-                    android:onClick="withdraw"
-                    android:text="회원 탈퇴"
-                    android:textAllCaps="false"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="left"
+                    android:text="이름"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/pretendard_regular"/>
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="left"
+                    android:text="이수지"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!-- 프로필 이름 END -->
+
+                <!-- 이메일 START -->
+                <TextView
+                    android:id="@+id/text_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="left"
+                    android:text="이메일"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_name" />
+
+                <TextView
+                    android:id="@+id/text_userEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="left"
+                    android:text="1@naver.com"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_userName" />
+                <!-- 이메일 END -->
+
+                <!-- 생일 START -->
+                <TextView
+                    android:id="@+id/text_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:gravity="left"
+                    android:text="생일"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_email" />
+
+                <TextView
+                    android:id="@+id/text_userBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="left"
+                    android:text="2001년 10월 12일"
+                    android:textColor="@color/black"
+                    android:textSize="23sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_userEmail" />
+                <!-- 생일 END -->
+
+                <!-- 연락처 START -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_birth">
+
+                    <TextView
+                        android:id="@+id/text_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:gravity="left"
+                        android:text="휴대폰 번호"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/edit_phone"
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:background="@drawable/icon_right_arrow_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 연락처 END -->
+
+                <!-- 주소 START -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_phone">
+
+                    <TextView
+                        android:id="@+id/text_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:gravity="left"
+                        android:text="주소"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_userAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:gravity="left"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/edit_address"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/edit_address"
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:background="@drawable/icon_right_arrow_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- 주소 END -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/text_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="center"
+                    android:text="로그아웃"
+                    android:textColor="@color/gray"
+                    android:textSize="23sp"
+                    android:onClick="Logout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_address"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="center"
+                    android:text=" | "
+                    android:textColor="@color/gray"
+                    android:textSize="23sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_address"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_withdraw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:gravity="center"
+                    android:text="회원탈퇴"
+                    android:textColor="@color/gray"
+                    android:textSize="23sp"
+                    android:onClick="withdraw"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_address"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-    <!-- 메인 END -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 메인 END -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

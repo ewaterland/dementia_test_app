@@ -54,8 +54,6 @@ public class UserActivity extends AppCompatActivity {
     EditText EditText_Address;
     EditText EditText_My;
     EditText EditText_Guardian;
-    TextView Text_Date;
-    TextView Text_Score;
     private ImageView imageView;
     private ProgressBar loadBar;
 
@@ -88,7 +86,7 @@ public class UserActivity extends AppCompatActivity {
         // firebase 접근 권한 갖기
         FirebaseApp.initializeApp(UserActivity.this);
 
-        TextView Text_Email = findViewById(R.id.text_email);
+        TextView Text_Email = findViewById(R.id.text_userEmail);
         Text_Email.setText(id);
 
         today = LocalDate.now();
@@ -111,14 +109,11 @@ public class UserActivity extends AppCompatActivity {
     ///////////////////////////////// 뷰 관련
 
     private void initializeViews() {
-        Text_Name = findViewById(R.id.text_Name);
-        Text_Birthday = findViewById(R.id.text_birthday);
-        EditText_Address = findViewById(R.id.editText_address);
-        EditText_My = findViewById(R.id.editText_my);
-        EditText_Guardian = findViewById(R.id.editText_guardian);
-        Text_Date = findViewById(R.id.text_date);
-        Text_Score = findViewById(R.id.text_score_cog);
+        Text_Name = findViewById(R.id.text_userName);
+        Text_Birthday = findViewById(R.id.text_userBirth);
+
         imageView = findViewById(R.id.profileImageView);
+
         loadBar = findViewById(R.id.loadBar);
     }
 
@@ -141,26 +136,8 @@ public class UserActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            String name = documentSnapshot.getString("Name");
-                            String fullName = name + "님";
-
-                            Text_Name.setText(fullName);
+                            Text_Name.setText(documentSnapshot.getString("Name"));
                             Text_Birthday.setText(String.valueOf(documentSnapshot.getString("Birth")));
-
-                            EditText_Address.setText(documentSnapshot.getString("Address"));
-                            EditText_My.setText(documentSnapshot.getString("My"));
-                            EditText_Guardian.setText(documentSnapshot.getString("Guardian"));
-
-                            Text_Score.setText(String.valueOf(documentSnapshot.getString("Score")));
-                            //Text_Score_dep.setText(String.valueOf(documentSnapshot.getString("Score_dep")));
-
-                            year = Integer.parseInt(documentSnapshot.getLong("year").toString());
-                            month = Integer.parseInt(documentSnapshot.getLong("month").toString());
-                            day = Integer.parseInt(documentSnapshot.getLong("day").toString());
-
-                            school = documentSnapshot.getLong("School");
-
-                            setData();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -178,17 +155,6 @@ public class UserActivity extends AppCompatActivity {
     private void getData() {
         // AsyncTask 실행
         new getDataTask().execute();
-    }
-
-    private void setData() {
-        try {
-            Log.w(TAG, String.format("%d.%d.%d.: ", year, month, day));
-            Testday = LocalDate.of(year, month, day);
-            long daysBetween = ChronoUnit.DAYS.between(Testday, today);
-            Text_Date.setText(String.valueOf(daysBetween));
-        } catch (Exception e) {
-            Log.w(TAG, "Error: " + e);
-        }
     }
 
     private void openGallery() {

@@ -2,6 +2,20 @@
     <!-- 앱 이름 -->
     <string name="app_name">아까치매</string>
 
+    <!-- 회원가입 -->
+    <string name="forgot_your_password"><u>비밀번호를 잊으셨나요?</u></string>
+
+    <!-- 메인 -->
+    <string name="check_your_test_result"><u>지난 검사 결과 보러 가기</u></string>
+
+    <string name="chatbot_msg_breakfast">아침 메뉴가 고민이라면 챗봇에게 물어봐요!</string>
+    <string name="chatbot_msg_morning">활기찬 하루의 시작, 챗봇에게 응원 받아요</string>
+    <string name="chatbot_msg_lunch">챗봇에게 점심 메뉴를 추천 받으세요!</string>
+    <string name="chatbot_msg_afternoon">식곤증, 챗봇과 대화하며 풀어봐요</string>
+    <string name="chatbot_msg_dinner">챗봇에게 저녁 메뉴를 추천 받아볼까요?</string>
+    <string name="chatbot_msg_night">늦은 시간 취침은 건강에 해로워요</string>
+    <string name="chatbot_msg_else">검사는 꾸준히 받는 게 중요해요</string>
+
     <!-- 치매 선별 검사 -->
     <string name="remember_text">나무 자동차 모자</string>
     <string name="pass_text">5초 후에 자동으로 넘어갑니다.</string>
@@ -10,7 +24,4 @@
 
     <!-- 기억력 검사 -->
     <string name="explain">이 아이콘은 어쩌고 저쩌고\n이 아이콘은 저쩌고 어쩌고</string>
-
-    <!-- 회원가입 -->
-    <string name="forgot_your_password"><u>비밀번호를 잊으셨나요?</u></string>
 </resources>
