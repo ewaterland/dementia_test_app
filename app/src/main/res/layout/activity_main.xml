@@ -97,11 +97,13 @@
                 </ImageView>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/icon_chatbot_msg"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -109,10 +111,10 @@
                         android:id="@+id/text_chatbot_msg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="챗봇에게 저녁식사를 추천받으세요!"
+                        android:fontFamily="@font/pretendard_medium"
+                        android:text="인공지능 다인이에게 저녁식사를 추천받으세요!"
                         android:textColor="@color/main"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/pretendard_medium" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -295,15 +297,17 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:gravity=""
                         android:text="말동무 로봇"
                         android:textColor="@color/white"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/icon_chatbot" />
 
@@ -332,15 +336,17 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:gravity=""
                         android:text="치매안심센터"
                         android:textColor="@color/black"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/icon_center" />
 
@@ -384,14 +390,16 @@
 
                     <TextView
                         android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:text="기억력\n모의고사"
                         android:textColor="@color/black"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/icon_memory" />
 
@@ -417,14 +425,16 @@
 
                     <TextView
                         android:id="@+id/text_dementia"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
                         android:fontFamily="@font/pretendard_medium"
                         android:text="치매선별검사"
                         android:textColor="@color/white"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/icon_dementia" />
 
@@ -461,16 +471,21 @@
                     android:scaleType="fitXY" />
 
             </FrameLayout>
-            <!--
-            <me.relex.circleindicator.CircleIndicator3
-                android:id="@+id/indicator"
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:layout_gravity="center"
-                app:ci_drawable="@drawable/ad_count"
+
+            <TextView
+                android:id="@+id/text_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="치매상담콜센터 1899-9988"
+                android:textColor="@color/more_gray"
+                android:textSize="15sp"
+                android:fontFamily="@font/pretendard_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view_ad" />
-                -->
-            <!-- 광고 배너 END -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,7 +2,9 @@ package com.example.white_butterfly;
 
 import static android.view.View.GONE;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     // 변수
     String result;  // 검사 결과
     Boolean hide = false;  // 검사 결과 숨길지 말지 (기본값: 결과 보임)
+
+    // 권한
+    private static final int REQUEST_CALL_PHONE_PERMISSION = 1001;
 
     // 문자열
     String chatbot_msg_breakfast;
@@ -156,6 +162,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changeHideCheck(hide);
+            }
+        });
+
+        // 치매상담콜센터 번호 누른 경우
+        TextView text_call = findViewById(R.id.text_call);
+        text_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                long currentTime = System.currentTimeMillis();
+
+                if (currentTime - backPressedTime < BACK_PRESS_INTERVAL) {
+                    if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE_PERMISSION);
+                    } else {
+                        // 권한이 이미 있으면 전화 걸기 로직을 실행
+                        String tel = "tel:18999988";
+                        startActivity(new Intent("android.intent.action.DIAL", Uri.parse(tel)));
+                    }
+                } else {
+                    backPressedTime = currentTime;
+                    Toast.makeText(MainActivity.this, "한 번 더 누를 시 치매상담콜센터로 연결됩니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

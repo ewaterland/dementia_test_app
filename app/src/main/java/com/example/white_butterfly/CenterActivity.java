@@ -54,7 +54,7 @@ public class CenterActivity extends AppCompatActivity implements MapView.Current
             //showDialogForLocationServiceSetting();
         }
 
-        //지도를 띄우자
+        // 지도를 띄우자
         mapView = new MapView(this);
         mapViewContainer = findViewById(R.id.map_view);
         mapView.setCurrentLocationEventListener(this);

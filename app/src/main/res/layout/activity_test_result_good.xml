@@ -101,8 +101,8 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/image_call"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_call"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="35dp"
@@ -110,23 +110,13 @@
             android:layout_marginEnd="35dp"
             android:background="@drawable/btn_center_result"
             android:scaleType="fitCenter"
+            android:fontFamily="@font/pretendard_medium"
+            android:text="      치매 상담 전화 연결하기"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_result" />
-
-        <TextView
-            android:id="@+id/text_call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:fontFamily="@font/pretendard_medium"
-            android:text="치매안심센터와 전화 연결"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_call"
-            app:layout_constraintEnd_toEndOf="@+id/image_call"
-            app:layout_constraintStart_toStartOf="@+id/image_call"
-            app:layout_constraintTop_toTopOf="@+id/image_call" />
 
         <TextView
             android:id="@+id/text_call_time1"
@@ -134,19 +124,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/pretendard_medium"
-            android:text="운영시간"
+            android:text="365일 24시간 연중무휴"
             android:textColor="@color/more_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_call" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_call" />
 
         <TextView
             android:id="@+id/text_call_time2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:text="평일 오전 7시부터 오후 10시"
+            android:text=""
             android:textColor="@color/more_gray"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

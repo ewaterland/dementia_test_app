@@ -42,6 +42,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class UserActivity extends AppCompatActivity {
     // Firebase
@@ -51,9 +52,6 @@ public class UserActivity extends AppCompatActivity {
     // 뷰
     TextView Text_Name;
     TextView Text_Birthday;
-    EditText EditText_Address;
-    EditText EditText_My;
-    EditText EditText_Guardian;
     private ImageView imageView;
     private ProgressBar loadBar;
 
@@ -62,17 +60,7 @@ public class UserActivity extends AppCompatActivity {
     public String address;
     public String my;
     public String guardian;
-
-    // 변수
-    Number school = 0;
-    int year = 0;
-    int month = 0;
-    int day = 0;
-
-    // 테스트 디데이 계산
-    LocalDate today;
-    LocalDate Testday;
-    private final int ONE_DAY = 24 * 60 * 60 * 1000;
+    String gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +76,6 @@ public class UserActivity extends AppCompatActivity {
 
         TextView Text_Email = findViewById(R.id.text_userEmail);
         Text_Email.setText(id);
-
-        today = LocalDate.now();
 
         // DocumentSnapshot 객체 생성, 데이터 가져오기
         getData();
@@ -132,20 +118,22 @@ public class UserActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            Text_Name.setText(documentSnapshot.getString("Name"));
-                            Text_Birthday.setText(String.valueOf(documentSnapshot.getString("Birth")));
-                        }
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        Text_Name.setText(documentSnapshot.getString("Name"));
+                        Text_Birthday.setText(String.valueOf(documentSnapshot.getString("Birth")));
+                        gender = documentSnapshot.getString("Gender");
+                        Log.d(TAG, "Gender: " + gender);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error getting document", e);
-                    }
-                });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error getting document", e);
+                }
+            });
 
             // 작업 완료 후 로딩 화면 숨김
             loadBar.setVisibility(View.GONE);
@@ -173,7 +161,12 @@ public class UserActivity extends AppCompatActivity {
                     .into(imageView);
             Log.d(TAG, "저장된 프로필: " + "프로필 사진을 불러옴");
         }).addOnFailureListener(urlFailure -> {
-            // 이미지가 존재하지 않는 경우, 토스트 메시지 띄우기
+            // 이미지가 존재하지 않는 경우
+            if(Objects.equals(gender, "여성")) {
+                imageView.setImageResource(R.drawable.app_icon_female);
+            } else {
+                imageView.setImageResource(R.drawable.app_icon_male);
+            }
             Toast.makeText(this, "프로필 사진을 등록해 주세요.", Toast.LENGTH_SHORT).show();
         });
     }
@@ -217,55 +210,6 @@ public class UserActivity extends AppCompatActivity {
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     String id = currentUser.getEmail();
     DocumentReference docRef = db.collection("Users").document(id);
-
-    public void Save(View target)
-    {
-        // 입력한 정보 받기
-        //address = ((EditText) findViewById(R.id.editText_address)).getText().toString();
-        //my = ((EditText) findViewById(R.id.editText_my)).getText().toString();
-        //guardian = ((EditText) findViewById(R.id.editText_guardian)).getText().toString();
-        //imageView = ((ImageView) findViewById(R.id.profileImageView));
-
-        // 입력한 정보 업데이트
-        docRef.update("Address", address);
-        docRef.update("My", my);
-        docRef.update("Guardian", guardian);
-        //docRef.update("ImageView", imageView);
-
-        db.collection("Users")
-                .document(id)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful())
-                        {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists())
-                            {
-                                Toast.makeText(UserActivity.this, "저장되었습니다.",
-                                        Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-
-                                Intent intent = new Intent(getApplication(), UserActivity.class);
-                                startActivity(intent);
-                            }
-                            else
-                            {
-                                Toast.makeText(UserActivity.this, "실패하였습니다.",
-                                        Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "No such document");
-                            }
-                        }
-                        else
-                        {
-                            Toast.makeText(UserActivity.this, "실패하였습니다.",
-                                    Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "get failed with ", task.getException());
-                        }
-                    }
-                });
-    }
 
     // Logout 버튼 누를 경우
     public void Logout(View target) {

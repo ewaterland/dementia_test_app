@@ -1,6 +1,9 @@
 package com.example.white_butterfly;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,20 +28,21 @@ public class TestResultBadActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference docRef;
 
+    // 권한
+    private static final int REQUEST_CALL_PHONE_PERMISSION = 1001;
+
     // 변수
-    String Score_cog = "";
-    String Score_dep = "";
     String Score = "";
 
     // TAG
-    private String TAG = "TestResultActivity";
+    private String TAG = "TestResultBadActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_result_bad);
 
-        Log.w(TAG, "--- TestResultActivity ---");
+        Log.w(TAG, "--- TestResultBadActivity ---");
 
         // Firebase
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -77,12 +82,24 @@ public class TestResultBadActivity extends AppCompatActivity {
         Log.w(TAG, "Score: " + Score);
 
 
-        // 치매안심센터와 전화 연결 버튼 누른 경우
-
+        // 치매상담콜센터와 전화 연결 버튼 누른 경우
+        Button btn_call = findViewById(R.id.btn_call);
+        btn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(TestResultBadActivity.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(TestResultBadActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE_PERMISSION);
+                } else {
+                    // 권한이 이미 있으면 전화 걸기 로직을 실행
+                    String tel = "tel:18999988";
+                    startActivity(new Intent("android.intent.action.DIAL", Uri.parse(tel)));
+                }
+            }
+        });
 
         // 돌아가기 버튼 누른 경우
-        Button btn_main = (Button) findViewById(R.id.btn_done);
-        btn_main.setOnClickListener(new View.OnClickListener() {
+        Button btn_done = (Button) findViewById(R.id.btn_done);
+        btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TestResultBadActivity.this, MainActivity.class);
