@@ -186,7 +186,7 @@ public class RegisterAddressFragment extends Fragment {
 
         rootView.findViewById(R.id.page_register).setVisibility(View.GONE);
 
-        Intent intent = new Intent(requireActivity(), RegisterFinishActivity.class);
+        Intent intent = new Intent(requireActivity(), MainActivity.class);
         startActivity(intent);
         requireActivity().finish();
     }

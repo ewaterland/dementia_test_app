@@ -99,7 +99,7 @@
                 android:background="@null"
                 android:fontFamily="@font/pretendard_light"
                 android:gravity="center"
-                android:text="  "
+                android:text="   "
                 android:textSize="25sp">
 
             </TextView>
@@ -111,7 +111,7 @@
                 android:layout_gravity="center"
                 android:background="@null"
                 android:fontFamily="@font/pretendard_light"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="1900"
                 android:inputType="date"
                 android:maxLength="4"
@@ -140,7 +140,7 @@
                 android:layout_gravity="center"
                 android:background="@null"
                 android:fontFamily="@font/pretendard_light"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="01"
                 android:inputType="date"
                 android:maxLength="2"
@@ -168,7 +168,7 @@
                 android:layout_gravity="center"
                 android:background="@null"
                 android:fontFamily="@font/pretendard_light"
-                android:gravity="center"
+                android:gravity="left"
                 android:hint="01"
                 android:inputType="date"
                 android:maxLength="2"

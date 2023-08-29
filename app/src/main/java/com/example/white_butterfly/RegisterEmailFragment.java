@@ -184,14 +184,11 @@ public class RegisterEmailFragment extends Fragment {
     }
 
     private void navigateToNextFragment() {
-        Fragment fragment2 = new RegisterNameFragment();
-        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.view_fragment, fragment2);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
         rootView.findViewById(R.id.page_register).setVisibility(View.GONE);
+
+        Intent intent = new Intent(requireActivity(), RegisterFinishActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
 
     @Override
