@@ -94,7 +94,7 @@ public class UserActivity extends AppCompatActivity {
         // DocumentSnapshot 객체 생성, 데이터 가져오기
         getData();
 
-        storageReference = FirebaseStorage.getInstance().getReference().child("images");
+        storageReference = FirebaseStorage.getInstance().getReference(id);
 
         onPageTransition();
 

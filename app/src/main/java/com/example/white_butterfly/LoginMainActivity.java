@@ -40,8 +40,8 @@ public class LoginMainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     // 버튼
-    ConstraintLayout kakaologinButton;
-    ConstraintLayout emailloginButton;
+    private Button kakaologinButton;
+    private ConstraintLayout emailloginButton;
     String email;
 
     // TAG
@@ -64,7 +64,6 @@ public class LoginMainActivity extends AppCompatActivity {
 
         kakaologinButton = findViewById(R.id.kakaologin);
         emailloginButton = findViewById(R.id.emaillogin);
-
 
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override
