@@ -6,19 +6,15 @@
     <string name="forgot_your_password"><u>비밀번호를 잊으셨나요?</u></string>
 
     <!-- 메인 -->
-    <string name="check_your_test_result"><u>지난 검사 결과 보러 가기</u></string>
-
-    <string name="chatbot_msg_breakfast">아침 메뉴가 고민이라면 챗봇에게 물어봐요!</string>
-    <string name="chatbot_msg_morning">활기찬 하루의 시작, 챗봇에게 응원 받아요</string>
-    <string name="chatbot_msg_lunch">챗봇에게 점심 메뉴를 추천 받으세요!</string>
-    <string name="chatbot_msg_afternoon">식곤증, 챗봇과 대화하며 풀어봐요</string>
-    <string name="chatbot_msg_dinner">챗봇에게 저녁 메뉴를 추천 받아볼까요?</string>
-    <string name="chatbot_msg_night">늦은 시간 취침은 건강에 해로워요</string>
+    <string name="chatbot_msg_breakfast">아침 메뉴가 고민이라면 인공지능 다인이에게 물어봐요!</string>
+    <string name="chatbot_msg_morning">활기찬 하루의 시작, 인공지능 하준이에게 응원 받아요</string>
+    <string name="chatbot_msg_lunch">인공지능 하준이에게 점심 메뉴를 추천 받으세요!</string>
+    <string name="chatbot_msg_afternoon">식곤증, 인공지능 다인이와 대화하며 풀어봐요</string>
+    <string name="chatbot_msg_dinner">인공지능 상담사에게 저녁 메뉴를 추천 받아볼까요?</string>
+    <string name="chatbot_msg_night">6시간 이하 수면은 치매 발생률을 약 30% 증가시켜요</string>
     <string name="chatbot_msg_else">검사는 꾸준히 받는 게 중요해요</string>
 
     <!-- 치매 선별 검사 -->
-    <string name="remember_text">나무 자동차 모자</string>
-    <string name="pass_text">5초 후에 자동으로 넘어갑니다.</string>
     <string name="ex09">예시) 물건 값이나 거스름돈 계산을 못한다.</string>
     <string name="ex11">(세탁기, 밥솥, 경운기 등)</string>
 

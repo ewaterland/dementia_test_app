@@ -33,10 +33,10 @@ public class SplashActivity extends AppCompatActivity {
         Log.w(TAG, "--- SplashActivity ---");
 
         // firebase 접근 권한 갖기
-        FirebaseApp.initializeApp(SplashActivity.this);
+        FirebaseApp.initializeApp(this);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         Log.d(TAG, "================== APP START ==================");
 
@@ -91,8 +91,6 @@ public class SplashActivity extends AppCompatActivity {
                                 .commit();
 
                         findViewById(R.id.page_splash).setVisibility(View.GONE);
-                    } else if (documentSnapshot.getLong("School").equals(0)) {
-
                     }
                     else {
                         Log.d(TAG, "< 모든 정보 입력 완료 > Email: " + id);
@@ -112,20 +110,6 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
-        /*
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-
-                finish();
-            }
-        },3000);
-
-         */
     }
 
     @Override
@@ -139,14 +123,5 @@ public class SplashActivity extends AppCompatActivity {
             Toast.makeText(this, "한 번 더 누를 시 앱이 종료됩니다", Toast.LENGTH_SHORT).show();
         }
     }
-
-    /*
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
-
-     */
 }
 

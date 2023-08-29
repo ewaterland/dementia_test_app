@@ -5,11 +5,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TestDepMainActivity extends AppCompatActivity {
 
+    // 뒤로가기 버튼
+    private static final int BACK_PRESS_INTERVAL = 2000; // 뒤로가기 버튼을 두 번 누르는 간격 (밀리초)
+    private long backPressedTime = 0;
+
+    // TAG
     private static final String TAG = "TestDepMainActivity";
 
     @Override
@@ -30,5 +36,21 @@ public class TestDepMainActivity extends AppCompatActivity {
                 startActivity(intent_dep);
             }
         });
+    }
+
+    ///////////////////////////////// 뒤로 가기 버튼
+
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - backPressedTime < BACK_PRESS_INTERVAL) {
+            Intent intent = new Intent(getApplication(), TestMainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            backPressedTime = currentTime;
+            Toast.makeText(this, "한 번 더 누를 시 테스트가 종료됩니다", Toast.LENGTH_SHORT).show();
+        }
     }
 }
