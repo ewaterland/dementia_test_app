@@ -33,6 +33,7 @@ public class TestResultBadActivity extends AppCompatActivity {
 
     // 변수
     String Score = "";
+    String id;
 
     // TAG
     private String TAG = "TestResultBadActivity";
@@ -44,9 +45,17 @@ public class TestResultBadActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- TestResultBadActivity ---");
 
+        String kakao_email = getIntent().getStringExtra("Email");
+
         // Firebase
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String id = currentUser.getEmail();
+        if (kakao_email != null && !kakao_email.isEmpty()) {
+            // 이전 액티비티에서 받아온 값이 있는 경우
+            id = kakao_email;
+        } else {
+            // 이전 액티비티에서 값이 없는 경우
+            id = currentUser.getEmail();
+        }
         docRef = db.collection("Users").document(id);
 
         int score_cog = getIntent().getIntExtra("score_cog", 0);
@@ -103,6 +112,7 @@ public class TestResultBadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TestResultBadActivity.this, MainActivity.class);
+                intent.putExtra("Email", kakao_email);
                 startActivity(intent);
                 finish();
             }

@@ -194,8 +194,11 @@ public class TestExampleActivity extends AppCompatActivity implements TextToSpee
     public void TestStart() {
         Log.w(TAG, "TestStart");
 
+        String kakao_email = getIntent().getStringExtra("Email");
+
         // 치매 선별 검사 페이지 출력
         Intent intent = new Intent(getApplication(), TestCogActivity.class);
+        intent.putExtra("Email", kakao_email);
         startActivity(intent);
         finish();
     }

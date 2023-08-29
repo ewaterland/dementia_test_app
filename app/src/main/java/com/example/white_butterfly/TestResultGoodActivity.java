@@ -37,6 +37,8 @@ public class TestResultGoodActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- TestResultGoodActivity ---");
 
+        String kakao_email = getIntent().getStringExtra("Email");
+
         // 치매상담콜센터와 전화 연결 버튼 누른 경우
         Button btn_call = findViewById(R.id.btn_call);
         btn_call.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,7 @@ public class TestResultGoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TestResultGoodActivity.this, MainActivity.class);
+                intent.putExtra("Email", kakao_email);
                 startActivity(intent);
                 finish();
             }

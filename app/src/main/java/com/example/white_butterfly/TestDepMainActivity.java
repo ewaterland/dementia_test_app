@@ -25,6 +25,7 @@ public class TestDepMainActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- TestDepMainActivity ---");
 
+        String kakao_email = getIntent().getStringExtra("Email");
         int score_cog = getIntent().getIntExtra("score_cog", 0);
 
         Button btn_next = (Button) findViewById(R.id.btn_next);
@@ -33,6 +34,7 @@ public class TestDepMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent_dep = new Intent(getApplication(), TestDepActivity.class);
                 intent_dep.putExtra("score_cog", score_cog);
+                intent_dep.putExtra("Email", kakao_email);
                 startActivity(intent_dep);
             }
         });

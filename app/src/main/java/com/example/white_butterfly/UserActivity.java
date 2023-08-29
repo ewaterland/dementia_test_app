@@ -46,6 +46,9 @@ import java.util.Objects;
 
 public class UserActivity extends AppCompatActivity {
     // Firebase
+    FirebaseFirestore db;
+    FirebaseUser currentUser;
+    DocumentReference docRef;
     private StorageReference storageReference;
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -61,6 +64,7 @@ public class UserActivity extends AppCompatActivity {
     public String my;
     public String guardian;
     String gender;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +99,25 @@ public class UserActivity extends AppCompatActivity {
     ///////////////////////////////// 뷰 관련
 
     private void initializeViews() {
+        String kakao_email = getIntent().getStringExtra("Email");
         Text_Name = findViewById(R.id.text_userName);
         Text_Birthday = findViewById(R.id.text_userBirth);
 
         imageView = findViewById(R.id.profileImageView);
 
         loadBar = findViewById(R.id.loadBar);
+
+        // 현재 로그인 된 유저 정보 읽기
+        db = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (kakao_email != null && !kakao_email.isEmpty()) {
+            // 이전 액티비티에서 받아온 값이 있는 경우
+            id = kakao_email;
+        } else {
+            // 이전 액티비티에서 값이 없는 경우
+            id = currentUser.getEmail();
+        }
+        docRef = db.collection("Users").document(id);
     }
 
     private class getDataTask extends AsyncTask<Void, Void, Void> {
@@ -167,7 +184,6 @@ public class UserActivity extends AppCompatActivity {
             } else {
                 imageView.setImageResource(R.drawable.app_icon_male);
             }
-            Toast.makeText(this, "프로필 사진을 등록해 주세요.", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -204,12 +220,6 @@ public class UserActivity extends AppCompatActivity {
             });
         }
     }
-
-    // 현재 로그인 된 유저 정보 읽기
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-    String id = currentUser.getEmail();
-    DocumentReference docRef = db.collection("Users").document(id);
 
     // Logout 버튼 누를 경우
     public void Logout(View target) {
@@ -264,12 +274,18 @@ public class UserActivity extends AppCompatActivity {
         builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String kakao_email = getIntent().getStringExtra("Email");
+                Log.d(TAG, kakao_email);
+                Log.d(TAG, String.valueOf(currentUser));
                 // 유저 삭제
-                String email = currentUser.getEmail();
-                currentUser.delete();
-
+                if(currentUser != null) {
+                    id = currentUser.getEmail();
+                    currentUser.delete();
+                } else {
+                    id = kakao_email;
+                }
                 // 유저 정보 삭제
-                db.collection("Users").document(email)
+                db.collection("Users").document(id)
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -282,7 +298,7 @@ public class UserActivity extends AppCompatActivity {
                                 finish();
 
                                 Log.d(TAG, "< 유저 정보 삭제 성공 >");
-                                Log.d(TAG, "< 회원 탈퇴 > Email: " + email);
+                                Log.d(TAG, "< 회원 탈퇴 > Email: " + id);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

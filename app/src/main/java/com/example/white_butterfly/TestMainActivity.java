@@ -38,6 +38,8 @@ public class TestMainActivity extends AppCompatActivity {
 
         Log.w(TAG, "--- TestMainActivity ---");
 
+        String kakao_email = getIntent().getStringExtra("Email");
+
         getData();
 
         Button btn_next = (Button) findViewById(R.id.btn_next);
@@ -45,6 +47,7 @@ public class TestMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), TestExampleActivity.class);
+                intent.putExtra("Email", kakao_email);
                 startActivity(intent);
             }
         });

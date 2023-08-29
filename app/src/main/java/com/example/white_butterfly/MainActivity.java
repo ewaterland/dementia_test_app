@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     String chatbot_msg_dinner;
     String chatbot_msg_night;
     String chatbot_msg_else;
+    String id;
 
     // 태그
     private static final String TAG = "MainActivity";
@@ -122,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
         btn_dementiaTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), TestMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, TestMainActivity.class); // 다른 화면으로 이동
+                intent.putExtra("Email", id);
                 startActivity(intent);
                 docRef.update("ResultHide", hide);
             }
@@ -153,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), UserActivity.class);
+                intent.putExtra("Email", id);
                 startActivity(intent);
                 docRef.update("ResultHide", hide);
             }
@@ -204,6 +207,13 @@ public class MainActivity extends AppCompatActivity {
     ///////////////////////////////// 뷰 관련
 
     private void initializeViews() {
+        String kakao_email = "";
+        try {
+            kakao_email = getIntent().getStringExtra("Email");
+            Log.d("kakao_email", kakao_email);
+        }catch (Exception e){
+
+        }
         text_UserName = findViewById(R.id.text_UserName);
         text_finalDay = findViewById(R.id.text_finalDay);
         text_chatbot_msg = findViewById(R.id.text_chatbot_msg);
@@ -225,7 +235,13 @@ public class MainActivity extends AppCompatActivity {
         // 현재 로그인 된 유저 정보 읽기
         db = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String id = currentUser.getEmail();
+        if (kakao_email != null && !kakao_email.isEmpty()) {
+            // 이전 액티비티에서 받아온 값이 있는 경우
+            id = kakao_email;
+        } else {
+            // 이전 액티비티에서 값이 없는 경우
+            id = currentUser.getEmail();
+        }
         docRef = db.collection("Users").document(id);
     }
 

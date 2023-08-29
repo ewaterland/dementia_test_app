@@ -38,23 +38,7 @@
 
     <!-- 로고 END -->
 
-    <!-- 메인 START -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/kakaologin"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="55dp"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="    카카오로 시작하기"
-        android:textColor="#262626"
-        android:textSize="20sp"
-        android:background="@drawable/button_login_kakao"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_subject1" />
-    <!--
+    <!-- 카카오 로그인 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/kakaologin"
         android:layout_width="match_parent"
@@ -91,8 +75,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    -->
+    <!-- 카카오 로그인 END -->
 
+    <!-- 이메일 로그인 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emaillogin"
         android:layout_width="match_parent"
@@ -128,9 +113,10 @@
             app:layout_constraintStart_toEndOf="@+id/logo_mail"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 이메일 로그인 END -->
 
+    <!-- 버전 START -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -144,7 +130,6 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </TextView>
-
-    <!-- 메인 END -->
+    <!-- 버전 END -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,6 +60,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
     Button btn_next;
     ImageView btn_reply_yes;
     ImageView btn_reply_no;
+    String id;
 
     // 버튼 선택 확인용 변수
     Boolean reply_yes_Selected = false;
@@ -93,10 +94,17 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser != null) {
-            String id = currentUser.getEmail();
-            docRef = db.collection("Users").document(id);
+        String kakao_email = getIntent().getStringExtra("Email");
+        Log.w(TAG, "kakao_email" + kakao_email);
+
+        if (kakao_email != null && !kakao_email.isEmpty()) {
+            // 이전 액티비티에서 받아온 값이 있는 경우
+            id = kakao_email;
+        } else {
+            // 이전 액티비티에서 값이 없는 경우
+            id = currentUser.getEmail();
         }
+        docRef = db.collection("Users").document(id);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +279,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
             int score_cog = getIntent().getIntExtra("score_cog", 0);
             intent_loading.putExtra("score_cog", score_cog);
             intent_loading.putExtra("score_dep", score_dep);
+            intent_loading.putExtra("Email", id);
             startActivity(intent_loading);
             finish();
         }

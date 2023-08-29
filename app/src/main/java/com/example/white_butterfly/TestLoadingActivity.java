@@ -57,6 +57,7 @@ public class TestLoadingActivity extends AppCompatActivity {
         docRef.update("day", day);
 
         // 점수에 따른 결과 표시
+        String kakao_email = getIntent().getStringExtra("Email");
         int score_cog = getIntent().getIntExtra("score_cog", 0);
         int score_dep = getIntent().getIntExtra("score_dep", 0);
 
@@ -65,6 +66,7 @@ public class TestLoadingActivity extends AppCompatActivity {
             Intent intent_bad = new Intent(getApplicationContext(), TestResultBadActivity.class);
             intent_bad.putExtra("score_cog", score_cog);
             intent_bad.putExtra("score_dep", score_dep);
+            intent_bad.putExtra("Email", kakao_email);
             startActivity(intent_bad);
             finish();
         }
@@ -75,6 +77,7 @@ public class TestLoadingActivity extends AppCompatActivity {
             Log.w(TAG, "Score: " + Score);
 
             Intent intent_good = new Intent(getApplicationContext(), TestResultGoodActivity.class);
+            intent_good.putExtra("Email", kakao_email);
             startActivity(intent_good);
             finish();
         }

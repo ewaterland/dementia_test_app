@@ -64,6 +64,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
     ImageView btn_reply_1;
     ImageView btn_reply_2;
     ImageView btn_reply_3;
+    String id;
 
     // 버튼 선택 확인용 변수
     Boolean reply_1_Selected = false;
@@ -98,10 +99,16 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if (currentUser != null) {
-            String id = currentUser.getEmail();
-            docRef = db.collection("Users").document(id);
+        String kakao_email = getIntent().getStringExtra("Email");
+
+        if (kakao_email != null && !kakao_email.isEmpty()) {
+            // 이전 액티비티에서 받아온 값이 있는 경우
+            id = kakao_email;
+        } else {
+            // 이전 액티비티에서 값이 없는 경우
+            id = currentUser.getEmail();
         }
+        docRef = db.collection("Users").document(id);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -303,6 +310,7 @@ public class TestCogActivity extends AppCompatActivity implements TextToSpeech.O
             // 우울증 검사 페이지 출력
             Intent intent_dep = new Intent(getApplication(), TestDepMainActivity.class);
             intent_dep.putExtra("score_cog", score_cog);
+            intent_dep.putExtra("Email", id);
             startActivity(intent_dep);
             finish();
         }

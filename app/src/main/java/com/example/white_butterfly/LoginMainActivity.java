@@ -40,9 +40,11 @@ public class LoginMainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     // 버튼
-    private Button kakaologinButton;
-    private ConstraintLayout emailloginButton;
+    ConstraintLayout kakaologinButton;
+    ConstraintLayout emailloginButton;
+    String name;
     String email;
+    String birth;
 
     // TAG
     private static final String TAG = "LoginMainActivity";
@@ -65,6 +67,7 @@ public class LoginMainActivity extends AppCompatActivity {
         kakaologinButton = findViewById(R.id.kakaologin);
         emailloginButton = findViewById(R.id.emaillogin);
 
+
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
@@ -83,7 +86,9 @@ public class LoginMainActivity extends AppCompatActivity {
                             Log.d("사용자 프로필", String.valueOf(user.getKakaoAccount().getProfileImageNeedsAgreement()));
                             Log.d("사용자 생일", user.getKakaoAccount().getBirthday());
 
+                            name = user.getKakaoAccount().getProfile().getNickname();
                             email = user.getKakaoAccount().getEmail();
+                            birth = user.getKakaoAccount().getBirthday();
 
                             DocumentReference docRef = db.collection("Users").document(email);
 
@@ -93,18 +98,15 @@ public class LoginMainActivity extends AppCompatActivity {
                                     if (document.exists()) {
                                         // 이미 같은 이메일로 만들어진 문서가 존재할 때
                                         Log.d(TAG, "Document exists!");
-                                        Intent intent = new Intent(LoginMainActivity.this, RegisterFinishActivity.class); // 다른 화면으로 이동
-                                        intent.putExtra("Email", email);
-                                        startActivity(intent);
                                     } else {
                                         // 같은 이메일로 만들어진 문서가 없을 때
                                         Log.d(TAG, "Document does not exist!");
                                         Map<String, Object> userData = new HashMap<>();
                                         userData.put("Email", email);
-                                        userData.put("Name", "");
+                                        userData.put("Name", name);
                                         userData.put("Gender", "");
                                         userData.put("Address", "");
-                                        userData.put("Birth", "");
+                                        userData.put("Birth", birth);
                                         userData.put("School", 0);
                                         userData.put("My", "");
                                         userData.put("Guardian", "");
@@ -114,12 +116,12 @@ public class LoginMainActivity extends AppCompatActivity {
                                         docRef.set(userData)
                                                 .addOnSuccessListener(unused -> {
                                                     Log.d(TAG, "< 데이터베이스에 유저 정보 저장 성공 >");
-                                                    Intent intent = new Intent(LoginMainActivity.this, RegisterFinishActivity.class);
-                                                    intent.putExtra("Email", email);
-                                                    startActivity(intent);
                                                 })
                                                 .addOnFailureListener(e -> Log.d(TAG, "< 데이터베이스에 유저 정보 저장 실패 >"));
                                     }
+                                    Intent intent = new Intent(LoginMainActivity.this, MainActivity.class); // 다른 화면으로 이동
+                                    intent.putExtra("Email", email);
+                                    startActivity(intent);
                                 }
                             });
                         }
