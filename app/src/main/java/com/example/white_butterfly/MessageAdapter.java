@@ -13,11 +13,13 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
+
     List<Message> messageList;
 
     public MessageAdapter(List<Message> messageList) {
         this.messageList = messageList;
     }
+
 
     @NonNull
     @Override

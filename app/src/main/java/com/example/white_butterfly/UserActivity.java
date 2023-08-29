@@ -194,12 +194,12 @@ public class UserActivity extends AppCompatActivity {
                 // 이미지 업로드 성공 시, 이미지 다운로드 URL을 가져와 ImageView에 표시
                 fileReference.getDownloadUrl().addOnSuccessListener(newDownloadUri -> {
                     if (newDownloadUri != null) {
-                        // 이미지 다운로드 URL(uri)을 이용하여 이미지뷰에 이미지 설정
+                        // 이미지 다운로드 URL(uri)을 이용하여 이미지 뷰에 이미지 설정
                         // Glide 라이브러리 등을 사용하여 이미지 로딩 가능
                         Glide.with(this)
                                 .load(newDownloadUri)
                                 .into(imageView);
-                        Toast.makeText(this, "프로필 사진을 변경하셨습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "프로필 사진을 변경하였습니다.", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "프로필 변경: " + "프로필 사진을 변경함");
                     } else {
                         Log.d(TAG, "저장소에 이미지가 없습니다.");
@@ -294,7 +294,7 @@ public class UserActivity extends AppCompatActivity {
         builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(UserActivity.this, "로그아웃을 취소하셨습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "로그아웃이 취소되었습니다.", Toast.LENGTH_SHORT).show();
                 dialog.dismiss(); // 팝업 닫기
             }
         });
@@ -330,7 +330,7 @@ public class UserActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(UserActivity.this, "탈퇴하셨습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserActivity.this, "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
 
                                 // 로그인 화면으로 이동
                                 Intent intent = new Intent(getApplication(), LoginMainActivity.class);
@@ -354,7 +354,7 @@ public class UserActivity extends AppCompatActivity {
         builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(UserActivity.this, "회원 탈퇴를 취소하셨습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "회원 탈퇴가 취소되었습니다.", Toast.LENGTH_SHORT).show();
                 dialog.dismiss(); // 팝업 닫기
             }
         });

@@ -1,17 +1,14 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
 import static android.view.View.GONE;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -40,8 +35,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-import me.relex.circleindicator.CircleIndicator3;
 
 public class MainActivity extends AppCompatActivity {
     // Firebase
@@ -57,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 3;
-    //private CircleIndicator3 mIndicator;
 
     // 뷰
     TextView text_UserName;
@@ -102,17 +94,10 @@ public class MainActivity extends AppCompatActivity {
         mPager = findViewById(R.id.viewpager);
 
         //Adapter
-        pagerAdapter = new MyAdapter(this, num_page);
+        pagerAdapter = new AdAdapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
 
-        /*
-        //Indicator
-        mIndicator = findViewById(R.id.indicator);
-        mIndicator.setViewPager(mPager);
-        mIndicator.createIndicators(num_page,0);
-         */
-
-        //ViewPager Setting
+        // ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         mPager.setCurrentItem(999); //시작 지점
         mPager.setOffscreenPageLimit(3); //최대 이미지 수
@@ -125,15 +110,6 @@ public class MainActivity extends AppCompatActivity {
                     mPager.setCurrentItem(position);
                 }
             }
-
-            /*
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                mIndicator.animatePageSelected(position%num_page);
-            }
-
-             */
         });
 
         ConstraintLayout btn_dementiaTest = findViewById(R.id.btn_dementia);

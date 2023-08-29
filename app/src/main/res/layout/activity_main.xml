@@ -197,7 +197,7 @@
                         android:id="@+id/text_finalDay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_medium"
+                        android:fontFamily="@font/pretendard_bold"
                         android:text="127일 전"
                         android:textColor="@color/main"
                         android:textSize="18sp"
@@ -378,7 +378,7 @@
                         android:layout_height="35dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/icon_game_round"
+                        android:background="@drawable/icon_memory_round"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -388,7 +388,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/pretendard_medium"
-                        android:text="기억력 게임"
+                        android:text="기억력\n모의고사"
                         android:textColor="@color/black"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"

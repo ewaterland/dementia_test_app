@@ -1,55 +1,34 @@
 package com.example.white_butterfly;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import java.util.List;
+public class AdAdapter extends FragmentStateAdapter {
 
-public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
-    private List<Integer> adList;
-    private int selectedPosition = 0; // 초기 선택된 위치
+    public int mCount;
 
-    public AdAdapter(List<Integer> adList) {
-        this.adList = adList;
+    public AdAdapter(FragmentActivity fa, int count) {
+        super(fa);
+        mCount = count;
     }
 
     @NonNull
     @Override
-    public AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ad, parent, false);
-        return new AdViewHolder(view);
-    }
+    public Fragment createFragment(int position) {
+        int index = getRealPosition(position);
 
-    @Override
-    public void onBindViewHolder(@NonNull AdViewHolder holder, int position) {
-        holder.adImageView.setImageResource(adList.get(position));
+        if(index==0) return new Ad1Fragment();
+        else if(index==1) return new Ad2Fragment();
+        else return new Ad3Fragment();
     }
 
     @Override
     public int getItemCount() {
-        return adList.size();
+        return 2000;
     }
 
-    static class AdViewHolder extends RecyclerView.ViewHolder {
-        // 광고 이미지
-        ImageView adImageView;
+    public int getRealPosition(int position) { return position % mCount; }
 
-        // 점 3개
-        ImageView ad_count_1;
-        ImageView ad_count_2;
-        ImageView ad_count_3;
-
-        public AdViewHolder(@NonNull View itemView) {
-            super(itemView);
-            adImageView = itemView.findViewById(R.id.adImageView);
-            ad_count_1 = itemView.findViewById(R.id.ad_count_1);
-            ad_count_2 = itemView.findViewById(R.id.ad_count_2);
-            ad_count_3 = itemView.findViewById(R.id.ad_count_3);
-        }
-    }
 }
