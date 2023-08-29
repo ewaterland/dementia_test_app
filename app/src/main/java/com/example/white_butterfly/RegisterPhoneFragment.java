@@ -1,12 +1,15 @@
 package com.example.white_butterfly;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -114,7 +117,6 @@ public class RegisterPhoneFragment extends Fragment {
             Log.e(TAG, e.toString());
         }
 
-
         // 이전 버튼 누른 경우
         text_before = rootView.findViewById(R.id.image_before);
         text_before.setOnClickListener(new View.OnClickListener() {
@@ -137,38 +139,43 @@ public class RegisterPhoneFragment extends Fragment {
         });
 
         // 정보가 입력됐을 때 다음 버튼 활성화를 위함
-        editText_MyFirst.addTextChangedListener(textWatcher);
-        editText_MyMiddle.addTextChangedListener(textWatcher);
-        editText_MyLast.addTextChangedListener(textWatcher);
+        setupAutoFocus(editText_MyFirst, 3, editText_MyMiddle);
+        setupAutoFocus(editText_MyMiddle, 4, editText_MyLast);
+        setupAutoFocus(editText_MyLast, 4, editText_GuardianFirst);
 
-        editText_GuardianFirst.addTextChangedListener(textWatcher);
-        editText_GuardianMiddle.addTextChangedListener(textWatcher);
-        editText_GuardianLast.addTextChangedListener(textWatcher);
+        setupAutoFocus(editText_GuardianFirst, 3, editText_GuardianMiddle);
+        setupAutoFocus(editText_GuardianMiddle, 4, editText_GuardianLast);
+        setupAutoFocus(editText_GuardianLast, 4, null);
 
         return rootView;
     }
 
-    // 입력에 따라 다음 버튼 활성화
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+    private void setupAutoFocus(final EditText editText, final int maxLength, final EditText nextEditText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            myfirst_active = editText_MyFirst.length() > 0 ? 1 : 0;
-            mymiddle_active = editText_MyMiddle.length() > 0 ? 1 : 0;
-            mylast_active = editText_MyLast.length() > 0 ? 1 : 0;
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                myfirst_active = editText_MyFirst.length() > 0 ? 1 : 0;
+                mymiddle_active = editText_MyMiddle.length() > 0 ? 1 : 0;
+                mylast_active = editText_MyLast.length() > 0 ? 1 : 0;
 
-            guardfirst_active = editText_GuardianFirst.length() > 0 ? 1 : 0;
-            guardmiddle_active = editText_GuardianMiddle.length() > 0 ? 1 : 0;
-            guardlast_active = editText_GuardianLast.length() > 0 ? 1 : 0;
+                guardfirst_active = editText_GuardianFirst.length() > 0 ? 1 : 0;
+                guardmiddle_active = editText_GuardianMiddle.length() > 0 ? 1 : 0;
+                guardlast_active = editText_GuardianLast.length() > 0 ? 1 : 0;
 
-            check();
-        }
+                check();
 
-        @Override
-        public void afterTextChanged(Editable editable) {}
-    };
+                if (charSequence.length() == maxLength && nextEditText != null) {
+                    nextEditText.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
 
     private void onNextButtonClick() {
         Log.w(TAG, "### Register_Phone - Next");

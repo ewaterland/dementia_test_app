@@ -280,7 +280,19 @@ public class UserActivity extends AppCompatActivity {
                 // 유저 삭제
                 if(currentUser != null) {
                     id = currentUser.getEmail();
-                    currentUser.delete();
+                    currentUser.delete()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        // 회원 탈퇴 성공
+                                        Log.d(TAG, "< 파이어베이스 유저 탈퇴 성공 >");
+                                    } else {
+                                        // 회원 탈퇴 실패
+                                        Log.d(TAG, "< 파이어베이스 유저 탈퇴 실패 >");
+                                    }
+                                }
+                            });
                 } else {
                     id = kakao_email;
                 }

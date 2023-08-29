@@ -34,6 +34,7 @@ public class AddressApiActivity extends AppCompatActivity {
 
         // 위에서 작성한 블로거 페이지의 URL
         String blogspot = "https://ewaterland.blogspot.com/2023/08/api.html";
+        //String blogspot = "http://127.0.0.1/addr_daum.html";
 
         activityAddressApiBinding = ActivityAddressApiBinding.inflate(getLayoutInflater());
         setContentView(activityAddressApiBinding.getRoot());

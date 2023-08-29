@@ -105,32 +105,34 @@ public class RegisterBirthFragment extends Fragment {
             onNextButtonClick();
         });
 
-        // 정보가 입력됐을 때 다음 버튼 활성화를 위함
-        editText_yyyy.addTextChangedListener(textWatcher);
-        editText_mm.addTextChangedListener(textWatcher);
-        editText_dd.addTextChangedListener(textWatcher);
+        // 정보가 입력됐을 때 다음 버튼 활성화를 위함 & 다음 칸으로 넘어감
+        setupAutoFocus(editText_yyyy, 4, editText_mm);
+        setupAutoFocus(editText_mm, 2, editText_dd);
+        setupAutoFocus(editText_dd, 2, null);
 
         return rootView;
     }
 
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+    private void setupAutoFocus(final EditText editText, final int maxLength, final EditText nextEditText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            yy_active = editText_yyyy.length() > 0 ? 1 : 0;
-            mm_active = editText_mm.length() > 0 ? 1 : 0;
-            dd_active = editText_dd.length() > 0 ? 1 : 0;
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                yy_active = editText_yyyy.length() > 0 ? 1 : 0;
+                mm_active = editText_mm.length() > 0 ? 1 : 0;
+                dd_active = editText_dd.length() > 0 ? 1 : 0;
 
-            check();
-        }
+                if (charSequence.length() == maxLength && nextEditText != null) {
+                    nextEditText.requestFocus();
+                }
+            }
 
-        @Override
-        public void afterTextChanged(Editable editable) {
-        }
-    };
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
 
     private void onNextButtonClick() {
         Log.w(TAG, "### Register_Birth - Next");
@@ -143,20 +145,24 @@ public class RegisterBirthFragment extends Fragment {
         infoModel.setInputMonth(inputMonth);
         infoModel.setInputDay(inputDay);
 
-        if (Integer.parseInt(inputYear) > 1900 && Integer.parseInt(inputYear) <= 2023) {
-            if (Integer.parseInt(inputMonth) > 0 && Integer.parseInt(inputMonth) <= 12) {
-                if (Integer.parseInt(inputDay) > 0 && Integer.parseInt(inputDay) <= 31) {
-                    String birth = String.format("%s년 %s월 %s일", infoModel.getInputYear(), infoModel.getInputMonth(), infoModel.getInputDay());
-                    docRef.update("Birth", birth);
-                    navigateToNextFragment();
-                } else  {
-                    Toast.makeText(getContext(), "태어난 일이 올바르지 않습니다", Toast.LENGTH_SHORT).show();
+        try {
+            if (Integer.parseInt(inputYear) > 1900 && Integer.parseInt(inputYear) <= 2023) {
+                if (Integer.parseInt(inputMonth) > 0 && Integer.parseInt(inputMonth) <= 12) {
+                    if (Integer.parseInt(inputDay) > 0 && Integer.parseInt(inputDay) <= 31) {
+                        String birth = String.format("%s년 %s월 %s일", infoModel.getInputYear(), infoModel.getInputMonth(), infoModel.getInputDay());
+                        docRef.update("Birth", birth);
+                        navigateToNextFragment();
+                    } else {
+                        Toast.makeText(getContext(), "태어난 일이 올바르지 않습니다", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "태어난 월이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(getContext(), "태어난 월이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "태어난 연도가 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(getContext(), "태어난 연도가 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+        }catch (Exception e) {
+            Toast.makeText(getContext(), "생년월일이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
