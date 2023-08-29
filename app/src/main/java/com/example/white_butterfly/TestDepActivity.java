@@ -247,7 +247,6 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
             button_unselected();
 
             text_q_num.setText(String.valueOf(currentPage));
-            text_ex.setText("");
 
             progressModel.getProgressLiveData().observe(TestDepActivity.this, progress -> {
                 progressBar.setProgress(currentProgress);
@@ -316,6 +315,7 @@ public class TestDepActivity extends AppCompatActivity implements TextToSpeech.O
                             String value = dataSnapshot.getValue(String.class);
                             value = value.replace("\\n", "\n");
                             text_question.setText(value);
+                            text_ex.setVisibility(View.INVISIBLE);
                             Log.w(TAG, currentPage + " 질문 세팅 완료");
                         } else {
                             Log.w(TAG, currentPage + " 질문 경로가 존재하지 않음. path: " + path);

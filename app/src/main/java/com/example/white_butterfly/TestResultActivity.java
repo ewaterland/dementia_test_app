@@ -1,10 +1,13 @@
 package com.example.white_butterfly;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,8 +54,13 @@ public class TestResultActivity extends AppCompatActivity {
         // 텍스트 뷰
         TextView text_cog_result1 = findViewById(R.id.text_cog_result1);
         TextView text_cog_result2 = findViewById(R.id.text_cog_result2);
-        TextView text_dep_result1 = findViewById(R.id.text_dep_result1);
-        TextView text_dep_result2 = findViewById(R.id.text_dep_result2);
+
+        // 이미지 뷰
+        ImageView image_test_result = findViewById(R.id.image_test_result);
+
+        // 레이아웃 뷰
+        LinearLayout layout_cog_result = findViewById(R.id.layout_cog_result);
+        LinearLayout layout_dep_result = findViewById(R.id.layout_dep_result);
 
         // 점수에 따른 결과 표시
         if (score_cog >= 6) // 치매 의심
@@ -69,21 +77,22 @@ public class TestResultActivity extends AppCompatActivity {
             }
             else  // 우울증 아님
             {
-                text_dep_result1.setText("");
-                text_dep_result2.setText("");
+                layout_dep_result.setVisibility(View.INVISIBLE);
             }
         }
         else  // 치매 아님
         {
             if (score_dep >= 5)  // 우울증 의심
             {
+                layout_cog_result.setVisibility(View.INVISIBLE);
                 Score = "우울증이 의심돼요";
             }
             else  // 우울증 아님
             {
-                text_dep_result1.setText("");
-                text_dep_result2.setText("");
+                layout_dep_result.setVisibility(View.INVISIBLE);
+
                 Score = "아주 건강한 상태예요";
+                image_test_result.setImageResource(R.drawable.image_test_result_good);
             }
         }
 
