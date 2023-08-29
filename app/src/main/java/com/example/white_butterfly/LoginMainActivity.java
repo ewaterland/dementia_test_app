@@ -73,6 +73,8 @@ public class LoginMainActivity extends AppCompatActivity {
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                 if (oAuthToken != null) {
                     Log.d("카카오 로그인 성공", "카카오 로그인 성공");
+                    Toast.makeText(LoginMainActivity.this, "카카오 로그인이 되었습니다.",
+                            Toast.LENGTH_SHORT).show();
 
                     // 로그인 성공 후 사용자 정보 요청
                     UserApiClient.getInstance().me((user, error) -> {

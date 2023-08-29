@@ -272,7 +272,7 @@ public class Memory02Activity extends AppCompatActivity implements TextToSpeech.
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-            int langResult = textToSpeech.setLanguage(Locale.US);
+            int langResult = textToSpeech.setLanguage(Locale.KOREA);
             if (langResult == TextToSpeech.LANG_MISSING_DATA || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "Language is not supported or missing data");
             } else {
