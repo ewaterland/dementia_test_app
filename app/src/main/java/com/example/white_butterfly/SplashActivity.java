@@ -11,6 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.white_butterfly.Login.LoginMainActivity;
+import com.example.white_butterfly.Register.RegisterAddressFragment;
+import com.example.white_butterfly.Register.RegisterBirthFragment;
+import com.example.white_butterfly.Register.RegisterGenderFragment;
+import com.example.white_butterfly.Register.RegisterNameFragment;
+import com.example.white_butterfly.Register.RegisterPhoneFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

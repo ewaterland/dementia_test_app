@@ -1,6 +1,5 @@
 package com.example.white_butterfly;
 
-import static android.content.ContentValues.TAG;
 import static android.view.View.GONE;
 
 import android.Manifest;
@@ -24,6 +23,9 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.white_butterfly.Center.CenterActivity;
+import com.example.white_butterfly.Chatbot.ChatbotMainActivity;
+import com.example.white_butterfly.Community.CommunityMainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         mPager = findViewById(R.id.viewpager);
 
         //Adapter
-        pagerAdapter = new AdAdapter(this, num_page);
+        pagerAdapter = new com.example.white_butterfly.Ad.AdAdapter(this, num_page);
         mPager.setAdapter(pagerAdapter);
 
         // ViewPager Setting
@@ -120,11 +122,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ConstraintLayout btn_reservation = findViewById(R.id.btn_reservation);
+        btn_reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HospitalListActivity.class); // 다른 화면으로 이동
+                startActivity(intent);
+                docRef.update("ResultHide", hide);
+            }
+        });
+
         ConstraintLayout btn_dementiaTest = findViewById(R.id.btn_dementia);
         btn_dementiaTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TestMainActivity.class); // 다른 화면으로 이동
+                Intent intent = new Intent(MainActivity.this, com.example.white_butterfly.TestCogDep.TestMainActivity.class); // 다른 화면으로 이동
                 intent.putExtra("Email", id);
                 startActivity(intent);
                 docRef.update("ResultHide", hide);
@@ -135,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         btn_memoryTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), Memory01Activity.class);
+                Intent intent = new Intent(getApplication(), com.example.white_butterfly.TestMemory.Memory01Activity.class);
                 startActivity(intent);
                 docRef.update("ResultHide", hide);
             }
@@ -448,11 +460,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void Naver(View target)
     {
+        Intent intent = new Intent(getApplication(), CommunityMainActivity.class);
+        startActivity(intent);
+
+        /*
         // 네이버 홈페이지 URL
         String naverUrl = "https://cafe.naver.com/whitebutterflys2";
 
         // 인텐트 생성 및 웹 브라우저로 이동
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(naverUrl));
         startActivity(intent);
+
+         */
     }
 }

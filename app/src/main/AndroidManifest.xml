@@ -46,16 +46,16 @@
 
         <!-- 로그인 및 회원가입 -->
         <activity
-            android:name=".LoginMainActivity"
+            android:name=".Login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login.LoginMainActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterFinishActivity"
+            android:name=".Register.AddressApiActivity"
             android:exported="false" />
         <activity
-            android:name=".AddressApiActivity"
+            android:name=".Register.RegisterFinishActivity"
             android:exported="false" />
 
         <!-- 카카오 로그인 -->
@@ -79,66 +79,83 @@
             android:name=".MainActivity"
             android:exported="false" />
 
-        <!-- 로딩 페이지 -->
+        <!-- 소통방 -->
         <activity
-            android:name=".TestLoadingActivity"
+            android:name=".Community.CommunityMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Community.CommunityWriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Community.CommunityReadActivity"
+            android:exported="false" />
+
+        <!-- 병원 예약 -->
+        <activity
+            android:name=".HospitalListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalInfoActivity"
             android:exported="false" />
 
         <!-- 말동무(챗봇) -->
         <activity
-            android:name=".ChatbotMainActivity"
+            android:name=".Chatbot.ChatbotMainActivity"
             android:label="ChatbotMainActivity" />
         <activity
-            android:name=".ChatbotActivity"
+            android:name=".Chatbot.ChatbotActivity"
             android:label="ChatbotActivity" />
         <activity
-            android:name=".ChatbotBoyActivity"
+            android:name=".Chatbot.ChatbotBoyActivity"
             android:label="ChatbotBoyActivity" />
         <activity
-            android:name=".ChatbotGirlActivity"
+            android:name=".Chatbot.ChatbotGirlActivity"
             android:label="ChatbotGirlActivity" />
         <activity
-            android:name=".ChatbotCounActivity"
+            android:name=".Chatbot.ChatbotCounActivity"
             android:label="ChatbotCounActivity" />
 
         <!-- 치매 선별 검사 -->
         <activity
-            android:name=".TestMainActivity"
+            android:name=".TestCogDep.TestLoadingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestCogDep.TestMainActivity"
             android:label="TestMainActivity" />
         <activity
-            android:name=".TestExampleActivity"
+            android:name=".TestCogDep.TestExampleActivity"
             android:label="TestExampleActivity" />
         <activity
-            android:name=".TestCogActivity"
+            android:name=".TestCogDep.TestCogActivity"
             android:label="TestCogActivity" />
         <activity
-            android:name=".TestDepMainActivity"
+            android:name=".TestCogDep.TestDepMainActivity"
             android:label="TestDepMainActivity" />
         <activity
-            android:name=".TestDepActivity"
+            android:name=".TestCogDep.TestDepActivity"
             android:label="TestDepActivity" />
         <activity
-            android:name=".TestResultGoodActivity"
+            android:name=".TestCogDep.TestResultGoodActivity"
             android:label="TestResultGoodActivity" />
         <activity
-            android:name=".TestResultBadActivity"
+            android:name=".TestCogDep.TestResultBadActivity"
             android:label="TestResultBadActivity" />
 
         <!-- 기억력 검사 -->
         <activity
-            android:name=".Memory01Activity"
+            android:name=".TestMemory.Memory01Activity"
             android:label="Memory01Activity" />
         <activity
-            android:name=".Memory02Activity"
+            android:name=".TestMemory.Memory02Activity"
             android:label="Memory02Activity" />
         <activity
-            android:name=".Memory03Activity"
+            android:name=".TestMemory.Memory03Activity"
             android:label="Memory03Activity" />
         <activity
-            android:name=".MemoryLoadingActivity"
+            android:name=".TestMemory.MemoryLoadingActivity"
             android:label="MemoryLoadingActivity" />
         <activity
-            android:name=".MemoryResultActivity"
+            android:name=".TestMemory.MemoryResultActivity"
             android:label="MemoryResultActivity" />
 
         <!-- 마이페이지 -->
@@ -148,12 +165,12 @@
 
         <!-- 카카오 지도 -->
         <activity
-            android:name=".CenterActivity"
+            android:name=".Center.CenterActivity"
             android:label="CenterActivity" />
 
         <!-- 푸쉬 알림 -->
         <service
-            android:name=".FCMNotificationService" android:exported="false">
+            android:name=".Z_etc.FCMNotificationService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
