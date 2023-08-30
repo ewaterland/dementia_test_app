@@ -62,6 +62,7 @@ public class HospitalReservationActivity extends AppCompatActivity {
                                                     Log.w(TAG, "Date: " + selectedDate);
 
                                                     startActivity(intent);
+                                                    finish();
                                                 }
                                             });
 
@@ -94,7 +95,7 @@ public class HospitalReservationActivity extends AppCompatActivity {
         int year = datePicker.getYear();
         int month = datePicker.getMonth();
         int dayOfMonth = datePicker.getDayOfMonth();
-        selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
+        selectedDate = year + "년 " + (month + 1) + "월 " + dayOfMonth + "일";
 
         datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
                 new DatePicker.OnDateChangedListener() {
