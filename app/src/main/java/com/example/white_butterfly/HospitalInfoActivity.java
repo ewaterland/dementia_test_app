@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,9 +22,6 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class HospitalInfoActivity extends AppCompatActivity {
-    // 뒤로가기 버튼
-    private static final int BACK_PRESS_INTERVAL = 2000; // 뒤로가기 버튼을 두 번 누르는 간격 (밀리초)
-    private long backPressedTime = 0;
 
     // 뷰
     ArrayList<HospitalData> hospitalDataList;
@@ -36,7 +34,18 @@ public class HospitalInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_info);
 
-        TextView text_title = findViewById(R.id.text_title);
+        ImageView image_before;
+        image_before = findViewById(R.id.image_before);
+        image_before.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.w(TAG, "이전 버튼 클릭");
+                Intent intent_main = new Intent(getApplication(), MainActivity.class);
+                startActivity(intent_main);
+            }
+        });
+
+        TextView text_name = findViewById(R.id.text_title);
         TextView text_sub = findViewById(R.id.text_sub);
         TextView text_adr = findViewById(R.id.text_adr);
 
@@ -44,23 +53,24 @@ public class HospitalInfoActivity extends AppCompatActivity {
         String hospitalSub = getIntent().getStringExtra("hospitalSub");
         String hospitalAddress = getIntent().getStringExtra("hospitalAddress");
 
-        text_title.setText(hospitalName);
+        text_name.setText(hospitalName);
         text_sub.setText(hospitalSub);
         text_adr.setText(hospitalAddress);
-    }
 
-    ///////////////////////////////// 뒤로 가기 버튼
+        Button btn_next = findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Log.w(TAG, "예약하기 버튼 클릭");
 
-    @Override
-    public void onBackPressed() {
-        long currentTime = System.currentTimeMillis();
+                                                    Intent intent = new Intent(getApplication(), HospitalReservationActivity.class);
 
-        if (currentTime - backPressedTime < BACK_PRESS_INTERVAL) {
-            Intent intent = new Intent(getApplication(), HospitalListActivity.class);
-            startActivity(intent);
-        } else {
-            backPressedTime = currentTime;
-            Toast.makeText(this, "한 번 더 누를 시 예약이 종료됩니다", Toast.LENGTH_SHORT).show();
-        }
+                                                    intent.putExtra("hospitalName", text_name.getText());
+                                                    intent.putExtra("hospitalSub", text_sub.getText());
+                                                    intent.putExtra("hospitalAddress", text_adr.getText());
+
+                                                    startActivity(intent);
+                                                }
+                                            });
     }
 }

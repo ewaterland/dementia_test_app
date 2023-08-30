@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.white_butterfly.MainActivity;
 import com.example.white_butterfly.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,18 +37,21 @@ public class CommunityWriteActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     DatabaseReference docRef;
     String id;
+    String name;
 
     //현재 날짜로 지정
     String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
     String date = currentDate;
-    private static final String TAG = "CommunityActivity";
+
+    // TAG
+    private static final String TAG = "CommunityWriteActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_write);
 
-        Log.w(TAG, "--- CommunityActivity ---");
+        Log.w(TAG, "--- CommunityWriteActivity ---");
 
         initializeViews();
 
@@ -67,15 +72,12 @@ public class CommunityWriteActivity extends AppCompatActivity {
             }
         });
 
-        String kakao_email = getIntent().getStringExtra("Email");
-        if (kakao_email != null && !kakao_email.isEmpty()) {
-            // 이전 액티비티에서 받아온 값이 있는 경우
-            id = kakao_email;
-        } else {
-            // 이전 액티비티에서 값이 없는 경우
-            id = currentUser.getEmail();
+        try {
+            name = maskName(getIntent().getStringExtra("name"));
+        } catch (Exception e) {
+            name = "홍길동";
+            name = maskName("홍길동");
         }
-        Log.d(TAG, id);
 
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,33 +99,45 @@ public class CommunityWriteActivity extends AppCompatActivity {
 
         // 빈 값이 아닐 경우에만 Firebase에 저장
         if (!nodetitle.isEmpty() && !nodecontent.isEmpty()) {
-            // 이메일 주소에서 @ 앞까지를 사용
-            int atIndex = id.indexOf('@');
-            if (atIndex != -1) {
-                String sanitizedId = id.substring(0, atIndex);
-
-                DatabaseReference newNodeReference = docRef.child("Community").child(date).child(sanitizedId).child(nodetitle);
-                newNodeReference.setValue(nodecontent)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Intent intent = new Intent(CommunityWriteActivity.this, CommunityMainActivity.class);
-                                intent.putExtra("Email", id);
-                                startActivity(intent);
-                                Toast.makeText(CommunityWriteActivity.this, "저장 성공", Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "< 저장 성공 >");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(CommunityWriteActivity.this, "저장 실패", Toast.LENGTH_SHORT).show();
-                                Log.e(TAG, "저장 실패: " + e.getMessage());
-                            }
-                        });
-            } else {
-                Log.e(TAG, "잘못된 형식의 이메일 주소");
-            }
+            DatabaseReference newNodeReference = docRef.child("Community").child(date).child(name).child(nodetitle);
+            newNodeReference.setValue(nodecontent)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Intent intent = new Intent(CommunityWriteActivity.this, CommunityMainActivity.class);
+                            intent.putExtra("Email", id);
+                            startActivity(intent);
+                            Toast.makeText(CommunityWriteActivity.this, "저장 성공", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "< 저장 성공 >");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(CommunityWriteActivity.this, "저장 실패", Toast.LENGTH_SHORT).show();
+                            Log.e(TAG, "저장 실패: " + e.getMessage());
+                        }
+                    });
         }
+
+        ImageView image_before = findViewById(R.id.image_before);
+        image_before.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_main = new Intent(getApplication(), CommunityMainActivity.class);
+                startActivity(intent_main);
+            }
+        });
+    }
+
+    public static String maskName(String fullName) {
+        if (fullName.length() < 2) {
+            return fullName; // 이름이 2글자 이하면 변환하지 않고 반환
+        }
+
+        char firstChar = fullName.charAt(0);
+        String maskedPortion = new String(new char[fullName.length() - 1]).replace('\0', '*');
+
+        return firstChar + maskedPortion;
     }
 }

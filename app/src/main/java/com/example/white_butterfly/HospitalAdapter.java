@@ -39,7 +39,7 @@ public class HospitalAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View converView, ViewGroup parent) {
-        View view = mLayoutInflater.inflate(R.layout.hospital_list, null);
+        View view = mLayoutInflater.inflate(R.layout.item_hospital, null);
 
         ImageView imageView = view.findViewById(R.id.imageView);
         TextView hospital_name = view.findViewById(R.id.text_name);

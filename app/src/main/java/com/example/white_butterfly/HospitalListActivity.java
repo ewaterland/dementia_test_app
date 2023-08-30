@@ -1,5 +1,6 @@
 package com.example.white_butterfly;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,16 @@ public class HospitalListActivity extends AppCompatActivity {
 
     // 뷰
     ArrayList<HospitalData> hospitalDataList;
+    ListView listView;
+    TextView text_reservation;
+    TextView text_name;
+    TextView text_sub;
+    TextView text_adr;
+
+    // 변수
+    String hospitalName;
+    String hospitalSub;
+    String hospitalAddress;
 
     // 태그
     private static final String TAG = "ReservationListActivity";
@@ -25,11 +36,14 @@ public class HospitalListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_list);
 
+        Log.w(TAG, "--- ReservationListActivity ---");
+
+        initializeViews();
+
         this.InitializeHospitalData();
 
-        ListView listView = (ListView)findViewById(R.id.hospital_list);
+        listView = (ListView)findViewById(R.id.hospital_list);
         final HospitalAdapter hospitalAdapter = new HospitalAdapter(this, hospitalDataList);
-
         listView.setAdapter(hospitalAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -37,29 +51,33 @@ public class HospitalListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View v, int position, long id){
                 HospitalData clickedItem = (HospitalData) parent.getItemAtPosition(position);
 
-                String hospitalName = clickedItem.getHospital_name();
-                String hospitalSub = clickedItem.getHospital_sub();
-                String hospitalAddress = clickedItem.getHospital_adr();
+                hospitalName = clickedItem.getHospital_name();
+                hospitalSub = clickedItem.getHospital_sub();
+                hospitalAddress = clickedItem.getHospital_adr();
 
                 Log.w(TAG, "clickedItem: " + clickedItem);
 
+                ProgressDialog progressDialog = ProgressDialog.show(HospitalListActivity.this, "", "로딩 중...", true);
+
+                // Intent 생성 및 데이터 전달 작업 수행
                 Intent intent = new Intent(getApplication(), HospitalInfoActivity.class);
+
                 intent.putExtra("hospitalName", hospitalName);
                 intent.putExtra("hospitalSub", hospitalSub);
                 intent.putExtra("hospitalAddress", hospitalAddress);
+
+                // ProgressDialog 닫기
+                progressDialog.dismiss();
 
                 startActivity(intent);
             }
         });
 
-        TextView text_reservation = findViewById(R.id.text_reservation);
-        TextView text_name = findViewById(R.id.text_name);
-        TextView text_sub = findViewById(R.id.text_sub);
-        TextView text_adr = findViewById(R.id.text_address);
         text_reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplication(), HospitalInfoActivity.class);
+
                 intent.putExtra("hospitalName", text_name.getText());
                 intent.putExtra("hospitalSub", text_sub.getText());
                 intent.putExtra("hospitalAddress", text_adr.getText());
@@ -67,6 +85,14 @@ public class HospitalListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initializeViews()
+    {
+        text_reservation = findViewById(R.id.text_reservation);
+        text_name = findViewById(R.id.text_name);
+        text_sub = findViewById(R.id.text_sub);
+        text_adr = findViewById(R.id.text_address);
     }
 
     public void InitializeHospitalData()

@@ -461,6 +461,7 @@ public class MainActivity extends AppCompatActivity {
     public void Naver(View target)
     {
         Intent intent = new Intent(getApplication(), CommunityMainActivity.class);
+        intent.putExtra("name", text_UserName.getText().toString());
         startActivity(intent);
 
         /*

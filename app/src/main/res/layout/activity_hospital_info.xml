@@ -29,6 +29,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- 상단 END -->
 
+    <!-- 병원 정보 START -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
@@ -105,6 +106,7 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 병원 정보 END -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -127,6 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- 진료 시간 START -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
             android:layout_width="0dp"
@@ -327,8 +330,9 @@
             app:layout_constraintStart_toEndOf="@+id/textView20" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 진료 시간 END -->
 
-    <!-- 예약하기 버튼 -->
+    <!-- 예약하기 버튼 START -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="0dp"
@@ -342,5 +346,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+    <!-- 예약하기 버튼 END -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

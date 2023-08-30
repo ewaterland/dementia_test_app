@@ -97,6 +97,13 @@
         <activity
             android:name=".HospitalInfoActivity"
             android:exported="false" />
+        <activity
+            android:name=".HospitalReservationActivity"
+            android:exported="true"
+            android:theme="@style/datePicker"/>
+        <activity
+            android:name=".HospitalFinishActivity"
+            android:exported="true" />
 
         <!-- 말동무(챗봇) -->
         <activity
