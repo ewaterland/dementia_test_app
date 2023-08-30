@@ -138,17 +138,22 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else // 로그인 실패
                     {
-                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
-                        {
-                            Toast.makeText(LoginActivity.this, "이메일 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                        if (NetworkUtils.isNetworkAvailable(LoginActivity.this)) {
+                            // 인터넷 연결이 가능한 상태
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                            {
+                                Toast.makeText(LoginActivity.this, "이메일 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
 
-                            Log.w(TAG, "< 로그인 실패 - 이메일 형식 오류 >", task.getException());
-                        }
-                        else
-                        {
-                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                                Log.w(TAG, "< 로그인 실패 - 이메일 형식 오류 >", task.getException());
+                            }
+                            else
+                            {
+                                Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
 
-                            Log.w(TAG, "< 로그인 실패 - 기타 오류 >", task.getException());
+                                Log.w(TAG, "< 로그인 실패 - 기타 오류 >", task.getException());
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "인터넷 연결이 필요합니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

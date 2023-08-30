@@ -53,6 +53,7 @@ public class UserActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     // 뷰
+    ImageView image_before;
     TextView Text_Name;
     TextView Text_Birthday;
     private ImageView imageView;
@@ -60,9 +61,6 @@ public class UserActivity extends AppCompatActivity {
 
     // 입력 받은 정보를 저장할 공간
     public String name;
-    public String address;
-    public String my;
-    public String guardian;
     String gender;
     String id;
 
@@ -94,6 +92,14 @@ public class UserActivity extends AppCompatActivity {
                 openGallery();
             }
         });
+
+        image_before.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_main = new Intent(getApplication(), MainActivity.class);
+                startActivity(intent_main);
+            }
+        });
     }
 
     ///////////////////////////////// 뷰 관련
@@ -105,6 +111,7 @@ public class UserActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.profileImageView);
 
+        image_before = findViewById(R.id.image_before);
         loadBar = findViewById(R.id.loadBar);
 
         // 현재 로그인 된 유저 정보 읽기
@@ -275,11 +282,14 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String kakao_email = getIntent().getStringExtra("Email");
-                Log.d(TAG, kakao_email);
-                Log.d(TAG, String.valueOf(currentUser));
-                // 유저 삭제
-                if(currentUser != null) {
-                    id = currentUser.getEmail();
+
+                // 로그인한 사용자 정보 가져오기
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (currentUser != null) {
+                    String id = currentUser.getEmail();
+
+                    // 유저 삭제
                     currentUser.delete()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -287,38 +297,16 @@ public class UserActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // 회원 탈퇴 성공
                                         Log.d(TAG, "< 파이어베이스 유저 탈퇴 성공 >");
+                                        deleteUserInfo(id);
                                     } else {
                                         // 회원 탈퇴 실패
-                                        Log.d(TAG, "< 파이어베이스 유저 탈퇴 실패 >");
+                                        Log.d(TAG, "< 파이어베이스 유저 탈퇴 실패 >", task.getException());
                                     }
                                 }
                             });
                 } else {
-                    id = kakao_email;
+                    deleteUserInfo(kakao_email);
                 }
-                // 유저 정보 삭제
-                db.collection("Users").document(id)
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(UserActivity.this, "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
-
-                                // 로그인 화면으로 이동
-                                Intent intent = new Intent(getApplication(), LoginMainActivity.class);
-                                startActivity(intent);
-                                finish();
-
-                                Log.d(TAG, "< 유저 정보 삭제 성공 >");
-                                Log.d(TAG, "< 회원 탈퇴 > Email: " + id);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "< 유저 정보 삭제 실패 >", e);
-                            }
-                        });
             }
         });
 
@@ -333,12 +321,44 @@ public class UserActivity extends AppCompatActivity {
 
         // 팝업 표시
         AlertDialog dialog = builder.create();
-        dialog.show();
 
         // 버튼 텍스트 색상 변경
-        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-        positiveButton.setTextColor(Color.BLACK);
-        negativeButton.setTextColor(Color.BLACK);
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                positiveButton.setTextColor(Color.BLACK);
+                negativeButton.setTextColor(Color.BLACK);
+            }
+        });
+
+        dialog.show();
+    }
+
+    // 유저 정보 삭제 메서드
+    private void deleteUserInfo(String id) {
+        db.collection("Users").document(id)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(UserActivity.this, "탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
+
+                        // 로그인 화면으로 이동
+                        Intent intent = new Intent(UserActivity.this, LoginMainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                        Log.d(TAG, "< 유저 정보 삭제 성공 >");
+                        Log.d(TAG, "< 회원 탈퇴 > Email: " + id);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "< 유저 정보 삭제 실패 >", e);
+                    }
+                });
     }
 }

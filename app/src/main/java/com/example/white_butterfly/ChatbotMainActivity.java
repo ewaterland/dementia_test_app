@@ -49,6 +49,9 @@ public class ChatbotMainActivity extends AppCompatActivity {
         mPager.setCurrentItem(999); //시작 지점
         mPager.setOffscreenPageLimit(3); //최대 이미지 수
 
+        // 유료/무료 계정 확인
+        Number pay = getIntent().getLongExtra("Pay", 0);
+
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -64,16 +67,23 @@ public class ChatbotMainActivity extends AppCompatActivity {
                 mIndicator.animatePageSelected(position%num_page);
                 now = position%num_page;
 
-                if (now == 2)
+                if (now == 2)  // 상담사 페이지일 때
                 {
-                    btn_next.setEnabled(false);
+                    Log.w(TAG, "ChatbotMain - Pay: " + pay);
+                    if (pay.equals(1)) {  // 유료 계정인 경우 버튼 활성화
+                        btn_next.setEnabled(true);
+                    }
+                    else {  // 무료 계정인 경우 버튼 비활성화
+                        btn_next.setEnabled(false);
+                    }
                 }
-                else {
+                else  // 나머지 애들 버튼 활성화
+                {
                     btn_next.setEnabled(true);
                 }
             }
         });
-
+        
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

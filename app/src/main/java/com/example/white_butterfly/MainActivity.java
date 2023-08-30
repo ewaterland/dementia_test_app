@@ -1,5 +1,6 @@
 package com.example.white_butterfly;
 
+import static android.content.ContentValues.TAG;
 import static android.view.View.GONE;
 
 import android.Manifest;
@@ -144,8 +145,26 @@ public class MainActivity extends AppCompatActivity {
         btn_chatbot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), ChatbotMainActivity.class);
-                startActivity(intent);
+                Intent intent_chatbot = new Intent(getApplication(), ChatbotMainActivity.class);
+
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            Number pay = documentSnapshot.getLong("Pay");
+                            intent_chatbot.putExtra("Pay", pay);
+
+                            Log.d(TAG, "결제 여부: " + pay);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error getting document", e);
+                    }
+                });
+
+                startActivity(intent_chatbot);
                 docRef.update("ResultHide", hide);
             }
         });
