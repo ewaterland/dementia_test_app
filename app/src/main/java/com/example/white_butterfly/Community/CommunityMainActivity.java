@@ -3,14 +3,19 @@ package com.example.white_butterfly.Community;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.white_butterfly.Community.CommunityWriteActivity;
 import com.example.white_butterfly.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,31 +71,62 @@ public class CommunityMainActivity extends AppCompatActivity {
 
         // 리스트뷰 초기화
         ArrayList<String> nodeNames = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nodeNames);
-        communitylistView.setAdapter(adapter);
-        int atIndex = id.indexOf('@');
-        if (atIndex != -1) {
-            String sanitizedId = id.substring(0, atIndex);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.community_list_item, nodeNames) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.community_list_item, parent, false);
+                }
 
-            // 데이터베이스에서 하위 노드 이름을 가져와서 리스트뷰에 추가
-            docRef.child(sanitizedId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    nodeNames.clear();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String nodeName = snapshot.getKey();
-                        if (nodeName != null) {
-                            nodeNames.add(nodeName);
+                TextView Title = convertView.findViewById(R.id.txt_title);
+                TextView Date = convertView.findViewById(R.id.txt_date);
+                TextView Id = convertView.findViewById(R.id.txt_id);
+
+                String itemData = nodeNames.get(position); // 현재 항목의 데이터
+                String[] dataParts = itemData.split("\n"); // 데이터를 줄 단위로 분할
+                String titleText = dataParts[0]; // 첫 번째 줄은 제목
+                String dateText = dataParts[1]; // 두 번째 줄은 날짜
+                String idText = dataParts[2]; // 세 번째 줄은 작성자
+
+                Title.setText(titleText); // 텍스트뷰에 제목 설정
+                Date.setText(dateText); // 텍스트뷰에 날짜 설정
+                Id.setText(idText); // 텍스트뷰에 작성자 설정
+
+                return convertView;
+            }
+        };
+        communitylistView.setAdapter(adapter);
+
+        docRef.child("Community").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                nodeNames.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String DateName = snapshot.getKey();
+                    Log.w(TAG, "DateName : " + DateName);
+
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        String IdName = childSnapshot.getKey();
+                        Log.w(TAG, "IdName : " + IdName);
+
+                        for (DataSnapshot grandChildSnapshot : childSnapshot.getChildren()) {
+                            String TitleName = grandChildSnapshot.getKey();
+                            Log.w(TAG, "TitleName : " + TitleName);
+                            if (TitleName != null) {
+                                String itemData = TitleName + "\n" + DateName + "\n" + IdName;
+                                nodeNames.add(itemData);
+                            }
                         }
                     }
-                    adapter.notifyDataSetChanged();
                 }
+                adapter.notifyDataSetChanged();
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e(TAG, "데이터 가져오기 실패: " + databaseError.getMessage());
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "데이터 가져오기 실패: " + databaseError.getMessage());
+            }
+        });
     }
 }

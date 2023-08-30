@@ -6,20 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class HospitalListActivity extends AppCompatActivity {
-
-    // 뒤로가기 버튼
-    private static final int BACK_PRESS_INTERVAL = 2000; // 뒤로가기 버튼을 두 번 누르는 간격 (밀리초)
-    private long backPressedTime = 0;
 
     // 뷰
     ArrayList<HospitalData> hospitalDataList;
@@ -30,7 +23,7 @@ public class HospitalListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hospital);
+        setContentView(R.layout.activity_hospital_list);
 
         this.InitializeHospitalData();
 
@@ -42,9 +35,35 @@ public class HospitalListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id){
+                HospitalData clickedItem = (HospitalData) parent.getItemAtPosition(position);
+
+                String hospitalName = clickedItem.getHospital_name();
+                String hospitalSub = clickedItem.getHospital_sub();
+                String hospitalAddress = clickedItem.getHospital_adr();
+
+                Log.w(TAG, "clickedItem: " + clickedItem);
+
                 Intent intent = new Intent(getApplication(), HospitalInfoActivity.class);
-                intent.putExtra("count", String.valueOf(hospitalAdapter.getItem(position)));
-                Log.w(TAG, "count: " + hospitalAdapter.getItem(position));
+                intent.putExtra("hospitalName", hospitalName);
+                intent.putExtra("hospitalSub", hospitalSub);
+                intent.putExtra("hospitalAddress", hospitalAddress);
+
+                startActivity(intent);
+            }
+        });
+
+        TextView text_reservation = findViewById(R.id.text_reservation);
+        TextView text_name = findViewById(R.id.text_name);
+        TextView text_sub = findViewById(R.id.text_sub);
+        TextView text_adr = findViewById(R.id.text_address);
+        text_reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplication(), HospitalInfoActivity.class);
+                intent.putExtra("hospitalName", text_name.getText());
+                intent.putExtra("hospitalSub", text_sub.getText());
+                intent.putExtra("hospitalAddress", text_adr.getText());
+
                 startActivity(intent);
             }
         });
@@ -54,11 +73,10 @@ public class HospitalListActivity extends AppCompatActivity {
     {
         hospitalDataList = new ArrayList<HospitalData>();
 
-        hospitalDataList.add(new HospitalData("청심병원", "정신건강의학과","광주광역시 동구 운림동"));
-        hospitalDataList.add(new HospitalData("북구치매주간병원", "요양병원","광주광역시 북구 태봉로"));
-        hospitalDataList.add(new HospitalData("해피뷰병원", "종합병원","광주광역시 북구 유동"));
-        hospitalDataList.add(new HospitalData("맑은머리 김동욱 신경과 의원", "신경과","광주광역시 북구 누문동"));
-        hospitalDataList.add(new HospitalData("중앙신경과의원", "신경과","광주광역시 서구 금호동"));
-        hospitalDataList.add(new HospitalData("하나로신경과의원", "신경과","광주광역시 남구 진월동"));
+        hospitalDataList.add(new HospitalData(R.drawable.icon_star,"해피뷰병원", "종합병원","광주광역시 북구 유동"));
+        hospitalDataList.add(new HospitalData(R.drawable.icon_star,"북구치매주간병원", "요양병원","광주광역시 북구 태봉로"));
+
+        hospitalDataList.add(new HospitalData(R.color.back,"중앙신경과의원", "신경과","광주광역시 서구 금호동"));
+        hospitalDataList.add(new HospitalData(R.color.back,"허욱신경과의원", "신경과","광주광역시 서구 금호동"));
     }
 }
