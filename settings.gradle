@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/'}
     }
 }
-rootProject.name = "white_butterfly"
+rootProject.name = "dementia_test"
 include ':app'

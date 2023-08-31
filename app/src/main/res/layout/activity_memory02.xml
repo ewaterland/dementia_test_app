@@ -239,7 +239,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/btn_meory_nextpage"
+        android:background="@drawable/btn_memory_nextpage"
         android:enabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace 'com.example.white_butterfly'
+    namespace 'com.example.dementia_test'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.white_butterfly"
+        applicationId "com.example.dementia_test"
         minSdk 28
         targetSdk 33
         versionCode 1
-        versionName "0.31.7"
+        versionName "0.31.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
