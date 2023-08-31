@@ -1,4 +1,6 @@
 ![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=White%20Butterfly&fontAlign=50&fontAlignY=40&color=gradient)
+
+<p align='center'>2023 오아시스 해커톤</p>
 <p align='center'>수상한 그녀들 Github에 오신 여러분들을 환영합니다!</p>
 <div align=center>
 	<h3>📚 Tech Stack 📚</h3>
